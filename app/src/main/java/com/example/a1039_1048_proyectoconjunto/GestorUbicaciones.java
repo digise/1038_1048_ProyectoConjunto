@@ -1,16 +1,17 @@
 package com.example.a1039_1048_proyectoconjunto;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class GestorUbicaciones {
-    private HashSet<Ubicacion> listadoUbicaciones;
+    private HashMap<String, Ubicacion> listadoUbicaciones;
 
     public GestorUbicaciones() {
-        this.listadoUbicaciones = new HashSet<>();
+        this.listadoUbicaciones = new HashMap<>();
     }
 
     public HashSet<Ubicacion> getListadoUbicaciones() {
-        return listadoUbicaciones;
+        return null;
     }
 
     public boolean addUbicacion(Ubicacion ubicacion){
@@ -18,6 +19,8 @@ public class GestorUbicaciones {
 
     }
 
-
+    public Ubicacion getUbicacion(String name) {
+        return null;
+    }
 
 }
