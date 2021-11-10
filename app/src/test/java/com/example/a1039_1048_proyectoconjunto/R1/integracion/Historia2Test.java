@@ -11,21 +11,23 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-public class Historia1Test {
+public class Historia2Test {
 
 
     @Test
-    public void altaUbicacion_toponimoExistente_anyadir(){
+    public void altaUbicacion_coordenadasExistentes_anyadir(){
         //Given
-        GestorServicios gestorServicios = Mockito.spy(GestorServicios.getInstance());
-        String toponimo = "Castelló";
-        Ubicacion ubicacionMock = new Ubicacion(toponimo);
-        when(mockServicioGeocoding.getUbicacionPorToponimo(toponimo)).thenReturn(ubicacionMock);
+        ServicioGeocoding mockServicioGeocoding = Mockito.mock(ServicioGeocoding.class);
+        GestorServicios gestorServicios = new GestorServicios(mockServicioGeocoding);
+        double latitud = 39.987889;
+        double longitud = 0.055778;
+        Ubicacion ubicacionMock = new Ubicacion(latitud, longitud);
+        when(mockServicioGeocoding.getUbicacionPorCoordenadas(latitud, longitud)).thenReturn(ubicacionMock);
         GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
 
         //When
         ServicioGeocoding servicioGeocoding = gestorServicios.getServicioGeocoding();
-        Ubicacion ubicacionReal = servicioGeocoding.getUbicacionPorToponimo(toponimo);
+        Ubicacion ubicacionReal = servicioGeocoding.getUbicacionPorCoordenadas(latitud, longitud);
         gestorUbicaciones.addUbicacion(ubicacionReal);
 
 
@@ -34,17 +36,18 @@ public class Historia1Test {
     }
 
     @Test
-    public void altaUbicacion_toponimoNoExistente_anyadir(){
+    public void altaUbicacion_coordenadasNoExistentes_anyadir(){
         //Given
         ServicioGeocoding mockServicioGeocoding = Mockito.mock(ServicioGeocoding.class);
         GestorServicios gestorServicios = new GestorServicios(mockServicioGeocoding);
-        String toponimo = "bhjgj";
-        when(mockServicioGeocoding.getUbicacionPorToponimo(toponimo)).thenReturn(null);
+        double latitud = -91;
+        double longitud = 165;
+        when(mockServicioGeocoding.getUbicacionPorCoordenadas(latitud, longitud)).thenReturn(null);
         GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
 
         //When
         ServicioGeocoding servicioGeocoding = gestorServicios.getServicioGeocoding();
-        Ubicacion ubicacionReal = servicioGeocoding.getUbicacionPorToponimo(toponimo);
+        Ubicacion ubicacionReal = servicioGeocoding.getUbicacionPorCoordenadas(latitud, longitud);
         gestorUbicaciones.addUbicacion(ubicacionReal);
 
 

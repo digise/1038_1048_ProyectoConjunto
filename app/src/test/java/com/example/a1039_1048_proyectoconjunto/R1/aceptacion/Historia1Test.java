@@ -16,14 +16,12 @@ public class Historia1Test {
    @Test
    public void altaUbicacion_toponimoExistente_anyadir(){
       //Given
-      ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-      GestorServicios gestorServicios = new GestorServicios(servicioGeocoding);
+      GestorServicios gestorServicios = GestorServicios.getInstance();
       String toponimo = "Castelló";
       GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
 
       //When
-      servicioGeocoding = gestorServicios.getServicioGeocoding();
-      Ubicacion ubicacion = servicioGeocoding.getUbicacionPorToponimo(toponimo);
+      Ubicacion ubicacion = gestorServicios.getUbicacionByToponimo(toponimo);
       gestorUbicaciones.addUbicacion(ubicacion);
 
 
@@ -34,14 +32,12 @@ public class Historia1Test {
    @Test
    public void altaUbicacion_toponimoNoExistente_anyadir(){
       //Given
-      ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-      GestorServicios gestorServicios = new GestorServicios(servicioGeocoding);
+      GestorServicios gestorServicios = GestorServicios.getInstance();
       GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
 
       //When
-      servicioGeocoding = gestorServicios.getServicioGeocoding();
-      Ubicacion ubicacionReal = servicioGeocoding.getUbicacionPorToponimo("NoExiste");
-      gestorUbicaciones.addUbicacion(ubicacionReal);
+      Ubicacion ubicacion = gestorServicios.getUbicacionByToponimo("NoExiste");
+      gestorUbicaciones.addUbicacion(ubicacion);
 
 
       //Then

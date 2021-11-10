@@ -23,7 +23,7 @@ public class GestorServicios {
     private ServicioGeocoding servicioGeocoding;
     private ServicioOpenWeather servicioOpenWeather;
 
-
+    //Geocoding
     public ServicioGeocoding getServicioGeocoding() {
         return servicioGeocoding;
     }
@@ -36,6 +36,11 @@ public class GestorServicios {
         return null;
     }
 
+    public Ubicacion getUbicacionByCoordenadas(double latitud, double longitud){
+        return null;
+    }
+
+    //OpenWeather
     public String getInfoOpenWeather(){
         return null;
     }
