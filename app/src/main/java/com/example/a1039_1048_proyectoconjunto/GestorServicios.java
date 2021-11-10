@@ -5,19 +5,24 @@ import java.util.Set;
 
 public class GestorServicios {
 
-    private HashSet<Servicio> servicios;
+    private static GestorServicios INSTANCE;
+
+    private GestorServicios() {
+    }
+
+    public synchronized  static GestorServicios getInstance(){
+        if (INSTANCE == null){
+            INSTANCE = new GestorServicios();
+            INSTANCE.servicioGeocoding = new ServicioGeocoding();
+            INSTANCE.servicioOpenWeather = new ServicioOpenWeather();
+        }
+        return INSTANCE;
+    }
+
+
     private ServicioGeocoding servicioGeocoding;
     private ServicioOpenWeather servicioOpenWeather;
 
-    public GestorServicios(ServicioGeocoding servicioGeocoding) {
-        this.servicios = new HashSet<>();
-        this.servicioGeocoding = new ServicioGeocoding();
-        this.servicioOpenWeather = new ServicioOpenWeather();
-    }
-
-    public GestorServicios() {
-        servicioGeocoding = new ServicioGeocoding();
-    }
 
     public ServicioGeocoding getServicioGeocoding() {
         return servicioGeocoding;

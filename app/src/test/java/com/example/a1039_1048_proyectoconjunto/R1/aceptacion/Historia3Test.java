@@ -16,7 +16,7 @@ public class Historia3Test {
     @Test
     public void validarToponimoExistente_APIOpenWeather_ubicacionValida(){
         //Given
-        GestorServicios gestorServicios = new GestorServicios();
+        GestorServicios gestorServicios = GestorServicios.getInstance();
         String toponimo = "Castello";
         GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
         Ubicacion ubicacion = gestorServicios.getUbicacionByToponimo(toponimo);
@@ -37,7 +37,7 @@ public class Historia3Test {
     @Test
     public void validarToponimoNoExistente_APIOpenWeather_ubicacionNoValida(){
         //Given
-        GestorServicios gestorServicios = new GestorServicios();
+        GestorServicios gestorServicios = GestorServicios.getInstance();
         String toponimo = "NoExiste";
         GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
         Ubicacion ubicacion = gestorServicios.getUbicacionByToponimo(toponimo);
