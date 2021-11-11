@@ -28,10 +28,6 @@ public class GestorServicios {
         return servicioGeocoding;
     }
 
-    public boolean addServicio(Servicio servicio){
-        return false;
-    }
-
     public Ubicacion getUbicacionByToponimo(String toponimo) {
         return null;
     }
@@ -41,11 +37,7 @@ public class GestorServicios {
     }
 
     //OpenWeather
-    public String getInfoOpenWeather(){
+    public String getInfoOpenWeather(Ubicacion ubicacion){
         return null;
-    }
-
-    public boolean isValidOpenWeather(){
-        return false;
     }
 }

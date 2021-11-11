@@ -23,4 +23,8 @@ public class GestorUbicaciones {
         return null;
     }
 
+    public Ubicacion getUbicacionByCoordinates(double latitud, double longitud){
+        return null;
+    }
+
 }

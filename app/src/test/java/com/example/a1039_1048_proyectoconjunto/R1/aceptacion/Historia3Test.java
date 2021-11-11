@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.GestorServicios;
 import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.Test;
@@ -24,14 +23,10 @@ public class Historia3Test {
 
         //When
         Ubicacion ubicacionCastellon = gestorUbicaciones.getUbicacion("Castello");
-        //@todo isValid() o getInfo()?
-        String info = gestorServicios.getInfoOpenWeather();
-        boolean valid = gestorServicios.isValidOpenWeather();
+        String info = gestorServicios.getInfoOpenWeather(ubicacionCastellon);
 
         //Then
-        //@todo esta be validar la resposta dels metodes
-        assertTrue(valid);
-        assertFalse(info.isEmpty());
+        assertFalse(info.isEmpty() || info == null);
     }
 
     @Test
@@ -44,14 +39,10 @@ public class Historia3Test {
         gestorUbicaciones.addUbicacion(ubicacion);
 
         //When
-        //@todo mock o algo para simular una ubicacion valida de geocoding pero no openweather
         Ubicacion ubicacionCastellon = gestorUbicaciones.getUbicacion("Castello");
-        //@todo isValid() o getInfo()?
-        String info = gestorServicios.getInfoOpenWeather();
-        boolean valid = gestorServicios.isValidOpenWeather();
+        String info = gestorServicios.getInfoOpenWeather(ubicacionCastellon);
 
         //Then
-        assertFalse(valid);
         assertTrue(info.isEmpty());
     }
 }
