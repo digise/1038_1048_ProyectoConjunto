@@ -4,11 +4,24 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class GestorUbicaciones {
-    private HashMap<String, Ubicacion> listadoUbicaciones;
 
-    public GestorUbicaciones() {
-        this.listadoUbicaciones = new HashMap<>();
+    // Singleton
+    private static GestorUbicaciones INSTANCE;
+
+    private GestorUbicaciones() {
     }
+
+    public synchronized  static GestorUbicaciones getInstance(){
+        if (INSTANCE == null){
+            INSTANCE = new GestorUbicaciones();
+            INSTANCE.ubicaciones = new HashMap<>();
+        }
+        return INSTANCE;
+    }
+
+
+
+    private HashMap<String, Ubicacion> ubicaciones;
 
     public HashSet<Ubicacion> getListadoUbicaciones() {
         return null;
