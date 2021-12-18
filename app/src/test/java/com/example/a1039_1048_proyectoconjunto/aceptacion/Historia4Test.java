@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.R1.aceptacion;
+package com.example.a1039_1048_proyectoconjunto.aceptacion;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.example.a1039_1048_proyectoconjunto.Gestor;
 import com.example.a1039_1048_proyectoconjunto.GestorServicios;
 import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.ServicioOpenWeather;
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,6 +38,7 @@ public class Historia4Test {
 
 
         //Then
+        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertTrue(valido);
         assertTrue(servicioOpenWeather.isValid(latitud, longitud));
     }

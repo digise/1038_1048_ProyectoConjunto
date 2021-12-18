@@ -1,8 +1,6 @@
-package com.example.a1039_1048_proyectoconjunto.R1.integracion;
+package com.example.a1039_1048_proyectoconjunto.integracion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.Gestor;
@@ -11,15 +9,14 @@ import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-public class Historia2Test {
+public class Historia1Test {
 
-    @Mock private ServicioGeocoding servicioGeocoding;
+    @Mock private ServicioGeocoding mockServicioGeocoding;
 
     @BeforeEach
     void setUp(){
@@ -27,50 +24,46 @@ public class Historia2Test {
     }
 
     @Test
-    public void altaUbicacion_coordenadasExistentes_anyadir(){
-        //Given
+    public void altaUbicacion_toponimoExistente_anadir(){
+        // Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.setServicioGeocoding(servicioGeocoding);
+        gestorServicios.setServicioGeocoding(mockServicioGeocoding);
 
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = 39.987889;
-        double longitud = 0.055778;
-        when(servicioGeocoding.getUbicacionByCoordenadas(latitud, longitud)).thenReturn(new Ubicacion(latitud, longitud));
+        String toponimo = "Castello";
+        when(mockServicioGeocoding.getUbicacionByToponimo(toponimo)).thenReturn(new Ubicacion(toponimo));
+
+        // When
+        gestor.darAltaToponimo(toponimo);
 
 
-        //When
-        boolean dadoAlta = gestor.darAltaCoordenadas(latitud, longitud);
-
-
-        //Then
+        // Then
         int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
+        String toponimoUbicacion = gestorUbicaciones.getUbicacion(toponimo).getToponimo();
         assertEquals(1, nUbicaciones);
-        assertTrue(dadoAlta);
+        assertEquals("Castello", toponimoUbicacion);
     }
 
     @Test
-    public void altaUbicacion_coordenadasNoExistentes_anyadir(){
-        //Given
+    public void altaUbicacion_toponimoNoExistente_anadir(){
+        // Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.setServicioGeocoding(servicioGeocoding);
+        gestorServicios.setServicioGeocoding(mockServicioGeocoding);
 
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = -91;
-        double longitud = 165;
-        when(servicioGeocoding.getUbicacionByCoordenadas(latitud, longitud)).thenReturn(new Ubicacion(latitud, longitud));
+        String toponimo = "NoExiste";
+        when(mockServicioGeocoding.getUbicacionByToponimo(toponimo)).thenReturn(null);
+
+        // When
+        gestor.darAltaToponimo(toponimo);
 
 
-        //When
-        boolean dadoAlta = gestor.darAltaCoordenadas(latitud, longitud);
-
-
-        //Then
+        // Then
         int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
         assertEquals(0, nUbicaciones);
-        assertFalse(dadoAlta);
     }
 }
