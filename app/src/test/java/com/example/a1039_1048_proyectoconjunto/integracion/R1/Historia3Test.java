@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.integracion;
+package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,14 +9,16 @@ import static org.mockito.Mockito.when;
 import com.example.a1039_1048_proyectoconjunto.Gestor;
 import com.example.a1039_1048_proyectoconjunto.GestorServicios;
 import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
+import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.ServicioOpenWeather;
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class Historia4Test {
+public class Historia3Test {
 
     @Mock private ServicioOpenWeather servicioOpenWeather;
 
@@ -26,30 +28,30 @@ public class Historia4Test {
     }
 
     @Test
-    public void validarCoordenadas_APIOpenWeather_coordenadasValidas(){
+    public void validarToponimo_APIOpenWeather_toponimoValido(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
         gestorServicios.addServicio("Open Weather", servicioOpenWeather);
 
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
+
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = 39.987889;
-        double longitud = 0.055778;
-        when(servicioOpenWeather.isValid(latitud, longitud)).thenReturn(true);
+        String toponimo = "Castello";
+        when(servicioOpenWeather.isValid(toponimo)).thenReturn(true);
 
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(latitud, longitud);
+        verify(servicioOpenWeather, times(1)).isValid(toponimo);
         assertTrue(valido);
     }
 
     @Test
-    public void validarCoordenadas_APIOpenWeather_coordenadasNoValidas(){
+    public void validarToponimo_APIOpenWeather_toponimoNoValido(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
         gestorServicios.addServicio("Open Weather", servicioOpenWeather);
@@ -57,17 +59,15 @@ public class Historia4Test {
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = -100;
-        double longitud = -100;
-        when(servicioOpenWeather.isValid(latitud, longitud)).thenReturn(false);
-
+        String toponimo = "NoExiste";
+        when(servicioOpenWeather.isValid(toponimo)).thenReturn(false);
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(latitud, longitud);
+        verify(servicioOpenWeather, times(1)).isValid(toponimo);
         assertFalse(valido);
     }
 }

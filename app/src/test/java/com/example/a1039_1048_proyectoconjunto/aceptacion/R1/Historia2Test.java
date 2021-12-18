@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.aceptacion;
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

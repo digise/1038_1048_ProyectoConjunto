@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.aceptacion;
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,7 +11,7 @@ import com.example.a1039_1048_proyectoconjunto.ServicioOpenWeather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Historia4Test {
+public class Historia3Test {
 
     private ServicioOpenWeather servicioOpenWeather;
 
@@ -21,7 +21,7 @@ public class Historia4Test {
     }
 
     @Test
-    public void validarCoordenadas_APIOpenWeather_coordenadasValidas(){
+    public void validarToponimo_APIOpenWeather_toponimoValido(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
         gestorServicios.addServicio("Open Weather", servicioOpenWeather);
@@ -29,22 +29,20 @@ public class Historia4Test {
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = 39.987889;
-        double longitud = 0.055778;
+        String toponimo = "Castello";
 
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
 
 
         //Then
-        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertTrue(valido);
-        assertTrue(servicioOpenWeather.isValid(latitud, longitud));
+        assertTrue(servicioOpenWeather.isValid(toponimo));
     }
 
     @Test
-    public void validarCoordenadas_APIOpenWeather_coordenadasNoValidas(){
+    public void validarToponimo_APIOpenWeather_toponimoNoValido(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
         gestorServicios.addServicio("Open Weather", servicioOpenWeather);
@@ -52,16 +50,15 @@ public class Historia4Test {
         GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
-        double latitud = -100;
-        double longitud = -100;
+        String toponimo = "NoExiste";
 
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
 
 
         //Then
         assertFalse(valido);
-        assertFalse(servicioOpenWeather.isValid(latitud, longitud));
+        assertFalse(servicioOpenWeather.isValid(toponimo));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.integracion;
+package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
