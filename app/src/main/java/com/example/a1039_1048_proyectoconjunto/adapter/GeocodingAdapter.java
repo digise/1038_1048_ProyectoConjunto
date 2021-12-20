@@ -12,7 +12,7 @@ public class GeocodingAdapter implements APIsAdapter {
     }
 
     // El objeto ubicacion que recibe este metodo sera un objeto solo con coordenadas o solo con toponimo
-    public HashMap<String, String> getInformacion(JSONObject jsonResponse){
+    public HashMap<String, String> JsonToHahsMap(JSONObject jsonResponse){
         return null;
     }
 
