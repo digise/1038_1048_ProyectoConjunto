@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+//EN ESTA CLASE ESTÁN TODOS LOS SERVICIOS (OpenWeather, Geocoding y TicketMaster)
+
 public class GestorServicios {
 
     //Singleton
@@ -37,6 +39,7 @@ public class GestorServicios {
         return null;
     }
 
+    //Geocoding
     public Servicio getServicioGeoCoding(){
         return null;
     }
@@ -45,6 +48,10 @@ public class GestorServicios {
     }
 
     //OpenWeather
+    public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather){
+
+    }
+
     public String getInfoOpenWeather(Ubicacion ubicacion){
         return null;
     }

@@ -1,5 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto;
 
+// ESTA CLASE ESTÁ A UN NIVEL MAS ALTO QUE LOS GESTORES DE SERVICIO Y UBICACIONES, Y ES LA QUE
+// APLICA LA LÓGICA.
+
 public class Gestor {
 
     private GestorUbicaciones gestorUbicaciones;
@@ -24,5 +27,9 @@ public class Gestor {
 
     public boolean coordenadasValidas(Servicio servicio, double latitud, double longitud){
         return true;
+    }
+
+    public Ubicacion getUbicacion(String toponimo){
+        return null;
     }
 }

@@ -9,4 +9,6 @@ public class ServicioGeocoding implements Servicio{
     public Ubicacion getUbicacionByCoordenadas(double latitud, double longitud){
         return null;
     }
+
+
 }

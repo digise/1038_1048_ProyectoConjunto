@@ -3,6 +3,8 @@ package com.example.a1039_1048_proyectoconjunto;
 import java.util.HashMap;
 import java.util.HashSet;
 
+//EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
+
 public class GestorUbicaciones {
 
     // Singleton

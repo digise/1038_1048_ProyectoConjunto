@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/drawable/border_grey.xml" value="0.2703125" />
+        <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/drawable/etcity_redondo.xml" value="0.3828125" />
+        <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/layout/activity_geocoding.xml" value="0.22916666666666666" />
+        <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/layout/activity_main.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

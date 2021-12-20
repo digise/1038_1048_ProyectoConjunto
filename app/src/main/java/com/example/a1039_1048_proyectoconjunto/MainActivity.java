@@ -2,7 +2,11 @@ package com.example.a1039_1048_proyectoconjunto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.example.a1039_1048_proyectoconjunto.activities.GeocodingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,6 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         System.out.println("hola");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        startActivity(new Intent(this, GeocodingActivity.class));
     }
 }
