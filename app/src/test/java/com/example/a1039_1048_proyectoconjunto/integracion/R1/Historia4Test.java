@@ -6,10 +6,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.example.a1039_1048_proyectoconjunto.Gestor;
-import com.example.a1039_1048_proyectoconjunto.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.ServicioOpenWeather;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

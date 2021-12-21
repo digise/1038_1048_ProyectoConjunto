@@ -1,6 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,27 +11,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.example.a1039_1048_proyectoconjunto.R;
-import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GeocodingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     // https://geocode.xyz/51.50354,-0.12768?geoit=json&auth=57673066339488579050x115589 --> latitud longitud
     // https://geocode.xyz/sagunto?json=1&auth=57673066339488579050x115589
-
-    private final String url = "https://geocode.xyz/";
-    private final String auth = "57673066339488579050x115589";
 
     private Button btnAnadirByToponimo;
     private Button btnAnadirByCoords;
@@ -55,52 +43,25 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getWeatherDetailsByCoords(View view){
-        addCiudad("coordenadas");
+        buscarUbicacion("coordenadas");
     }
 
     public void getWeatherDetailsByName(View view){
-        addCiudad("toponimo");
+        buscarUbicacion("toponimo");
     }
 
-    public void addCiudad(String tipo){
-        //Aqui en vez de texto habría que poner toda la movida de conseguir la ubicacion.
+    public void buscarUbicacion(String tipo){
         String toponimoCoords = etCity.getText().toString().trim();
-        String tempUrl = "";
-        GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-/*
-        if (toponimoCoords.length() > 0){
-            tempUrl = url + toponimoCoords;
-            if (tipo.equals("coordenadas")){
-                tempUrl += "?geoit=json&auth=" + auth;
-            }else{
-                tempUrl += "?json=1&auth=" + auth;
-            }
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        HashMap<String, String> datosGeocoding = geocodingAdapter.JsonToHahsMap(new JSONObject(response));
-                        String nombreCiudad = datosGeocoding.get("nombre");
-                        String nombreComunidad = datosGeocoding.get("comunidad");
-                        String nombrePais = datosGeocoding.get("pais");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-                }
-            });
 
-        }*/
+        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
+        servicioGeocoding.getInformacion(tipo, toponimoCoords);
 
         ciudades.add(toponimoCoords);
         etCity.getText().clear();
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ciudades);
         lvNuevasUbicaciones.setAdapter(adapter);
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

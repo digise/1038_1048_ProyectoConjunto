@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-import com.example.a1039_1048_proyectoconjunto.Gestor;
-import com.example.a1039_1048_proyectoconjunto.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 
 import org.junit.jupiter.api.Test;
@@ -18,13 +18,10 @@ public class Historia1Test {
    @Test
    public void altaUbicacion_toponimoExistente_anadir(){
       // Given
-      GestorServicios gestorServicios = GestorServicios.getInstance();
-      gestorServicios.setServicioGeocoding(new ServicioGeocoding());
+      Gestor gestor = Gestor.getInstance();
 
-      GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-
-      Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
-
+      GestorServicios gestorServicios = gestor.getGestorServicios();
+      gestorServicios.addServicio()
       String toponimo = "Castello";
 
 

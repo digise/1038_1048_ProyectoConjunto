@@ -3,10 +3,10 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-import com.example.a1039_1048_proyectoconjunto.Gestor;
-import com.example.a1039_1048_proyectoconjunto.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.ServicioGeocoding;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.jupiter.api.Test;

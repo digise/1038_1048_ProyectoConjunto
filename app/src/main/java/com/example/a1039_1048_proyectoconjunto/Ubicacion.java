@@ -3,31 +3,51 @@ package com.example.a1039_1048_proyectoconjunto;
 public class Ubicacion {
 
     private String toponimo;
-    private Double latitud; //-90, 90
-    private Double longitud; //-180, 180
+    private String latitud; //-90, 90
+    private String longitud; //-180, 180
     private boolean activada = true;
+    private String pais;
+    private String region;
 
     public Ubicacion(String toponimo) {
         this.toponimo = toponimo;
         this.latitud = null;
         this.longitud = null;
+        this.pais = null;
+        this.region = null;
     }
 
-    public Ubicacion(double latitud, double longitud) {
+    public Ubicacion(String latitud, String longitud) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.toponimo = null;
+        this.pais = null;
+        this.region = null;
+    }
+    public Ubicacion(String toponimo, String pais, String region) {
+        this.toponimo = toponimo;
+        this.pais = pais;
+        this.region = region;
+        this.latitud = null;
+        this.longitud = null;
+    }
+    public Ubicacion(String toponimo, String pais, String region, String latitud, String longitud) {
+        this.toponimo = toponimo;
+        this.pais = pais;
+        this.region = region;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
 
     public String getToponimo() {
         return null;
     }
 
-    public double getLatitud() {
+    public String getLatitud() {
         return latitud;
     }
 
-    public double getLongitud() {
+    public String getLongitud() {
         return longitud;
     }
 
