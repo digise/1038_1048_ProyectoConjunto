@@ -1,0 +1,61 @@
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
+
+
+import org.junit.jupiter.api.Test;
+
+public class Historia1Test {
+
+   @Test
+   public void altaUbicacion_toponimoExistente_anadir(){
+      // Given
+      Gestor gestor = Gestor.getInstance();
+
+      GestorServicios gestorServicios = gestor.getGestorServicios();
+      gestorServicios.addServicio()
+      String toponimo = "Castello";
+
+
+      // When
+      boolean dadoAlta = gestor.darAltaToponimo(toponimo);
+
+
+      // Then
+      assertTrue(dadoAlta);
+      int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
+      String toponimoUbicacion = gestorUbicaciones.getUbicacion(toponimo).getToponimo();
+      assertEquals(1, nUbicaciones);
+      assertEquals("Castello", toponimoUbicacion);
+   }
+
+   @Test
+   public void altaUbicacion_toponimoNoExistente_anadir(){
+      // Given
+      GestorServicios gestorServicios = GestorServicios.getInstance();
+      gestorServicios.setServicioGeocoding(new ServicioGeocoding());
+
+      GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
+
+      Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
+
+      String toponimo = "NoExiste";
+
+      // When
+      boolean dadoAlta = gestor.darAltaToponimo(toponimo);
+
+
+      // Then
+      assertFalse(dadoAlta);
+      int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
+      assertEquals(0, nUbicaciones);
+   }
+}
