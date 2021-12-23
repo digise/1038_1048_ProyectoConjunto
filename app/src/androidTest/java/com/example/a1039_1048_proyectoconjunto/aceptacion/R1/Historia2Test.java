@@ -1,5 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,8 +12,10 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 import org.junit.jupiter.api.Test;
 
-public class Historia2Test {
+ */
 
+public class Historia2Test {
+/*
     @Test
     public void altaUbicacion_coordenadasExistentes_anadir(){
         //Given
@@ -59,4 +61,6 @@ public class Historia2Test {
         assertEquals(0, nUbicaciones);
         assertFalse(dadoAlta);
     }
+
+ */
 }

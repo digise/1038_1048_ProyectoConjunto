@@ -42,11 +42,11 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
         lvNuevasUbicaciones.setOnItemClickListener(this);
     }
 
-    public void getWeatherDetailsByCoords(View view){
+    public void getUbicacionPorCoords(View view){
         buscarUbicacion("coordenadas");
     }
 
-    public void getWeatherDetailsByName(View view){
+    public void getUbicacionPorNombre(View view){
         buscarUbicacion("toponimo");
     }
 

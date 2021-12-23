@@ -1,5 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,8 +11,10 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Historia3Test {
+ */
 
+public class Historia3Test {
+/*
     private ServicioOpenWeather servicioOpenWeather;
 
     @BeforeEach
@@ -61,4 +63,6 @@ public class Historia3Test {
         assertFalse(valido);
         assertFalse(servicioOpenWeather.isValid(toponimo));
     }
+
+ */
 }

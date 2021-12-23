@@ -6,26 +6,22 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+public class GeocodingAdapter{
 
-import java.util.HashMap;
-
-public class GeocodingAdapter implements APIsAdapter{
+    private Ubicacion ubicacion;
 
     public GeocodingAdapter(){
+        ubicacion = new Ubicacion("sagunto");
     }
 
-    public void doRequest(String tempUrl){
+    public Ubicacion doRequest(String tempUrl){
 
-        hecho=false
-        ubicacion = null
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
+                ubicacion = new Ubicacion("castellon");
 
-                gestor.addUbicaicon(ubicaion)
             }
         }, new Response.ErrorListener(){
             @Override
@@ -33,13 +29,8 @@ public class GeocodingAdapter implements APIsAdapter{
 
             }
         });
-
-        while(! hecho){
-            if (ubicacion != null){
-                hecho = true
-            }
-        }
-
+        System.out.println("ubicacion: " + ubicacion);
+        return ubicacion;
     }
 
 

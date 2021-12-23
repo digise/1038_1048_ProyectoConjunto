@@ -9,6 +9,14 @@ public class Ubicacion {
     private String pais;
     private String region;
 
+    public Ubicacion(){
+        this.toponimo = null;
+        this.latitud = null;
+        this.longitud = null;
+        this.pais = null;
+        this.region = null;
+    }
+
     public Ubicacion(String toponimo) {
         this.toponimo = toponimo;
         this.latitud = null;

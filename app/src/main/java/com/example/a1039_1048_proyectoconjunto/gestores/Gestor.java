@@ -3,7 +3,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 // ESTA CLASE ESTÁ A UN NIVEL MAS ALTO QUE LOS GESTORES DE SERVICIO Y UBICACIONES, Y ES LA QUE
 // APLICA LA LÓGICA.
 
-import com.example.a1039_1048_proyectoconjunto.Servicio;
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 public class Gestor {
@@ -34,8 +34,8 @@ public class Gestor {
         return gestorServicios;
     }
 
-    public boolean darAltaToponimo(String toponimo) {
-        return false;
+    public Ubicacion darAltaToponimo(String toponimo) {
+        return gestorServicios.getServicioGeocoding().getInformacion("toponimo", toponimo);
     }
 
     public boolean darAltaCoordenadas(double latitud, double longitud) {

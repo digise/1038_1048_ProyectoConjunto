@@ -16,8 +16,7 @@ public class OpenWeatherAdapter implements APIsAdapter{
     }
 
     @Override
-    public HashMap<String, String> JsonToHahsMap(JSONObject jsonResponse) {
-        return null;
-    }
+    public void doRequest(String url) {
 
+    }
 }

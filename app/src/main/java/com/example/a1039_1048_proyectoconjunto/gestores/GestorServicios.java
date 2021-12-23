@@ -1,6 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto.gestores;
 
-import com.example.a1039_1048_proyectoconjunto.Servicio;
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
@@ -29,9 +29,10 @@ public class GestorServicios {
         return null;
     }
 
-    //Geocoding
-    public Servicio getServicioGeoCoding() {
-        return null;
+    //-------------------------------------------------------------------------------------------//
+    //GEOCODE
+    public ServicioGeocoding getServicioGeoCoding() {
+        return this.servicioGeocoding;
     }
 
     public void setServicioGeocoding(ServicioGeocoding servicioGeocoding) {
@@ -41,7 +42,8 @@ public class GestorServicios {
         return servicioGeocoding;
     }
 
-    //OpenWeather
+    //-------------------------------------------------------------------------------------------//
+    //OPENWEATHER
     public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather) {
 
     }
