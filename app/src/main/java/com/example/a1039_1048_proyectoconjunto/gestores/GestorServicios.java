@@ -12,7 +12,7 @@ public class GestorServicios {
     ServicioGeocoding servicioGeocoding;
     ServicioOpenWeather servicioOpenWeather;
 
-    protected GestorServicios() {
+    public GestorServicios() {
         servicioGeocoding = null;
         servicioOpenWeather = null;
     }

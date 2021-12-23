@@ -26,10 +26,10 @@ public class Historia1Test {
     @Test
     public void altaUbicacion_toponimoExistente_anadir(){
         // Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
+        GestorServicios gestorServicios = new GestorServicios();
         gestorServicios.setServicioGeocoding(mockServicioGeocoding);
 
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
+        GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
         String toponimo = "Castello";

@@ -14,7 +14,7 @@ public class Gestor {
     private GestorUbicaciones gestorUbicaciones;
     private GestorServicios gestorServicios;
 
-    private Gestor() {
+    public Gestor() {
         this.gestorUbicaciones = new GestorUbicaciones();
         this.gestorServicios = new GestorServicios();
     }

@@ -11,7 +11,7 @@ public class GestorUbicaciones {
 
     private HashMap<String, Ubicacion> ubicaciones;
 
-    protected GestorUbicaciones() {
+    public GestorUbicaciones() {
         ubicaciones = new HashMap<>();
     }
 
