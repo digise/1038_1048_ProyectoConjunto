@@ -48,7 +48,11 @@ public class Ubicacion {
     }
 
     public String getToponimo() {
-        return null;
+        return this.toponimo;
+    }
+
+    public void setToponimo(String toponimo){
+        this.toponimo = toponimo;
     }
 
     public String getLatitud() {

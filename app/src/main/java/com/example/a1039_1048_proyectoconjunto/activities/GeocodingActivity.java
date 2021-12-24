@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1039_1048_proyectoconjunto.R;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 import java.util.ArrayList;
@@ -43,23 +44,31 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getUbicacionPorCoords(View view){
-        buscarUbicacion("coordenadas");
+        String toponimoCoords = etCity.getText().toString().trim();
+        getUbicacionPorCoords(toponimoCoords);
     }
 
     public void getUbicacionPorNombre(View view){
-        buscarUbicacion("toponimo");
+        String toponimoCoords = etCity.getText().toString().trim();
+        getUbicacionPorNombre(toponimoCoords);
     }
 
-    public void buscarUbicacion(String tipo){
-        String toponimoCoords = etCity.getText().toString().trim();
+    public void getUbicacionPorCoords(String toponimoCoords){
+        Gestor gestor = createGestorGeocoding();
+        gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
+    }
 
-        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        servicioGeocoding.getInformacion(tipo, toponimoCoords);
+    public void getUbicacionPorNombre(String toponimoCoords){
+        Gestor gestor = createGestorGeocoding();
+        gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
 
-        ciudades.add(toponimoCoords);
-        etCity.getText().clear();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ciudades);
-        lvNuevasUbicaciones.setAdapter(adapter);
+    }
+
+    private Gestor createGestorGeocoding(){
+        Gestor gestor = new Gestor();
+        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
+        gestor.setContexto(getApplicationContext());
+        return gestor;
     }
 
 

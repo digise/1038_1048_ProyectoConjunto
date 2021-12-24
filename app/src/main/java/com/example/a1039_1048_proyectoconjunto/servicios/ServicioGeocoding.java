@@ -1,39 +1,41 @@
 package com.example.a1039_1048_proyectoconjunto.servicios;
 
+import android.content.Context;
+
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 
-public class ServicioGeocoding {
+public class ServicioGeocoding implements Servicio{
 
     private final String url = "https://geocode.xyz/";
     private final String auth = "57673066339488579050x115589";
+    private Context contexto = null;
 
     public ServicioGeocoding() {
 
     }
 
-    public Ubicacion getInformacion(String tipo, String toponimoCoords) {
-        if (tipo.equals("toponimo")) {
-            return getUbicacionByToponimo(toponimoCoords);
-        } else {
-            return getUbicacionByCoordenadas(toponimoCoords);
-        }
-    }
 
-
-    private Ubicacion getUbicacionByToponimo(String toponimoCoords) {
+    public Ubicacion getInformacionPorToponimo(String toponimoCoords) {
+        // https://geocode.xyz/castellon?json=1&auth=57673066339488579050x115589
         String tempUrl = url + toponimoCoords;
         tempUrl += "?json=1&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl);
+        return geocodingAdapter.doRequest(tempUrl, contexto);
     }
 
-    private Ubicacion getUbicacionByCoordenadas(String toponimoCoords) {
+    public Ubicacion getInformacionPorCoordenadas(String toponimoCoords) {
         String tempUrl = url + toponimoCoords;
         tempUrl += "?geoit=json&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl);
+        return geocodingAdapter.doRequest(tempUrl, contexto);
     }
 
+    public Context getContexto() {
+        return contexto;
+    }
 
+    public void setContexto(Context contexto) {
+        this.contexto = contexto;
+    }
 }

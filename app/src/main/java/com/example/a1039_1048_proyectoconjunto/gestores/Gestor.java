@@ -3,6 +3,8 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 // ESTA CLASE ESTÁ A UN NIVEL MAS ALTO QUE LOS GESTORES DE SERVICIO Y UBICACIONES, Y ES LA QUE
 // APLICA LA LÓGICA.
 
+import android.content.Context;
+
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
@@ -13,10 +15,12 @@ public class Gestor {
 
     private GestorUbicaciones gestorUbicaciones;
     private GestorServicios gestorServicios;
+    private Context contexto;
 
     public Gestor() {
         this.gestorUbicaciones = new GestorUbicaciones();
         this.gestorServicios = new GestorServicios();
+        this.contexto = null;
     }
 
     public synchronized static Gestor getInstance() {
@@ -35,7 +39,7 @@ public class Gestor {
     }
 
     public Ubicacion darAltaToponimo(String toponimo) {
-        return gestorServicios.getServicioGeocoding().getInformacion("toponimo", toponimo);
+        return gestorServicios.getServicioGeocoding().getInformacionPorToponimo(toponimo);
     }
 
     public boolean darAltaCoordenadas(double latitud, double longitud) {
@@ -52,5 +56,16 @@ public class Gestor {
 
     public Ubicacion getUbicacion(String toponimo) {
         return null;
+    }
+
+    public Context getContexto() {
+        return contexto;
+    }
+
+    public void setContexto(Context contexto) {
+        this.contexto = contexto;
+        if (gestorServicios != null){
+            gestorServicios.getServicioGeocoding().setContexto(contexto);
+        }
     }
 }

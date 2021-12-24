@@ -1,39 +1,39 @@
 package com.example.a1039_1048_proyectoconjunto.adapter;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
-public class GeocodingAdapter{
+public class GeocodingAdapter {
 
     private Ubicacion ubicacion;
+    boolean acabado = false;
 
     public GeocodingAdapter(){
         ubicacion = new Ubicacion("sagunto");
     }
 
-    public Ubicacion doRequest(String tempUrl){
+    public Ubicacion doRequest(String tempUrl, Context contexto){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl,
+                response -> {
+                    Log.d("funciona", "FUNCIONA");
+                    ubicacion.setToponimo("castellon");
+                    acabado = true;
+                },
+                error -> Log.d("no funciona", "That didn't work!"));
 
-                ubicacion = new Ubicacion("castellon");
+        Log.d("ubicacion: ", ubicacion.getToponimo());
 
-            }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        RequestQueue requestQueue = Volley.newRequestQueue(contexto);
+        requestQueue.add(stringRequest);
 
-            }
-        });
-        System.out.println("ubicacion: " + ubicacion);
         return ubicacion;
     }
-
-
-
 
 }
