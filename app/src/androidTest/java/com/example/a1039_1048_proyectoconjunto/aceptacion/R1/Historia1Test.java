@@ -38,6 +38,7 @@ public class Historia1Test {
 
       // Then
       assertEquals(ubicacionCastellon.getToponimo(), toponimo);
+
    }
 
    @Test
