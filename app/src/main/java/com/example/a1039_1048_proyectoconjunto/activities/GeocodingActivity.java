@@ -1,6 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto.activities;
 
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,6 +42,7 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
         etCity = findViewById(R.id.etCity);
         lvNuevasUbicaciones = findViewById(R.id.listView_nuevasUbicaciones);
         lvNuevasUbicaciones.setOnItemClickListener(this);
+
     }
 
     public void getUbicacionPorCoords(View view){

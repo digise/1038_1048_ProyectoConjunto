@@ -4,6 +4,7 @@ package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import android.os.Looper;
 import android.view.View;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
@@ -33,6 +34,7 @@ public class Historia1Test {
       // When
       ServicioGeocoding sgc = gestor.getGestorServicios().getServicioGeocoding();
       Ubicacion ubicacionCastellon = sgc.getInformacionPorToponimo(toponimo);
+
 
       // Then
       assertEquals(ubicacionCastellon.getToponimo(), toponimo);

@@ -12,7 +12,6 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 public class GeocodingAdapter {
 
     private Ubicacion ubicacion;
-    boolean acabado = false;
 
     public GeocodingAdapter(){
         ubicacion = new Ubicacion("sagunto");
@@ -24,7 +23,6 @@ public class GeocodingAdapter {
                 response -> {
                     Log.d("funciona", "FUNCIONA");
                     ubicacion.setToponimo("castellon");
-                    acabado = true;
                 },
                 error -> Log.d("no funciona", "That didn't work!"));
 
