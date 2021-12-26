@@ -1,21 +1,13 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import android.os.Looper;
-import android.view.View;
-
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.activities.GeocodingActivity;
-import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
-
-import org.junit.Test;
+import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 public class Historia1Test {
 
@@ -37,8 +29,7 @@ public class Historia1Test {
 
 
       // Then
-      assertEquals(ubicacionCastellon.getToponimo(), toponimo);
-
+      Assert.assertEquals(ubicacionCastellon.getToponimo(), toponimo);
    }
 
    @Test

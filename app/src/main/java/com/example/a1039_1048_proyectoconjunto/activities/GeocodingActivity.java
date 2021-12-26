@@ -69,7 +69,6 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     private Gestor createGestorGeocoding(){
         Gestor gestor = new Gestor();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
-        gestor.setContexto(getApplicationContext());
         return gestor;
     }
 

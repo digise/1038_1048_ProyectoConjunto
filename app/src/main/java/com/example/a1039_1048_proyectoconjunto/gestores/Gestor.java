@@ -15,12 +15,10 @@ public class Gestor {
 
     private GestorUbicaciones gestorUbicaciones;
     private GestorServicios gestorServicios;
-    private Context contexto;
 
     public Gestor() {
         this.gestorUbicaciones = new GestorUbicaciones();
         this.gestorServicios = new GestorServicios();
-        this.contexto = null;
     }
 
     public synchronized static Gestor getInstance() {
@@ -58,14 +56,4 @@ public class Gestor {
         return null;
     }
 
-    public Context getContexto() {
-        return contexto;
-    }
-
-    public void setContexto(Context contexto) {
-        this.contexto = contexto;
-        if (gestorServicios != null){
-            gestorServicios.getServicioGeocoding().setContexto(contexto);
-        }
-    }
 }

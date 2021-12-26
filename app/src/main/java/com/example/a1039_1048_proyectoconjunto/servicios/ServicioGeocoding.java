@@ -9,7 +9,6 @@ public class ServicioGeocoding implements Servicio{
 
     private final String url = "https://geocode.xyz/";
     private final String auth = "57673066339488579050x115589";
-    private Context contexto = null;
 
     public ServicioGeocoding() {
 
@@ -21,21 +20,13 @@ public class ServicioGeocoding implements Servicio{
         String tempUrl = url + toponimoCoords;
         tempUrl += "?json=1&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl, contexto);
+        return geocodingAdapter.doRequest(tempUrl);
     }
 
     public Ubicacion getInformacionPorCoordenadas(String toponimoCoords) {
         String tempUrl = url + toponimoCoords;
         tempUrl += "?geoit=json&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl, contexto);
-    }
-
-    public Context getContexto() {
-        return contexto;
-    }
-
-    public void setContexto(Context contexto) {
-        this.contexto = contexto;
+        return geocodingAdapter.doRequest(tempUrl);
     }
 }

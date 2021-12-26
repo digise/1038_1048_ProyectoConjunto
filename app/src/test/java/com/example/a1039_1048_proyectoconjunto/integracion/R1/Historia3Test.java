@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class Historia3Test {
+    /*
 
     @Mock private ServicioOpenWeather servicioOpenWeather;
 
@@ -68,4 +69,6 @@ public class Historia3Test {
         verify(servicioOpenWeather, times(1)).isValid(toponimo);
         assertFalse(valido);
     }
+
+     */
 }
