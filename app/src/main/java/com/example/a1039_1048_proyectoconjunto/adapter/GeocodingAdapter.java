@@ -3,11 +3,20 @@ package com.example.a1039_1048_proyectoconjunto.adapter;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.a1039_1048_proyectoconjunto.SingletonRequestQueue;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,18 +24,45 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.CountDownLatch;
 
 public class GeocodingAdapter {
 
-    private Ubicacion ubicacion;
 
     public GeocodingAdapter() {
-        ubicacion = new Ubicacion("sagunto");
     }
 
     public Ubicacion doRequest(String tempUrl) {
+        Ubicacion ubicacion = new Ubicacion();
+        //final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        BufferedReader bufferedReader;
+        JsonObjectRequest request = new JsonObjectRequest
+                (Request.Method.GET, tempUrl, null, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ubicacion.setToponimo("hola");
+                        //countDownLatch.countDown();
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
+                        //countDownLatch.countDown();
+
+                    }
+                });
+
+        SingletonRequestQueue.getInstance(null).addToRequestQueue(request);
+        /*try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+
+        /*BufferedReader bufferedReader;
         String linea;
         StringBuffer responseContent = new StringBuffer();
 
@@ -67,9 +103,11 @@ public class GeocodingAdapter {
             Log.d("malformed", e.toString());
         } catch (IOException e){
             Log.d("ioException", e.toString());
-        }
+        }*/
 
         return ubicacion;
+
     }
+
 
 }

@@ -13,8 +13,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1039_1048_proyectoconjunto.R;
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,13 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
 
     public void getUbicacionPorNombre(View view){
         String toponimoCoords = etCity.getText().toString().trim();
+        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
+        servicioGeocoding.getInformacionPorToponimo(toponimoCoords);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Ubicacion ubicacion = new Ubicacion("hola");
+        Ubicacion ubicacion1 = new Ubicacion("hola1");
+        db.collection("ubicaciones").document("hola").set(ubicacion);
+        db.collection("ubicaciones").add(ubicacion1);
         getUbicacionPorNombre(toponimoCoords);
     }
 

@@ -13,7 +13,6 @@ public class GestorServicios {
 
     ServicioGeocoding servicioGeocoding;
     ServicioOpenWeather servicioOpenWeather;
-    Context contexto;
 
     public GestorServicios() {
         servicioGeocoding = null;
@@ -29,6 +28,11 @@ public class GestorServicios {
 
     public ServicioGeocoding getServicioGeocoding() {
         return servicioGeocoding;
+    }
+
+    public Ubicacion darAltaUbicacionPorToponimo(String toponimo){
+        Ubicacion ubicacion = servicioGeocoding.getInformacionPorToponimo(toponimo);
+        return ubicacion;
     }
 
 
