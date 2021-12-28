@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-firestore:24.0.0'
     implementation 'com.google.firebase:firebase-admin:8.1.0'
+    implementation 'com.google.firebase:firebase-database:20.0.3'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
