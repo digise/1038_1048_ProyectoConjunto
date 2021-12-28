@@ -18,23 +18,20 @@ public class Historia1Test {
    public void altaUbicacion_toponimoExistente_anadir(){
       // Given
       Gestor gestor = Gestor.getInstance();
-      String toponimo = "torreblanca";
+      String toponimo = "castellon";
       ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
       gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
 
       // When
       Ubicacion ubicacion = gestor.getGestorServicios().darAltaUbicacionPorToponimo(toponimo);
-      System.out.println(ubicacion.toString());
 
 
       // Then
       //int nUbicaciones = gestor.getGestorUbicaciones().getListadoUbicaciones();
       //assertEquals(1, nUbicaciones);
       String nombre = ubicacion.getToponimo();
-      System.out.println(nombre);
-      System.out.println("adios");
-      assertEquals("torreblanca", nombre.toLowerCase());
+      assertEquals("castello de la plana", nombre.toLowerCase());
    }
 
    @Test

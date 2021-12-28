@@ -7,12 +7,18 @@ public class Ubicacion {
     private String longitud; //-180, 180
     private boolean activada = true;
     private String pais;
+    private boolean servicioGeocodingActivo;
+    private boolean servicioOpenWeatherActivo;
+    private boolean servicioCurrentsActivo;
 
     public Ubicacion(){
         this.toponimo = null;
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
+        this.servicioGeocodingActivo = false;
+        this.servicioOpenWeatherActivo = false;
+        this.servicioCurrentsActivo = false;
     }
 
     public Ubicacion(String toponimo) {
