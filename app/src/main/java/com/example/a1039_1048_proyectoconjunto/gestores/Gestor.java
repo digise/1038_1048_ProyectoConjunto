@@ -36,11 +36,11 @@ public class Gestor {
         return gestorServicios;
     }
 
-    public Ubicacion darAltaToponimo(String toponimo) {
-        return gestorServicios.getServicioGeocoding().getInformacionPorToponimo(toponimo);
-    }
+    /*public Ubicacion darAltaToponimo(String toponimo) {
+        return gestorServicios.darAltaToponimo(toponimo);
+    }*/
 
-    public boolean darAltaCoordenadas(double latitud, double longitud) {
+    /*public boolean darAltaCoordenadas(double latitud, double longitud) {
         return false;
     }
 
@@ -54,6 +54,6 @@ public class Gestor {
 
     public Ubicacion getUbicacion(String toponimo) {
         return null;
-    }
+    }*/
 
 }

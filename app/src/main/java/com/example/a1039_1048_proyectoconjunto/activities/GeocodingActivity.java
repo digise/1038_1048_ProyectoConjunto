@@ -13,8 +13,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1039_1048_proyectoconjunto.R;
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +57,16 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getUbicacionPorNombre(View view){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setToponimo("Castelló");
+        db.collection("ubicaciones").document("hola").set(ubicacion);
+
         String toponimoCoords = etCity.getText().toString().trim();
-        getUbicacionPorNombre(toponimoCoords);
+        Gestor gestor = Gestor.getInstance();
+        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
+        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
+        gestor.getGestorServicios().darAltaUbicacionPorToponimo(toponimoCoords);
     }
 
     public void getUbicacionPorCoords(String toponimoCoords){
@@ -60,11 +74,11 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
     }
 
-    public void getUbicacionPorNombre(String toponimoCoords){
+    /*public void getUbicacionPorNombre(String toponimoCoords){
         Gestor gestor = createGestorGeocoding();
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
 
-    }
+    }*/
 
     private Gestor createGestorGeocoding(){
         Gestor gestor = new Gestor();

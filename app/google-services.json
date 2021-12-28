@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "482094820574",
+    "project_id": "proyectoparadis-c4b40",
+    "storage_bucket": "proyectoparadis-c4b40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482094820574:android:e4ed01108fe8681821e64f",
+        "android_client_info": {
+          "package_name": "com.example.a1039_1048_proyectoconjunto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482094820574-824cfsbm1nsg2g500u1qi25anfgifocs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrFP_EWwtSeFWUFlkpa_IkgoDYcSY4xBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482094820574-824cfsbm1nsg2g500u1qi25anfgifocs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

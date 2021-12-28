@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class Historia1Test {/*
+/*public class Historia1Test {
 
     @Mock private ServicioGeocoding mockServicioGeocoding;
 
@@ -33,7 +33,7 @@ public class Historia1Test {/*
         Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
 
         String toponimo = "Castello";
-        when(mockServicioGeocoding.getUbicacionByToponimo(toponimo)).thenReturn(new Ubicacion(toponimo));
+        when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(new Ubicacion(toponimo));
 
         // When
         gestor.darAltaToponimo(toponimo);
@@ -46,7 +46,7 @@ public class Historia1Test {/*
         assertEquals("Castello", toponimoUbicacion);
     }
 
-    @Test
+    /*@Test
     public void altaUbicacion_toponimoNoExistente_anadir(){
         // Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
@@ -66,5 +66,5 @@ public class Historia1Test {/*
         int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
         assertEquals(0, nUbicaciones);
     }
-    */
-}
+
+}*/

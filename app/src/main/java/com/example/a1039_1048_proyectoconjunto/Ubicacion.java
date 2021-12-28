@@ -7,14 +7,12 @@ public class Ubicacion {
     private String longitud; //-180, 180
     private boolean activada = true;
     private String pais;
-    private String region;
 
     public Ubicacion(){
         this.toponimo = null;
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
-        this.region = null;
     }
 
     public Ubicacion(String toponimo) {
@@ -22,27 +20,18 @@ public class Ubicacion {
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
-        this.region = null;
     }
 
-    public Ubicacion(String latitud, String longitud) {
-        this.latitud = latitud;
-        this.longitud = longitud;
+    public Ubicacion(String latitud, String longitud){
         this.toponimo = null;
         this.pais = null;
-        this.region = null;
+        this.latitud = latitud;
+        this.longitud = longitud;
     }
-    public Ubicacion(String toponimo, String pais, String region) {
+
+    public Ubicacion(String toponimo, String pais, String latitud, String longitud) {
         this.toponimo = toponimo;
         this.pais = pais;
-        this.region = region;
-        this.latitud = null;
-        this.longitud = null;
-    }
-    public Ubicacion(String toponimo, String pais, String region, String latitud, String longitud) {
-        this.toponimo = toponimo;
-        this.pais = pais;
-        this.region = region;
         this.latitud = latitud;
         this.longitud = longitud;
     }
@@ -59,8 +48,24 @@ public class Ubicacion {
         return latitud;
     }
 
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
     public String getLongitud() {
         return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
     }
 
     public boolean activar(){
@@ -77,5 +82,16 @@ public class Ubicacion {
 
     public boolean issetToponimo(){
         return this.toponimo == null;
+    }
+
+    @Override
+    public String toString() {
+        return "Ubicacion{" +
+                "toponimo='" + toponimo + '\'' +
+                ", latitud='" + latitud + '\'' +
+                ", longitud='" + longitud + '\'' +
+                ", activada=" + activada +
+                ", pais='" + pais + '\'' +
+                '}';
     }
 }

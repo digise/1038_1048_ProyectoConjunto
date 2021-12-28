@@ -1,40 +1,36 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.activities.GeocodingActivity;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 
-import org.junit.jupiter.api.Test;
-
-import java.util.Locale;
+import org.junit.Test;
 
 public class Historia1Test {
 
    @Test
    public void altaUbicacion_toponimoExistente_anadir(){
       // Given
-      Gestor gestor = Gestor.getInstance();
-      String toponimo = "torreblanca";
-      ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-      gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
+      String toponimo = "Castellon";
+
+      GeocodingActivity geocodingActivity = new GeocodingActivity();
+      //geocodingActivity.getUbicacionPorNombre(toponimo);
+
+      Gestor gestor = new Gestor();
+      gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
 
 
       // When
-      Ubicacion ubicacion = gestor.getGestorServicios().darAltaUbicacionPorToponimo(toponimo);
-      System.out.println(ubicacion.toString());
-
+      ServicioGeocoding sgc = gestor.getGestorServicios().getServicioGeocoding();
+      Ubicacion ubicacionCastellon = sgc.getInformacionPorToponimo(toponimo);
 
       // Then
-      //int nUbicaciones = gestor.getGestorUbicaciones().getListadoUbicaciones();
-      //assertEquals(1, nUbicaciones);
-      String nombre = ubicacion.getToponimo();
-      System.out.println(nombre);
-      System.out.println("adios");
-      assertEquals("torreblanca", nombre.toLowerCase());
+      assertEquals(ubicacionCastellon.getToponimo(), toponimo);
    }
 
    @Test
