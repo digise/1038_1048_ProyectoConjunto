@@ -24,7 +24,7 @@ public class Historia1Test {
       String toponimo = "Castellon";
 
       GeocodingActivity geocodingActivity = new GeocodingActivity();
-      geocodingActivity.getUbicacionPorNombre(toponimo);
+      //geocodingActivity.getUbicacionPorNombre(toponimo);
 
       Gestor gestor = new Gestor();
       gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());

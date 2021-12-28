@@ -32,7 +32,6 @@ public class GestorUbicaciones {
     }
 
 
-
     public boolean addUbicacion(Ubicacion ubicacion) {
         DocumentReference doc = db.collection("ubicaciones")
                 .add(ubicacion).getResult();

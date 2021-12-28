@@ -19,6 +19,9 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,15 +57,19 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getUbicacionPorNombre(View view){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("city", "Torreblanca");
+            System.out.println(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         String toponimoCoords = etCity.getText().toString().trim();
+        Gestor gestor = Gestor.getInstance();
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        servicioGeocoding.getInformacionPorToponimo(toponimoCoords);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Ubicacion ubicacion = new Ubicacion("hola");
-        Ubicacion ubicacion1 = new Ubicacion("hola1");
-        db.collection("ubicaciones").document("hola").set(ubicacion);
-        db.collection("ubicaciones").add(ubicacion1);
-        getUbicacionPorNombre(toponimoCoords);
+        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
+        gestor.getGestorServicios().darAltaUbicacionPorToponimo(toponimoCoords);
     }
 
     public void getUbicacionPorCoords(String toponimoCoords){
@@ -70,11 +77,11 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
     }
 
-    public void getUbicacionPorNombre(String toponimoCoords){
+    /*public void getUbicacionPorNombre(String toponimoCoords){
         Gestor gestor = createGestorGeocoding();
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
 
-    }
+    }*/
 
     private Gestor createGestorGeocoding(){
         Gestor gestor = new Gestor();

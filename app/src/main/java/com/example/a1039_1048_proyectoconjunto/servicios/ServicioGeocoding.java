@@ -10,10 +10,7 @@ public class ServicioGeocoding implements Servicio{
     private final String url = "https://geocode.xyz/";
     private final String auth = "57673066339488579050x115589";
 
-    public ServicioGeocoding() {
-
-    }
-
+    public ServicioGeocoding() {}
 
     public Ubicacion getInformacionPorToponimo(String toponimoCoords) {
         // https://geocode.xyz/castellon?json=1&auth=57673066339488579050x115589
@@ -23,10 +20,12 @@ public class ServicioGeocoding implements Servicio{
         return geocodingAdapter.doRequest(tempUrl);
     }
 
-    public Ubicacion getInformacionPorCoordenadas(String toponimoCoords) {
-        String tempUrl = url + toponimoCoords;
+    public Ubicacion getInformacionPorCoordenadas(String faltacambiaresto) {
+        /*String coordenadas = latitud + "," + longitud;
+        String tempUrl = url + coordenadas;
         tempUrl += "?geoit=json&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl);
+        return geocodingAdapter.doRequest(tempUrl);*/
+        return null;
     }
 }

@@ -1,30 +1,19 @@
 package com.example.a1039_1048_proyectoconjunto.adapter;
 
-import android.content.Context;
-import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.a1039_1048_proyectoconjunto.SingletonRequestQueue;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.concurrent.CountDownLatch;
+
 
 public class GeocodingAdapter {
 
@@ -34,77 +23,84 @@ public class GeocodingAdapter {
 
     public Ubicacion doRequest(String tempUrl) {
         Ubicacion ubicacion = new Ubicacion();
-        //final CountDownLatch countDownLatch = new CountDownLatch(1);
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
 
-        JsonObjectRequest request = new JsonObjectRequest
-                (Request.Method.GET, tempUrl, null, new Response.Listener<JSONObject>() {
+        //llamada sincrona que no funciona
+        /*OkHttpClient client = new OkHttpClient();
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        ubicacion.setToponimo("hola");
-                        //countDownLatch.countDown();
-                    }
-                }, new Response.ErrorListener() {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("TAG", "Error Respuesta en JSON: " + error.getMessage());
-                        //countDownLatch.countDown();
+        try{
+            Response response = client.newCall(request).execute();
 
-                    }
-                });
+            if (response.isSuccessful()){
+                String jsonData = response.body().string();
+                System.out.println(jsonData);
+                JSONObject jsonObjectPrueba = new JSONObject();
+                jsonObjectPrueba.put("city", "Torreblanca");
+                System.out.println(jsonObjectPrueba.toString());
+                /*JSONArray jsonObject1 = jsonObject.getJSONArray("standard");
+                String description = jsonObject1.getString(1);
+                ubicacion.setToponimo(description);
 
-        SingletonRequestQueue.getInstance(null).addToRequestQueue(request);
-        /*try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }*/
 
-
-        /*BufferedReader bufferedReader;
-        String linea;
-        StringBuffer responseContent = new StringBuffer();
-
-        try {
-            Log.d("entra al try",  "try");
-
-            URL url = new URL(tempUrl);
-            Log.d("hace el url",  "try");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            Log.d("conexion",  "try");
-
-            connection.setRequestMethod("GET");
-            Log.d("hace get",  "try");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-
-            Log.d("falla?",  "try");
-            int status = connection.getResponseCode();
-
-            Log.d("estado", status + "");
-
-            if(status > 299){
-                bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                while( (linea = bufferedReader.readLine()) != null ){
-                    responseContent.append(linea);
-                }
-            }else{
-                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                while( (linea = bufferedReader.readLine()) != null ){
-                    responseContent.append(linea);
-                }
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(tempUrl)
+                .get().build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                System.out.println("Fail");
+                countDownLatch.countDown();
             }
-            bufferedReader.close();
 
-            Log.d("response", responseContent.toString());
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String jsonData = response.body().string();
+                String toponimo = null;
+                String latitud = null;
+                String longitud = null;
+                String pais = null;
+                try {
+                    JSONObject jsonResponse = new JSONObject(jsonData);
+                    JSONObject jsonObject = jsonResponse.getJSONObject("standard");
 
-        } catch (MalformedURLException e) {
-            Log.d("malformed", e.toString());
-        } catch (IOException e){
-            Log.d("ioException", e.toString());
-        }*/
+                    //toponimo
+                    toponimo = jsonObject.getString("city");
 
+                    //pais
+                    pais = jsonObject.getString("countryname");
+
+                    //latitud
+                    latitud = jsonResponse.getString("latt");
+                    //longitud
+                    longitud = jsonResponse.getString("longt");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ubicacion.setToponimo(toponimo);
+                ubicacion.setPais(pais);
+                ubicacion.setLatitud(latitud);
+                ubicacion.setLongitud(longitud);
+                countDownLatch.countDown();
+            }
+        });
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return ubicacion;
 
     }
