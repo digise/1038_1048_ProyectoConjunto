@@ -1,14 +1,9 @@
 package com.example.a1039_1048_proyectoconjunto.gestores;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,11 +15,10 @@ public class GestorUbicaciones {
 
     private HashMap<String, Ubicacion> ubicaciones;
 
-    private FirebaseFirestore db;
 
     public GestorUbicaciones() {
         ubicaciones = new HashMap<>();
-        //db = FirebaseFirestore.getInstance();
+
     }
 
     public HashSet<Ubicacion> getListadoUbicaciones() {
@@ -32,10 +26,9 @@ public class GestorUbicaciones {
     }
 
 
-    public boolean addUbicacion(Ubicacion ubicacion) {
-        DocumentReference doc = db.collection("ubicaciones")
-                .add(ubicacion).getResult();
-        return doc != null;
+    public void addUbicacion(Ubicacion ubicacion) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("ubicaciones").add(ubicacion);
     }
 
     public Ubicacion getUbicacionPorToponimo(String name) {

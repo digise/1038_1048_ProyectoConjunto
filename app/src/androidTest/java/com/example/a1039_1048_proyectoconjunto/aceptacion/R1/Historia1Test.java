@@ -2,15 +2,10 @@ package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
-import android.view.View;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.activities.GeocodingActivity;
-import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 
