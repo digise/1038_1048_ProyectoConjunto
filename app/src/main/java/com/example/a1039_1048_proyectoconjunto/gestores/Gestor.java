@@ -5,6 +5,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import android.content.Context;
 
+import com.example.a1039_1048_proyectoconjunto.Coordenadas;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
@@ -38,12 +39,12 @@ public class Gestor implements Serializable {
         return gestorServicios;
     }
 
-    /*public Ubicacion darAltaToponimo(String toponimo) {
-        return gestorServicios.darAltaToponimo(toponimo);
-    }*/
+    public Ubicacion darAltaUbicacionPorToponimo(String toponimo) {
+        return gestorServicios.darAltaUbicacionPorToponimo(toponimo);
+    }
 
-    /*public boolean darAltaCoordenadas(double latitud, double longitud) {
-        return false;
+    public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas) {
+        return gestorServicios.darAltaUbicacionPorCoordenadas(coordenadas);
     }
 
     public boolean toponimoValido(Servicio servicio, String toponimo) {
@@ -56,6 +57,6 @@ public class Gestor implements Serializable {
 
     public Ubicacion getUbicacion(String toponimo) {
         return null;
-    }*/
+    }
 
 }
