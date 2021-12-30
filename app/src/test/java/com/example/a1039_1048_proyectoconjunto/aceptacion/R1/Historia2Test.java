@@ -5,16 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Coordenadas;
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Set;
 
 public class Historia2Test {
 
@@ -29,13 +23,12 @@ public class Historia2Test {
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
-        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // When
-        Ubicacion ubicacion = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
-        boolean dadoAlta = gestor.getGestorUbicaciones().addUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
+        boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // Then
@@ -53,19 +46,17 @@ public class Historia2Test {
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
-        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
-        Ubicacion ubicacion = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
-        boolean dadoAlta = gestor.getGestorUbicaciones().addUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
+        boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // Then
         assertFalse(dadoAlta);
         assertEquals(nUbicacionesAntesDeInsertar, nUbicacionesAlInsertar);
     }
-
 
 }

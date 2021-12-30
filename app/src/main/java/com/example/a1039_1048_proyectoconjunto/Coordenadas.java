@@ -1,19 +1,11 @@
 package com.example.a1039_1048_proyectoconjunto;
 
 public class Coordenadas {
-    String longitud;
-    String latitud;
+    private String latitud;
+    private String longitud;
 
     public Coordenadas(String latitud, String longitud) {
-        this.longitud = longitud;
         this.latitud = latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
 
@@ -25,8 +17,11 @@ public class Coordenadas {
         this.latitud = latitud;
     }
 
-    @Override
-    public String toString() {
-        return latitud + "," + longitud;
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 }

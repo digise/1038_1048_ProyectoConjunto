@@ -1,11 +1,11 @@
 package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
@@ -15,56 +15,57 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class Historia1Test {
-/*
+
     @Mock private ServicioGeocoding mockServicioGeocoding;
 
     @BeforeEach
-    void setUp(){
-        MockitoAnnotations.initMocks(this);
-    }
+        void setUp(){
+            MockitoAnnotations.initMocks(this);
+        }
 
     @Test
-    public void altaUbicacion_toponimoExistente_anadir(){
-        // Given
-        GestorServicios gestorServicios = new GestorServicios();
-        gestorServicios.setServicioGeocoding(mockServicioGeocoding);
+       public void altaUbicacion_toponimoExistente_anadir(){
+          // Given
 
-        GestorUbicaciones gestorUbicaciones = new GestorUbicaciones();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
+          Gestor gestor = Gestor.getInstance();
+          String toponimo = "sagunto";
+          gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
+          Ubicacion ubicacionMock = new Ubicacion(toponimo, "España", "39.6833", "-0.2667");
 
-        String toponimo = "Castello";
-        when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(new Ubicacion(toponimo));
+          when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(ubicacionMock);
 
-        // When
-        gestor.darAltaToponimo(toponimo);
+          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
-        // Then
-        int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
-        String toponimoUbicacion = gestorUbicaciones.getUbicacion(toponimo).getToponimo();
-        assertEquals(1, nUbicaciones);
-        assertEquals("Castello", toponimoUbicacion);
-    }
+          // When
+          boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+          int nUbicacionesAlInsertar = gestor.getAllUbicaciones().size();
 
-    /*@Test
-    public void altaUbicacion_toponimoNoExistente_anadir(){
-        // Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.setServicioGeocoding(mockServicioGeocoding);
+          // Then
+          assertTrue(dadoAlta);
+          assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
+          assertEquals(gestor.getUbicacion(toponimo), ubicacionMock);
+       }
 
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
+       @Test
+       public void altaUbicacion_toponimoNoExistente_anadir(){
+          // Given
+          Gestor gestor = Gestor.getInstance();
+          String toponimo = "noExiste";
+          gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
 
-        String toponimo = "NoExiste";
-        when(mockServicioGeocoding.getUbicacionByToponimo(toponimo)).thenReturn(null);
+          when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(null);
 
-        // When
-        gestor.darAltaToponimo(toponimo);
+          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
-        // Then
-        int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
-        assertEquals(0, nUbicaciones);
-    }
-*/
+          // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
+          boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+          int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+
+
+          // Then
+          assertFalse(dadoAlta);
+          assertEquals(nUbicacionesAntesDeInsertar, nUbicacionesAlInsertar);
+       }
 }

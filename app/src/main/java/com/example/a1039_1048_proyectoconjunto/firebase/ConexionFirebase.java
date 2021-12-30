@@ -11,7 +11,6 @@ import java.io.IOException;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -152,7 +151,7 @@ public class ConexionFirebase {
     }
 
     private static boolean contieneUbicacion(Ubicacion ubicacion) {
-        Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getListadoUbicaciones();
+        Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getUbicaciones();
         for (Ubicacion u : ubicaciones) {
             if (u.equals(ubicacion)) {
                 return true;

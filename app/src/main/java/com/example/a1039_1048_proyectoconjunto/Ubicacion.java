@@ -77,7 +77,7 @@ public class Ubicacion {
     }
 
     public boolean activar(){
-        return true;
+        return activada = true;
     }
 
     public boolean isActivada(){

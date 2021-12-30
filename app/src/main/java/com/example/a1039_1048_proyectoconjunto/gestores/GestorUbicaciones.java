@@ -25,7 +25,7 @@ public class GestorUbicaciones {
         }
     }
 
-    public Set<Ubicacion> getListadoUbicaciones() {
+    public Set<Ubicacion> getUbicaciones() {
         return ubicaciones;
     }
 
@@ -47,6 +47,15 @@ public class GestorUbicaciones {
 
     public Ubicacion getUbicacionPorCoordenadas(double latitud, double longitud) {
         return null;
+    }
+
+    public boolean activarUbicacion(String toponimo){
+        for (Ubicacion ubicacion : ubicaciones){
+            if (ubicacion.getToponimo().equals(toponimo)){
+                return ubicacion.activar();
+            }
+        }
+        return false;
     }
 
 }

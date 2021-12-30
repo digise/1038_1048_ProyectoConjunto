@@ -3,13 +3,10 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 
+import com.example.a1039_1048_proyectoconjunto.Coordenadas;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,15 +14,39 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class Historia2Test {
-    /*
 
-    @Mock private ServicioGeocoding servicioGeocoding;
+
+    @Mock private ServicioGeocoding mockServicioGeocoding;
 
     @BeforeEach
     void setUp(){
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
+        public void altaUbicacion_coordenadasExistentes_anadir(){
+            // Given
+            Gestor gestor = Gestor.getInstance();
+            String latitud = "40.4619719";
+            String longitud = "0.3548686";
+            Coordenadas coordenadas = new Coordenadas(latitud, longitud);
+
+            gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
+
+            int nUbicacionesAntesDeInsertar = gestor.getAllUbicaciones().size();
+
+
+            // When
+            boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+            int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+
+
+            // Then
+            assertTrue(dadoAlta);
+            assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
+        }
+
+/*
     @Test
     public void altaUbicacion_coordenadasExistentes_anyadir(){
         //Given
