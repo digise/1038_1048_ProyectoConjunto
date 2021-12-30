@@ -32,9 +32,7 @@ public class Historia2Test {
             Coordenadas coordenadas = new Coordenadas(latitud, longitud);
 
             gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
-
             int nUbicacionesAntesDeInsertar = gestor.getAllUbicaciones().size();
-
 
             // When
             boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
