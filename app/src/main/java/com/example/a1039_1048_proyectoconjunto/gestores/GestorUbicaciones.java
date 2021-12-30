@@ -2,11 +2,11 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Set;
 
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
 
@@ -21,14 +21,13 @@ public class GestorUbicaciones {
 
     }
 
-    public HashSet<Ubicacion> getListadoUbicaciones() {
-        return null;
+    public Set<Object> getListadoUbicaciones() {
+        return ConexionFirebase.getCollection("ubicaciones");
     }
 
 
-    public void addUbicacion(Ubicacion ubicacion) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("ubicaciones").add(ubicacion);
+    public boolean addUbicacion(Ubicacion ubicacion) {
+        return ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
     }
 
     public Ubicacion getUbicacionPorToponimo(String name) {

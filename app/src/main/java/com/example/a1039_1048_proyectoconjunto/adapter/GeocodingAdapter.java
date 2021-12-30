@@ -87,46 +87,7 @@ public class GeocodingAdapter {
             e.printStackTrace();
         }
 
-        Gson gson = new Gson();
-
-        guardarDatos(gson, "datos.json", ubicacion);
-
-        System.out.println("ubicaciones actuales: " + leerDatos("datos.json"));
-
         return ubicacion;
 
-    }
-
-    private String leerDatos(String nombreFichero){
-        StringBuilder ficheroBuilder = new StringBuilder();
-        String fichero = "";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreFichero))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                ficheroBuilder.append(linea);
-            }
-            fichero = ficheroBuilder.toString();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return fichero;
-    }
-
-    private void guardarDatos(Gson gson, String nombreFichero, Ubicacion ubicacion){
-        String ubicacionJson = gson.toJson(ubicacion);
-        System.out.println("ubicacion Json: " + ubicacionJson);
-
-        Properties properties = gson.fromJson(nombreFichero, Properties.class);
-        System.out.println(properties.get("ubicacion"));
-
-        try (FileWriter fileWriter = new FileWriter(nombreFichero)) {
-            fileWriter.write(ubicacionJson);
-            fileWriter.flush();
-            System.out.println("Fichero creado");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 }

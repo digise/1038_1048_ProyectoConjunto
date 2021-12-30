@@ -16,7 +16,6 @@ import com.example.a1039_1048_proyectoconjunto.R;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 import org.json.JSONException;
@@ -57,10 +56,6 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void getUbicacionPorNombre(View view){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Ubicacion ubicacion = new Ubicacion();
-        ubicacion.setToponimo("Castelló");
-        db.collection("ubicaciones").document("hola").set(ubicacion);
 
         String toponimoCoords = etCity.getText().toString().trim();
         Gestor gestor = Gestor.getInstance();
