@@ -31,8 +31,11 @@ public class GestorServicios {
     }
 
     public Ubicacion darAltaUbicacionPorToponimo(String toponimo){
-        Ubicacion ubicacion = servicioGeocoding.getInformacionPorToponimo(toponimo);
-        return ubicacion;
+        return servicioGeocoding.getInformacionPorToponimo(toponimo);
+    }
+
+    public Ubicacion darAltaUbicacionPorCoordenadas(String coordenadas){
+        return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
     }
 
 
