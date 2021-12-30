@@ -1,5 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto;
 
+import java.util.Comparator;
+
 public class Ubicacion {
 
     private String toponimo;
@@ -101,12 +103,8 @@ public class Ubicacion {
                 '}';
     }
 
-    public boolean equals (Ubicacion a){
-
-        if(a.getLatitud().equals(this.latitud) && a.getLongitud().equals(this.longitud)){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean equals(Ubicacion ubicacion) {
+        return ubicacion.longitud.equals(this.longitud) && ubicacion.latitud.equals(this.latitud);
     }
+
 }

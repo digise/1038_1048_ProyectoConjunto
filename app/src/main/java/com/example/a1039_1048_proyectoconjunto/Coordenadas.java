@@ -4,7 +4,7 @@ public class Coordenadas {
     String longitud;
     String latitud;
 
-    public Coordenadas(String longitud, String latitud) {
+    public Coordenadas(String latitud, String longitud) {
         this.longitud = longitud;
         this.latitud = latitud;
     }
@@ -27,6 +27,6 @@ public class Coordenadas {
 
     @Override
     public String toString() {
-        return latitud + "," + "longitud";
+        return latitud + "," + longitud;
     }
 }

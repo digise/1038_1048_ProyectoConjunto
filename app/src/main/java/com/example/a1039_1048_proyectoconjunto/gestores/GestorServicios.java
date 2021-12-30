@@ -15,7 +15,7 @@ public class GestorServicios {
     ServicioGeocoding servicioGeocoding;
     ServicioOpenWeather servicioOpenWeather;
 
-    public GestorServicios() {
+    protected GestorServicios() {
         servicioGeocoding = null;
         servicioOpenWeather = null;
     }
@@ -36,8 +36,7 @@ public class GestorServicios {
     }
 
     public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas){
-        Ubicacion ubicacion = servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
-        return ubicacion;
+        return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
     }
 
 

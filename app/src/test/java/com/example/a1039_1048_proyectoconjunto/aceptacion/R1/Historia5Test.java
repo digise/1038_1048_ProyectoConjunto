@@ -1,14 +1,9 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,17 +11,290 @@ import org.junit.jupiter.api.Test;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Set;
+
 public class Historia5Test {
+
+    private static Set<Object> ubicaciones;
+
+    @BeforeAll
+    public static void crear_firebase(){
+        ubicaciones = ConexionFirebase.getCollection("ubicaciones");
+    }
 
     @Test
     public void activarUbicacion_servicioDisponible_activar(){
-        String json = "{   \"statename\" : {},   \"distance\" : \"0.015\",   \"elevation\" : \"120\",   \"osmtags\" : {      \"wikipedia\" : \"es:Cálig\",      \"source\" : \"BDLL25, EGRN, Instituto Geográfico Nacional\",      \"population\" : \"2217\",      \"idee_name\" : \"Càlig\",      \"ine_municipio\" : \"12034\",      \"is_in_region\" : \"Comunidad Valenciana\",      \"is_in_province\" : \"Castellón\",      \"boundary\" : \"administrative\",      \"wikidata\" : \"Q1635720\",      \"is_in\" : \"Castellón, Comunidad Valenciana, Spain\",      \"name\" : \"Càlig\",      \"name_ca\" : \"Càlig\",      \"is_in_country\" : \"Spain\",      \"admin_level\" : \"8\",      \"population_date\" : \"2009\",      \"type\" : \"boundary\"   },   \"state\" : \"Comunidad Valenciana\",   \"latt\" : \"40.46208\",   \"city\" : \"Calig\",   \"prov\" : \"ES\",   \"intersection\" : {      \"distance\" : \"0.061\",      \"xlat\" : \"40.46156\",      \"xlon\" : \"0.35439\",      \"street2\" : \"Diputacion\",      \"street1\" : \"CL FACUNDO COMES Y MAYOR\"   },   \"geocode\" : \"BENICARLO-UYFAV\",   \"geonumber\" : \"3162047685129\",   \"country\" : \"Spain\",   \"stnumber\" : \"3\",   \"staddress\" : \"CL SAN VICENTE\",   \"inlatt\" : \"40.46197\",   \"alt\" : {      \"loc\" : [         {            \"staddress\" : \"CL SAN VICENTE\",            \"stnumber\" : \"3\",            \"postal\" : \"12589\",            \"latt\" : \"40.46208\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35497\",            \"class\" : {}         },         {            \"staddress\" : \"San Vicente\",            \"stnumber\" : \"3\",            \"postal\" : {},            \"latt\" : \"40.46208\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35497\",            \"class\" : {}         },         {            \"staddress\" : \"San Vicente\",            \"stnumber\" : \"3\",            \"postal\" : {},            \"dist\" : \"0.015\",            \"latt\" : \"40.46208\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35497\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN VICENTE\",            \"stnumber\" : \"1\",            \"postal\" : \"12589\",            \"dist\" : \"0.020\",            \"latt\" : \"40.46208\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35506\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN LORENZO\",            \"stnumber\" : \"21\",            \"postal\" : \"12589\",            \"dist\" : \"0.025\",            \"latt\" : \"40.46207\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35514\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN LORENZO\",            \"stnumber\" : \"19\",            \"postal\" : \"12589\",            \"dist\" : \"0.017\",            \"latt\" : \"40.46202\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35506\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN ROQUE\",            \"stnumber\" : \"3\",            \"postal\" : \"12589\",            \"dist\" : \"0.037\",            \"latt\" : \"40.46229\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35499\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN VICENTE\",            \"stnumber\" : \"2\",            \"postal\" : \"12589\",            \"dist\" : \"0.029\",            \"latt\" : \"40.46222\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35497\",            \"class\" : {}         },         {            \"staddress\" : \"CL SAN ROQUE\",            \"stnumber\" : \"1\",            \"postal\" : \"12589\",            \"dist\" : \"0.032\",            \"latt\" : \"40.46225\",            \"city\" : \"Calig\",            \"prov\" : \"Comunidad Valenciana\",            \"longt\" : \"0.35497\",            \"class\" : {}         }      ]   },   \"timezone\" : \"Europe/Madrid\",   \"region\" : \"Calig, Comunidad Valenciana\",   \"postal\" : \"12589\",   \"poi\" : {      \"poilat\" : \"40.46195\",      \"name\" : \"Pub la Lluna\",      \"name_es\" : \"Pub La Lluna\",      \"name_ca\" : \"Pub la Lluna\",      \"addr_street\" : \"Calle San Tarsicio\",      \"amenity\" : \"pub\",      \"poilon\" : \"0.35477\",      \"internet_access\" : \"wlan\",      \"id\" : \"4827498823\",      \"poidist\" : \"0.009\"   },   \"longt\" : \"0.35497\",   \"remaining_credits\" : \"-177\",   \"confidence\" : \"0.9\",   \"inlongt\" : \"0.35487\",   \"class\" : {},   \"adminareas\" : {      \"admin7\" : {         \"wikipedia\" : \"es:Bajo Maestrazgo\",         \"is_in_region\" : \"Comunitat Valenciana\",         \"place\" : \"region\",         \"boundary\" : \"administrative\",         \"is_in_continent\" : \"Europe\",         \"wikidata\" : \"Q804017\",         \"is_in\" : \"Comunitat Valenciana;Spain;Europe\",         \"name\" : \"el Baix Maestrat\",         \"name_ca\" : \"el Baix Maestrat\",         \"name_es\" : \"Bajo Maestrazgo\",         \"is_in_country\" : \"Spain\",         \"admin_level\" : \"7\",         \"level\" : \"7\",         \"alt_name\" : \"Baix Maestrat\",         \"type\" : \"boundary\",         \"rank\" : \"region\"      },      \"admin6\" : {         \"is_in_region\" : \"Comunitat Valenciana\",         \"addr_country\" : \"ES\",         \"official_name_es\" : \"Provincia de Castellón\",         \"boundary\" : \"administrative\",         \"is_in_continent\" : \"Europe\",         \"name\" : \"Castelló / Castellón\",         \"ISO3166_2\" : \"ES-CS\",         \"is_in_country\" : \"Spain\",         \"level\" : \"6\",         \"official_name_en\" : \"Province of Castellón\",         \"type\" : \"boundary\",         \"name_eu\" : \"Castellón\",         \"name_fr\" : \"Castellón\",         \"source\" : \"BDLL25, EGRN, Instituto Geográfico Nacional\",         \"wikipedia\" : \"ca:Província de Castelló\",         \"place\" : \"county\",         \"is_in_country_code\" : \"ES\",         \"name_be\" : \"Кастэльён\",         \"name_ru\" : \"Кастельон\",         \"official_name_ca\" : \"Província de Castelló\",         \"official_name_fr\" : \"Province de Castellón\",         \"wikidata\" : \"Q54942\",         \"is_in_region_code\" : \"10\",         \"is_in\" : \"Europe;Spain;Comunitat Valenciana\",         \"name_es\" : \"Castellón\",         \"name_ca\" : \"Castelló\",         \"official_name\" : \"Provincia de Castelló/Castellón\",         \"ine_provincia\" : \"12\",         \"admin_level\" : \"6\",         \"official_name_de\" : \"Provinz Castellón\",         \"official_name_be\" : \"Правінцыя Кастэльён\",         \"border_type\" : \"province\"      },      \"admin8\" : {         \"wikipedia\" : \"es:Cálig\",         \"source\" : \"BDLL25, EGRN, Instituto Geográfico Nacional\",         \"population\" : \"2217\",         \"idee_name\" : \"Càlig\",         \"ine_municipio\" : \"12034\",         \"is_in_region\" : \"Comunidad Valenciana\",         \"is_in_province\" : \"Castellón\",         \"boundary\" : \"administrative\",         \"wikidata\" : \"Q1635720\",         \"is_in\" : \"Castellón, Comunidad Valenciana, Spain\",         \"name\" : \"Càlig\",         \"name_ca\" : \"Càlig\",         \"is_in_country\" : \"Spain\",         \"admin_level\" : \"8\",         \"level\" : \"8\",         \"population_date\" : \"2009\",         \"type\" : \"boundary\"      }   },   \"altgeocode\" : \"CALIG-UYFAV\"}";
+        Ubicacion aux = null;
+
+        for (Object ubicacion: ubicaciones){
+            aux = (Ubicacion) ubicacion;
+            System.out.println(aux.toString());
+        }
+
+        String json = "{\n" +
+                "   \"statename\":{\n" +
+                "      \n" +
+                "   },\n" +
+                "   \"distance\":\"0.188\",\n" +
+                "   \"elevation\":\"62\",\n" +
+                "   \"osmtags\":{\n" +
+                "      \"wikipedia\":\"es:Sagunto (Valencia)\",\n" +
+                "      \"source\":\"BDLL25, EGRN, Instituto Geográfico Nacional\",\n" +
+                "      \"population\":\"66259\",\n" +
+                "      \"idee_name\":\"Sagunto/Sagunt\",\n" +
+                "      \"ine_municipio\":\"46220\",\n" +
+                "      \"is_in_region\":\"Comunidad Valenciana\",\n" +
+                "      \"is_in_province\":\"Valencia\",\n" +
+                "      \"boundary\":\"administrative\",\n" +
+                "      \"wikidata\":\"Q47483\",\n" +
+                "      \"is_in\":\"Valencia, Comunidad Valenciana, Spain\",\n" +
+                "      \"name\":\"Sagunt / Sagunto\",\n" +
+                "      \"name_ca\":\"Sagunt\",\n" +
+                "      \"name_es\":\"Sagunto\",\n" +
+                "      \"is_in_country\":\"Spain\",\n" +
+                "      \"admin_level\":\"8\",\n" +
+                "      \"population_date\":\"2009\",\n" +
+                "      \"type\":\"boundary\"\n" +
+                "   },\n" +
+                "   \"state\":\"Comunidad Valenciana\",\n" +
+                "   \"latt\":\"39.69342\",\n" +
+                "   \"city\":\"Sagunto\",\n" +
+                "   \"prov\":\"ES\",\n" +
+                "   \"geocode\":\"SAGUNTO-GPLAU\",\n" +
+                "   \"geonumber\":\"3161957963704\",\n" +
+                "   \"country\":\"Spain\",\n" +
+                "   \"stnumber\":\"5\",\n" +
+                "   \"staddress\":\"PL NUMERO 50\",\n" +
+                "   \"inlatt\":\"39.69250\",\n" +
+                "   \"alt\":{\n" +
+                "      \"loc\":[\n" +
+                "         {\n" +
+                "            \"staddress\":\"PL NUMERO 50\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":\"46500\",\n" +
+                "            \"latt\":\"39.69342\",\n" +
+                "            \"city\":\"Sagunt/Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28092\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"PL NUMERO 50\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":\"46500\",\n" +
+                "            \"latt\":\"39.69342\",\n" +
+                "            \"city\":\"Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28092\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"PL NUMERO   50\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":{\n" +
+                "               \n" +
+                "            },\n" +
+                "            \"latt\":\"39.69342\",\n" +
+                "            \"city\":\"Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28092\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"Place Numero   50\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":{\n" +
+                "               \n" +
+                "            },\n" +
+                "            \"latt\":\"39.69342\",\n" +
+                "            \"city\":\"Sweet Hotel Els Arenals\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28092\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"Autovía del Mediterráneo\",\n" +
+                "            \"stnumber\":\"1\",\n" +
+                "            \"postal\":{\n" +
+                "               \n" +
+                "            },\n" +
+                "            \"dist\":\"0.271\",\n" +
+                "            \"latt\":\"39.69388\",\n" +
+                "            \"city\":\"Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28168\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"NUMERO 50 PL\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":{\n" +
+                "               \n" +
+                "            },\n" +
+                "            \"dist\":\"0.189\",\n" +
+                "            \"latt\":\"39.693418\",\n" +
+                "            \"city\":\"Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.2809247\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"Autovía del Mediterráneo\",\n" +
+                "            \"stnumber\":\"1\",\n" +
+                "            \"postal\":{\n" +
+                "               \n" +
+                "            },\n" +
+                "            \"dist\":\"0.262\",\n" +
+                "            \"latt\":\"39.69433\",\n" +
+                "            \"city\":\"Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.281\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"PL NUMERO 50\",\n" +
+                "            \"stnumber\":\"5\",\n" +
+                "            \"postal\":\"46500\",\n" +
+                "            \"dist\":\"0.188\",\n" +
+                "            \"latt\":\"39.69342\",\n" +
+                "            \"city\":\"Sagunt/Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28092\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         },\n" +
+                "         {\n" +
+                "            \"staddress\":\"PL NUMERO 50\",\n" +
+                "            \"stnumber\":\"4\",\n" +
+                "            \"postal\":\"46500\",\n" +
+                "            \"dist\":\"0.218\",\n" +
+                "            \"latt\":\"39.69341\",\n" +
+                "            \"city\":\"Sagunt/Sagunto\",\n" +
+                "            \"prov\":\"Comunidad Valenciana\",\n" +
+                "            \"longt\":\"-0.28133\",\n" +
+                "            \"class\":{\n" +
+                "               \n" +
+                "            }\n" +
+                "         }\n" +
+                "      ]\n" +
+                "   },\n" +
+                "   \"timezone\":\"Europe/Madrid\",\n" +
+                "   \"region\":\"Sagunto, Comunidad Valenciana\",\n" +
+                "   \"postal\":\"46500\",\n" +
+                "   \"longt\":\"-0.28092\",\n" +
+                "   \"remaining_credits\":\"-176\",\n" +
+                "   \"confidence\":\"0.9\",\n" +
+                "   \"inlongt\":\"-0.27907\",\n" +
+                "   \"class\":{\n" +
+                "      \n" +
+                "   },\n" +
+                "   \"adminareas\":{\n" +
+                "      \"admin7\":{\n" +
+                "         \"wikipedia\":\"es:Campo de Murviedro\",\n" +
+                "         \"is_in_region\":\"Comunitat Valenciana\",\n" +
+                "         \"place\":\"region\",\n" +
+                "         \"boundary\":\"administrative\",\n" +
+                "         \"is_in_continent\":\"Europe\",\n" +
+                "         \"wikidata\":\"Q925790\",\n" +
+                "         \"is_in\":\"Comunitat Valenciana;Spain;Europe\",\n" +
+                "         \"name\":\"el Camp de Morvedre\",\n" +
+                "         \"name_ca\":\"el Camp de Morvedre\",\n" +
+                "         \"name_es\":\"Campo de Murviedro\",\n" +
+                "         \"is_in_country\":\"Spain\",\n" +
+                "         \"admin_level\":\"7\",\n" +
+                "         \"level\":\"7\",\n" +
+                "         \"alt_name\":\"Camp de Morvedre\",\n" +
+                "         \"type\":\"boundary\",\n" +
+                "         \"rank\":\"region\"\n" +
+                "      },\n" +
+                "      \"admin6\":{\n" +
+                "         \"name_de\":\"Valencia\",\n" +
+                "         \"name_sr\":\"Валенсија\",\n" +
+                "         \"is_in_region\":\"Comunidad Valenciana\",\n" +
+                "         \"name_lt\":\"Valensija\",\n" +
+                "         \"old_name_ca_valencia\":\"València\",\n" +
+                "         \"official_name_es\":\"Provincia de Valencia\",\n" +
+                "         \"name_uk\":\"Валенсія\",\n" +
+                "         \"boundary\":\"administrative\",\n" +
+                "         \"name_en\":\"Valencia\",\n" +
+                "         \"name_el\":\"Βαλένθια\",\n" +
+                "         \"is_in_continent\":\"Europe\",\n" +
+                "         \"name_ca_valencia\":\"València\",\n" +
+                "         \"name_lv\":\"Valensija\",\n" +
+                "         \"name\":\"València / Valencia\",\n" +
+                "         \"ISO3166_2\":\"ES-V\",\n" +
+                "         \"is_in_country\":\"Spain\",\n" +
+                "         \"alt_name_el\":\"Βαλένσια\",\n" +
+                "         \"level\":\"6\",\n" +
+                "         \"name_ar\":\"فالنسيا\",\n" +
+                "         \"type\":\"boundary\",\n" +
+                "         \"name_nl\":\"Valencia\",\n" +
+                "         \"name_eu\":\"Valentzia\",\n" +
+                "         \"name_fr\":\"Valence\",\n" +
+                "         \"wikipedia\":\"es:Provincia de Valencia\",\n" +
+                "         \"source\":\"BDLL25, EGRN, Instituto Geográfico Nacional\",\n" +
+                "         \"is_in_country_code\":\"ES\",\n" +
+                "         \"name_be\":\"Валенсія\",\n" +
+                "         \"name_ru\":\"Валенсия\",\n" +
+                "         \"official_name_ca\":\"Província de València\",\n" +
+                "         \"name_la\":\"Valentia\",\n" +
+                "         \"official_name_fr\":\"Province de Valence\",\n" +
+                "         \"wikidata\":\"Q54939\",\n" +
+                "         \"is_in_region_code\":\"10\",\n" +
+                "         \"is_in\":\"Europe;Spain;Comunidad Valenciana\",\n" +
+                "         \"official_name\":\"Provincia de València/Valencia\",\n" +
+                "         \"name_ca\":\"València\",\n" +
+                "         \"name_es\":\"Valencia\",\n" +
+                "         \"ine_provincia\":\"46\",\n" +
+                "         \"admin_level\":\"6\",\n" +
+                "         \"name_pl\":\"Walencja\",\n" +
+                "         \"official_name_de\":\"Provinz Valencia\",\n" +
+                "         \"name_it\":\"Valencia\",\n" +
+                "         \"official_name_be\":\"Правінцыя Валенсія\",\n" +
+                "         \"border_type\":\"province\"\n" +
+                "      },\n" +
+                "      \"admin8\":{\n" +
+                "         \"wikipedia\":\"es:Sagunto (Valencia)\",\n" +
+                "         \"source\":\"BDLL25, EGRN, Instituto Geográfico Nacional\",\n" +
+                "         \"population\":\"66259\",\n" +
+                "         \"idee_name\":\"Sagunto/Sagunt\",\n" +
+                "         \"ine_municipio\":\"46220\",\n" +
+                "         \"is_in_region\":\"Comunidad Valenciana\",\n" +
+                "         \"is_in_province\":\"Valencia\",\n" +
+                "         \"boundary\":\"administrative\",\n" +
+                "         \"wikidata\":\"Q47483\",\n" +
+                "         \"is_in\":\"Valencia, Comunidad Valenciana, Spain\",\n" +
+                "         \"name\":\"Sagunt / Sagunto\",\n" +
+                "         \"name_ca\":\"Sagunt\",\n" +
+                "         \"name_es\":\"Sagunto\",\n" +
+                "         \"is_in_country\":\"Spain\",\n" +
+                "         \"admin_level\":\"8\",\n" +
+                "         \"level\":\"8\",\n" +
+                "         \"population_date\":\"2009\",\n" +
+                "         \"type\":\"boundary\"\n" +
+                "      }\n" +
+                "   },\n" +
+                "   \"altgeocode\":\"SWEETELS-GPLAU\"\n" +
+                "}";
         try {
             JSONObject jsonResponse = new JSONObject(json);
             boolean x  = jsonResponse.isNull("standard");
             System.out.println(x);
-            String city = jsonResponse.getString("city");
-            System.out.println(city);
         } catch (JSONException e) {
             e.printStackTrace();
         }

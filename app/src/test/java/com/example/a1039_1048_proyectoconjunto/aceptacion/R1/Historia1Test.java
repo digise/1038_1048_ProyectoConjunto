@@ -53,27 +53,23 @@ public class Historia1Test {
 
    @Test
    public void altaUbicacion_toponimoNoExistente_anadir(){
-      /*
-      GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-      geocodingAdapter.doRequest("http://geocode.xyz/no%20Existe?json=1&auth=57673066339488579050x115589", true);
+      // Given
       Gestor gestor = Gestor.getInstance();
-      String toponimo = "no Existe";
+      String toponimo = "noExiste";
       ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
       gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
       int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
 
 
-      // When
-      Ubicacion ubicacion = gestor.getGestorServicios().darAltaUbicacionPorToponimo(toponimo);
+      // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
+      Ubicacion ubicacion = gestor.darAltaUbicacionPorToponimo(toponimo);
       boolean dadoAlta = gestor.getGestorUbicaciones().addUbicacion(ubicacion);
       int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
 
 
       // Then
       assertFalse(dadoAlta);
-      assertEquals(nUbicacionesAntesDeInsertar, nUbicacionesAlInsertar);*/
-
-
+      assertEquals(nUbicacionesAntesDeInsertar, nUbicacionesAlInsertar);
    }
 }
