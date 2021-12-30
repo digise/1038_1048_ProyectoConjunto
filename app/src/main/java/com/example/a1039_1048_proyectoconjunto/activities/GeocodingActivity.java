@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeocodingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+/*public class GeocodingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     // https://geocode.xyz/51.50354,-0.12768?geoit=json&auth=57673066339488579050x115589 --> latitud longitud
     // https://geocode.xyz/sagunto?json=1&auth=57673066339488579050x115589
@@ -69,11 +69,11 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
     }
 
-    /*public void getUbicacionPorNombre(String toponimoCoords){
+    public void getUbicacionPorNombre(String toponimoCoords){
         Gestor gestor = createGestorGeocoding();
         gestor.getGestorServicios().getServicioGeocoding().getInformacionPorCoordenadas(toponimoCoords);
 
-    }*/
+    }
 
     private Gestor createGestorGeocoding(){
         Gestor gestor = new Gestor();
@@ -86,4 +86,4 @@ public class GeocodingActivity extends AppCompatActivity implements AdapterView.
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(this, "clicked item: " + position, Toast.LENGTH_SHORT).show();
     }
-}
+}*/

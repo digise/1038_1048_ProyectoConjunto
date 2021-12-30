@@ -2,6 +2,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import android.content.Context;
 
+import com.example.a1039_1048_proyectoconjunto.Coordenadas;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
@@ -32,6 +33,11 @@ public class GestorServicios {
 
     public Ubicacion darAltaUbicacionPorToponimo(String toponimo){
         Ubicacion ubicacion = servicioGeocoding.getInformacionPorToponimo(toponimo);
+        return ubicacion;
+    }
+
+    public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas){
+        Ubicacion ubicacion = servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
         return ubicacion;
     }
 
