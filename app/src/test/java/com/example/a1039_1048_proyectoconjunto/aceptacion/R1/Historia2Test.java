@@ -1,28 +1,18 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
-/*
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
-
-
-import org.junit.jupiter.api.Test;
-
- */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Coordenadas;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 public class Historia2Test {
 
@@ -33,6 +23,7 @@ public class Historia2Test {
         String latitud = "40.4619719";
         String longitud = "0.3548686";
         Coordenadas coordenadas = new Coordenadas(latitud, longitud);
+
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
@@ -40,7 +31,7 @@ public class Historia2Test {
 
 
         // When
-        Ubicacion ubicacion = gestor.getGestorServicios().darAltaUbicacionPorCoordenadas(coordenadas);
+        Ubicacion ubicacion = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
         boolean dadoAlta = gestor.getGestorUbicaciones().addUbicacion(ubicacion);
         int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
 

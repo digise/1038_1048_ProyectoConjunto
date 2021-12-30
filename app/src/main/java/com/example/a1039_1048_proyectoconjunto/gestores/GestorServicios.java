@@ -15,7 +15,7 @@ public class GestorServicios {
     ServicioGeocoding servicioGeocoding;
     ServicioOpenWeather servicioOpenWeather;
 
-    public GestorServicios() {
+    protected GestorServicios() {
         servicioGeocoding = null;
         servicioOpenWeather = null;
     }
@@ -35,13 +35,8 @@ public class GestorServicios {
         return servicioGeocoding.getInformacionPorToponimo(toponimo);
     }
 
-    public Ubicacion darAltaUbicacionPorCoordenadas(String coordenadas){
-        return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
-    }
-
     public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas){
-        Ubicacion ubicacion = servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
-        return ubicacion;
+        return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
     }
 
 

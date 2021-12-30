@@ -14,9 +14,9 @@ public class ServicioGeocoding implements Servicio{
 
     public ServicioGeocoding() {}
 
-    public Ubicacion getInformacionPorToponimo(String toponimoCoords) {
+    public Ubicacion getInformacionPorToponimo(String toponimo) {
         // https://geocode.xyz/castellon?json=1&auth=57673066339488579050x115589
-        String tempUrl = url + toponimoCoords;
+        String tempUrl = url + toponimo;
         tempUrl += "?json=1&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
         return geocodingAdapter.doRequest(tempUrl);

@@ -1,14 +1,9 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 
@@ -16,10 +11,26 @@ import org.junit.jupiter.api.Test;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Set;
+
 public class Historia5Test {
+
+    private static Set<Object> ubicaciones;
+
+    @BeforeAll
+    public static void crear_firebase(){
+        ubicaciones = ConexionFirebase.getCollection("ubicaciones");
+    }
 
     @Test
     public void activarUbicacion_servicioDisponible_activar(){
+        Ubicacion aux = null;
+
+        for (Object ubicacion: ubicaciones){
+            aux = (Ubicacion) ubicacion;
+            System.out.println(aux.toString());
+        }
+
         String json = "{\n" +
                 "   \"statename\":{\n" +
                 "      \n" +

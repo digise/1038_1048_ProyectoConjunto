@@ -6,6 +6,7 @@ import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
@@ -13,21 +14,31 @@ import java.util.Set;
 public class GestorUbicaciones {
 
 
-    private HashMap<String, Ubicacion> ubicaciones;
+    private Set<Ubicacion> ubicaciones;
 
 
-    public GestorUbicaciones() {
-        ubicaciones = new HashMap<>();
-
+    protected GestorUbicaciones() {
+        ubicaciones = new HashSet<>();
+        Set<Object> objectosUbicaciones = ConexionFirebase.getCollection("ubicaciones");
+        for (Object ubicacion : objectosUbicaciones) {
+            ubicaciones.add((Ubicacion) ubicacion);
+        }
     }
 
-    public Set<Object> getListadoUbicaciones() {
-        return ConexionFirebase.getCollection("ubicaciones");
+    public Set<Ubicacion> getListadoUbicaciones() {
+        return ubicaciones;
     }
 
 
     public boolean addUbicacion(Ubicacion ubicacion) {
-        return ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
+        boolean anadido = false;
+        if (ubicacion != null) {
+            anadido = ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
+            if (anadido) {
+                ubicaciones.add(ubicacion);
+            }
+        }
+        return anadido;
     }
 
     public Ubicacion getUbicacionPorToponimo(String name) {
