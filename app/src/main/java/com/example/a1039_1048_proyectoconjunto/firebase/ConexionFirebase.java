@@ -41,7 +41,9 @@ public class ConexionFirebase {
         try {
             Response response = call.execute();
             String jsonData = response.body().string();
-            System.out.println(jsonData);
+            if (jsonData.equals("null")) {
+                return res;
+            }
             JSONObject jsonObject = new JSONObject(jsonData);
             for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                 String x = it.next();
@@ -121,7 +123,7 @@ public class ConexionFirebase {
 
     public static boolean updateDocument(String referencia, Object data, String idDocumento) {
 
-        if (! contieneUbicacion( (Ubicacion) data)) {
+        if (!contieneUbicacion((Ubicacion) data)) {
             return false;
         }
 
@@ -149,10 +151,10 @@ public class ConexionFirebase {
         return false;
     }
 
-    private static boolean contieneUbicacion(Ubicacion ubicacion){
+    private static boolean contieneUbicacion(Ubicacion ubicacion) {
         Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getListadoUbicaciones();
-        for (Ubicacion u : ubicaciones){
-            if (u.equals(ubicacion)){
+        for (Ubicacion u : ubicaciones) {
+            if (u.equals(ubicacion)) {
                 return true;
             }
         }

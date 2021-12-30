@@ -41,28 +41,30 @@ public class Historia2Test {
         assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
     }
 
-    /*@Test
+    @Test
     public void altaUbicacion_coordenadasNoExistentes_anadir(){
-        //Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.setServicioGeocoding(new ServicioGeocoding());
+        // Given
+        Gestor gestor = Gestor.getInstance();
+        String latitud = "40.4619719";
+        String longitud = "0.3548686";
+        Coordenadas coordenadas = new Coordenadas(latitud, longitud);
 
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
+        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
+        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
-        double latitud = -91;
-        double longitud = 165;
-
-
-        //When
-        boolean dadoAlta = gestor.darAltaCoordenadas(latitud, longitud);
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
 
 
-        //Then
-        int nUbicaciones = gestorUbicaciones.getListadoUbicaciones().size();
-        assertEquals(0, nUbicaciones);
-        assertFalse(dadoAlta);
-    }*/
+        // When
+        Ubicacion ubicacion = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+        boolean dadoAlta = gestor.getGestorUbicaciones().addUbicacion(ubicacion);
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getListadoUbicaciones().size();
+
+
+        // Then
+        assertTrue(dadoAlta);
+        assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
+    }
 
 
 }
