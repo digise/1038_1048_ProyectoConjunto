@@ -20,12 +20,10 @@ public class ServicioGeocoding implements Servicio{
         return geocodingAdapter.doRequest(tempUrl);
     }
 
-    public Ubicacion getInformacionPorCoordenadas(String faltacambiaresto) {
-        /*String coordenadas = latitud + "," + longitud;
-        String tempUrl = url + coordenadas;
+    public Ubicacion getInformacionPorCoordenadas(String toponimoCoords) {
+        String tempUrl = url + toponimoCoords;
         tempUrl += "?geoit=json&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
-        return geocodingAdapter.doRequest(tempUrl);*/
-        return null;
+        return geocodingAdapter.doRequest(tempUrl);
     }
 }
