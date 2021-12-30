@@ -2,8 +2,10 @@ package com.example.a1039_1048_proyectoconjunto.servicios;
 
 import android.content.Context;
 
+import com.example.a1039_1048_proyectoconjunto.Coordenadas;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
+import com.google.protobuf.CodedOutputStream;
 
 public class ServicioGeocoding implements Servicio{
 
@@ -20,8 +22,8 @@ public class ServicioGeocoding implements Servicio{
         return geocodingAdapter.doRequest(tempUrl);
     }
 
-    public Ubicacion getInformacionPorCoordenadas(String toponimoCoords) {
-        String tempUrl = url + toponimoCoords;
+    public Ubicacion getInformacionPorCoordenadas(Coordenadas coordenadas) {
+        String tempUrl = url + coordenadas.toString();
         tempUrl += "?geoit=json&auth=" + auth;
         GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
         return geocodingAdapter.doRequest(tempUrl);

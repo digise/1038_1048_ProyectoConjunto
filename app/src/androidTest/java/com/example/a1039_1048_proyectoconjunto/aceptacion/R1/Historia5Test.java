@@ -1,5 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
-
+/*
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,10 +11,11 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import org.junit.jupiter.api.Test;
 
-
+ */
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
 
 public class Historia5Test {
 
@@ -282,8 +283,9 @@ public class Historia5Test {
                 "}";
         try {
             JSONObject jsonResponse = new JSONObject(json);
-            boolean x  = jsonResponse.isNull("standard");
-            System.out.println(x);
+            JSONObject jsonObject = jsonResponse.getJSONObject("standard");
+            String pais = jsonObject.getString("countryname");
+            System.out.println(pais);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -310,7 +312,7 @@ public class Historia5Test {
 
     }
 
-    /*@Test
+   /* @Test
     public void activarUbicacion_servicioNoDisponible_activar(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();
