@@ -13,14 +13,10 @@ import org.junit.jupiter.api.Test;
 
  */
 
-public class Historia3Test {
-/*
-    private ServicioOpenWeather servicioOpenWeather;
+import org.junit.Test;
 
-    @BeforeEach
-    void setUp(){
-        servicioOpenWeather = new ServicioOpenWeather();
-    }
+public class Historia3Test {
+
 
     @Test
     public void validarToponimo_APIOpenWeather_toponimoValido(){
@@ -43,7 +39,7 @@ public class Historia3Test {
         assertTrue(servicioOpenWeather.isValid(toponimo));
     }
 
-    @Test
+    /*@Test
     public void validarToponimo_APIOpenWeather_toponimoNoValido(){
         //Given
         GestorServicios gestorServicios = GestorServicios.getInstance();

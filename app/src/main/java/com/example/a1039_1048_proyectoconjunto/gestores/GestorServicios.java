@@ -36,7 +36,10 @@ public class GestorServicios {
     }
 
     public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas){
-        return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
+        if ((Double.parseDouble(coordenadas.getLatitud()) > -90.0 && Double.parseDouble(coordenadas.getLatitud()) < 90.0)
+                && (Double.parseDouble(coordenadas.getLongitud()) > -180.0 && Double.parseDouble(coordenadas.getLongitud()) < 180.0))
+            return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
+        return null;
     }
 
 
