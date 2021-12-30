@@ -53,10 +53,10 @@ public class GeocodingAdapter {
                 String pais = null;
                 try {
                     JSONObject jsonResponse = new JSONObject(jsonData);
-                    if (jsonResponse.isNull("standard")) {
+                    /*if (jsonResponse.isNull("standard")) {
 
 
-                    } else{
+                    } else{*/
                         JSONObject jsonObject = jsonResponse.getJSONObject("standard");
 
                         //toponimo
@@ -69,7 +69,7 @@ public class GeocodingAdapter {
                         latitud = jsonResponse.getString("latt");
                         //longitud
                         longitud = jsonResponse.getString("longt");
-                }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();

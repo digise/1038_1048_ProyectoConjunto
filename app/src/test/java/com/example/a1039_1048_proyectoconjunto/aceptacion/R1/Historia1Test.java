@@ -33,7 +33,7 @@ public class Historia1Test {
    public void altaUbicacion_toponimoExistente_anadir(){
       // Given
       Gestor gestor = Gestor.getInstance();
-      String toponimo = "castellon de la plana";
+      String toponimo = "sagunto";
       ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
       gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
