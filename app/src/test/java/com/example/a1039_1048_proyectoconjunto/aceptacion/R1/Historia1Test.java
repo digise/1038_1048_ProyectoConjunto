@@ -53,9 +53,10 @@ public class Historia1Test {
 
    @Test
    public void altaUbicacion_toponimoNoExistente_anadir(){
+      /*
       GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
       geocodingAdapter.doRequest("http://geocode.xyz/no%20Existe?json=1&auth=57673066339488579050x115589", true);
-      /*Gestor gestor = Gestor.getInstance();
+      Gestor gestor = Gestor.getInstance();
       String toponimo = "no Existe";
       ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
       gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
