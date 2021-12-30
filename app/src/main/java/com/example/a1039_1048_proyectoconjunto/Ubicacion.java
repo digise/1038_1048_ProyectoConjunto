@@ -94,4 +94,13 @@ public class Ubicacion {
                 ", pais='" + pais + '\'' +
                 '}';
     }
+
+    public boolean equals (Ubicacion a){
+
+        if(a.getLatitud().equals(this.latitud) && a.getLongitud().equals(this.longitud)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

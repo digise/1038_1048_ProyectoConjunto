@@ -8,7 +8,9 @@ import android.content.Context;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
-public class Gestor {
+import java.io.Serializable;
+
+public class Gestor implements Serializable {
 
     //Singleton
     private static Gestor INSTANCE;
