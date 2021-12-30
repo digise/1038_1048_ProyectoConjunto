@@ -53,18 +53,23 @@ public class GeocodingAdapter {
                 String pais = null;
                 try {
                     JSONObject jsonResponse = new JSONObject(jsonData);
-                    JSONObject jsonObject = jsonResponse.getJSONObject("standard");
+                    if (jsonResponse.isNull("standard")) {
 
-                    //toponimo
-                    toponimo = jsonObject.getString("city");
 
-                    //pais
-                    pais = jsonObject.getString("countryname");
+                    } else{
+                        JSONObject jsonObject = jsonResponse.getJSONObject("standard");
 
-                    //latitud
-                    latitud = jsonResponse.getString("latt");
-                    //longitud
-                    longitud = jsonResponse.getString("longt");
+                        //toponimo
+                        toponimo = jsonObject.getString("city");
+
+                        //pais
+                        pais = jsonObject.getString("countryname");
+
+                        //latitud
+                        latitud = jsonResponse.getString("latt");
+                        //longitud
+                        longitud = jsonResponse.getString("longt");
+                }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
