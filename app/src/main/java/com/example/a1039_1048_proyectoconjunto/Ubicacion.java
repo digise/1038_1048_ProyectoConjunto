@@ -9,6 +9,7 @@ public class Ubicacion {
     private String longitud; //-180, 180
     private boolean activada = false;
     private String pais;
+    private String alias;
     private boolean servicioGeocodingActivo;
     private boolean servicioOpenWeatherActivo;
     private boolean servicioCurrentsActivo;
@@ -18,6 +19,7 @@ public class Ubicacion {
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
+        this.alias = "";
         this.servicioGeocodingActivo = false;
         this.servicioOpenWeatherActivo = false;
         this.servicioCurrentsActivo = false;
@@ -28,6 +30,7 @@ public class Ubicacion {
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
+        this.alias = "";
     }
 
     public Ubicacion(String latitud, String longitud){
@@ -35,6 +38,7 @@ public class Ubicacion {
         this.pais = null;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.alias = "";
     }
 
     public Ubicacion(String toponimo, String pais, String latitud, String longitud) {
@@ -42,6 +46,7 @@ public class Ubicacion {
         this.pais = pais;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.alias = "";
     }
 
     public String getToponimo() {
@@ -96,6 +101,18 @@ public class Ubicacion {
 
     public boolean issetToponimo(){
         return this.toponimo == null;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public boolean setAlias(String alias) {
+        if (alias.length() > 0 && alias.length() <= 20) {
+            this.alias = alias;
+            return true;
+        }
+        return false;
     }
 
     @Override

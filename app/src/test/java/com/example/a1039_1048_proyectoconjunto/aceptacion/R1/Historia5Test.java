@@ -16,13 +16,7 @@ import java.util.Set;
 
 public class Historia5Test {
 
-    private static Set<Object> ubicaciones;
     private static Gestor gestor;
-
-    @BeforeAll
-    public static void crear_firebase(){
-        ubicaciones = ConexionFirebase.getCollection("ubicaciones");
-    }
 
     // TODO Cambiar la ubicación de ejemplo y insertarla en este mismo test. Sino depende de si se realiza o no la historia 1.
     @BeforeAll
