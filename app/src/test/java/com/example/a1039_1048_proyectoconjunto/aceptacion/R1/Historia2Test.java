@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.example.a1039_1048_proyectoconjunto.Coordenadas;
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
@@ -18,7 +18,6 @@ public class Historia2Test {
         Gestor gestor = Gestor.getInstance();
         String latitud = "40.4619719";
         String longitud = "0.3548686";
-        Coordenadas coordenadas = new Coordenadas(latitud, longitud);
 
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
@@ -27,7 +26,8 @@ public class Historia2Test {
 
 
         // When
-        boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+        Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
+        boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
         int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
@@ -42,7 +42,6 @@ public class Historia2Test {
         Gestor gestor = Gestor.getInstance();
         String latitud = "-91";
         String longitud = "100";
-        Coordenadas coordenadas = new Coordenadas(latitud, longitud);
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
@@ -50,7 +49,8 @@ public class Historia2Test {
 
 
         // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
-        boolean dadoAlta = gestor.darAltaUbicacionPorCoordenadas(coordenadas);
+        Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
+        boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
         int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 

@@ -24,4 +24,9 @@ public class Coordenadas {
     public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
+
+    @Override
+    public String toString(){
+        return latitud + "," + longitud;
+    }
 }

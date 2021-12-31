@@ -1,6 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto.gestores;
 
-import com.example.a1039_1048_proyectoconjunto.Coordenadas;
+
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
@@ -51,14 +51,14 @@ public class GestorServicios {
         return servicioGeocoding;
     }
 
-    public Ubicacion darAltaUbicacionPorToponimo(String toponimo){
-        return servicioGeocoding.getInformacionPorToponimo(toponimo);
+    public Ubicacion getInformacionPorToponimo(String toponimo){
+        return servicioGeocoding.getInformacion(toponimo);
     }
 
-    public Ubicacion darAltaUbicacionPorCoordenadas(Coordenadas coordenadas){
-        if ((Double.parseDouble(coordenadas.getLatitud()) > -90.0 && Double.parseDouble(coordenadas.getLatitud()) < 90.0)
-                && (Double.parseDouble(coordenadas.getLongitud()) > -180.0 && Double.parseDouble(coordenadas.getLongitud()) < 180.0))
-            return servicioGeocoding.getInformacionPorCoordenadas(coordenadas);
+    public Ubicacion getInformacionPorCoordenadas(String latitud, String longitud){
+        if ((Double.parseDouble(latitud) > -90.0 && Double.parseDouble(latitud) < 90.0)
+                && (Double.parseDouble(longitud) > -180.0 && Double.parseDouble(longitud) < 180.0))
+            return servicioGeocoding.getInformacion(latitud, longitud);
         return null;
     }
     

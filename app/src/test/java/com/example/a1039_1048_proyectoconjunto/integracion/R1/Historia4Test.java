@@ -16,61 +16,58 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class Historia4Test {
-    /*
+import java.util.HashMap;
+import java.util.Map;
 
-    @Mock private ServicioOpenWeather servicioOpenWeather;
+public class Historia4Test {
+
+    private Gestor  gestor;
+    @Mock private ServicioOpenWeather mockServicioOpenWeather;
 
     @BeforeEach
     void setUp(){
         MockitoAnnotations.initMocks(this);
+        gestor = Gestor.getInstance();
+        gestor.getGestorServicios().setServicioOpenWeather(mockServicioOpenWeather);
     }
 
     @Test
     public void validarCoordenadas_APIOpenWeather_coordenadasValidas(){
         //Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.addServicio("Open Weather", servicioOpenWeather);
-
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
-
-        double latitud = 39.987889;
-        double longitud = 0.055778;
-        when(servicioOpenWeather.isValid(latitud, longitud)).thenReturn(true);
+        String latitud = "39.987570";
+        String longitud = "-0.054678";
+        HashMap<String, String> mapa = new HashMap<>();
+        mapa.put("sensacionTerminca", "9.509999999999991");
+        mapa.put("temperaturaMedia", "11.410000000000025");
+        mapa.put("humedad", "-238.0");
+        mapa.put("presion", "751.0");
+        when(mockServicioOpenWeather.getInformacion(latitud, longitud)).thenReturn(mapa);
 
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.validarCoordenadas("OPENWEATHER", latitud, longitud);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(latitud, longitud);
+        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertTrue(valido);
+
     }
 
     @Test
     public void validarCoordenadas_APIOpenWeather_coordenadasNoValidas(){
         //Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.addServicio("Open Weather", servicioOpenWeather);
-
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
-
-        double latitud = -100;
-        double longitud = -100;
-        when(servicioOpenWeather.isValid(latitud, longitud)).thenReturn(false);
+        String latitud = "-100";
+        String longitud = "-100";
+        when(mockServicioOpenWeather.getInformacion(latitud, longitud)).thenReturn(null);
 
 
         //When
-        boolean valido = gestor.coordenadasValidas(servicioOpenWeather, latitud, longitud);
+        boolean valido = gestor.validarCoordenadas("OPENWEATHER", latitud, longitud);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(latitud, longitud);
+        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertFalse(valido);
     }
-
-     */
 }

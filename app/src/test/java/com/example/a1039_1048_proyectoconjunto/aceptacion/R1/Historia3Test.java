@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 public class Historia3Test {
 
     private static Gestor  gestor;
+
     @BeforeAll
     public static void setServicioOpenWeather(){
         gestor = Gestor.getInstance();

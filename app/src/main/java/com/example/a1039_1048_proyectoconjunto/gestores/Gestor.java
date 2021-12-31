@@ -3,14 +3,13 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 // ESTA CLASE ESTÁ A UN NIVEL MAS ALTO QUE LOS GESTORES DE SERVICIO Y UBICACIONES, Y ES LA QUE
 // APLICA LA LÓGICA.
 
-import com.example.a1039_1048_proyectoconjunto.Coordenadas;
+
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
-import java.util.Locale;
 import java.util.Set;
 
 public class Gestor implements Serializable {
@@ -41,35 +40,39 @@ public class Gestor implements Serializable {
         return gestorServicios;
     }
 
-    public boolean darAltaUbicacionPorToponimo(String toponimo) {
-        return gestorUbicaciones.addUbicacion(gestorServicios.darAltaUbicacionPorToponimo(toponimo));
+    public Ubicacion getUbicacionPorToponimo(String toponimo) {
+        return gestorServicios.getInformacionPorToponimo(toponimo);
     }
 
-    public boolean darAltaUbicacionPorCoordenadas(Coordenadas coordenadas) {
-        return gestorUbicaciones.addUbicacion(gestorServicios.darAltaUbicacionPorCoordenadas(coordenadas));
+    public Ubicacion getUbicacionPorCoordenadas(String latitud, String longitud) {
+        return gestorServicios.getInformacionPorCoordenadas(latitud, longitud);
+    }
+
+    public boolean darAltaUbicacion(Ubicacion ubicacion){
+        return gestorUbicaciones.addUbicacion(ubicacion);
     }
 
     public boolean validarToponimo(String servicio, String toponimo) {
         switch (servicio) {
             case "GEOCODING":
-                return gestorServicios.getServicioGeocoding().getInformacionPorToponimo(toponimo) != null;
+                return gestorServicios.getServicioGeocoding().getInformacion(toponimo) != null;
             case "OPENWEATHER":
-                return gestorServicios.getServicioOpenWeather().getInformacionPorToponimo(toponimo) != null;
+                return gestorServicios.getServicioOpenWeather().getInformacion(toponimo) != null;
             case "CURRENTS":
-                return gestorServicios.getServicioCurrents().getInformacionPorToponimo(toponimo) != null;
+                return gestorServicios.getServicioCurrents().getInformacion(toponimo) != null;
             default:
                 return false;
         }
     }
 
-    public boolean validarCoordenadas(String servicio, Coordenadas coordenadas) {
+    public boolean validarCoordenadas(String servicio, String latitud, String longitud) {
         switch (servicio.toUpperCase()) {
             case "GEOCODING":
-                return gestorServicios.getServicioGeocoding().getInformacionPorCoordenadas(coordenadas) != null;
+                return gestorServicios.getServicioGeocoding().getInformacion(latitud, longitud) != null;
             case "OPENWEATHER":
-                return gestorServicios.getServicioOpenWeather().getInformacionPorCoordenadas(coordenadas) != null;
+                return gestorServicios.getServicioOpenWeather().getInformacion(latitud, longitud) != null;
             case "CURRENTS":
-                return gestorServicios.getServicioCurrents().getInformacionPorCoordenadas(coordenadas) != null;
+                return gestorServicios.getServicioCurrents().getInformacion(latitud, longitud) != null;
             default:
                 return false;
         }
@@ -118,9 +121,10 @@ public class Gestor implements Serializable {
         }
     }
 
-    public Ubicacion getUbicacion(String toponimo) {
+    public Ubicacion getUbicacionGuardada(String toponimo) {
+        toponimo = toponimo.toLowerCase();
         for (Ubicacion ubicacion : gestorUbicaciones.getUbicaciones()) {
-            if (ubicacion.getToponimo().toLowerCase(Locale.ROOT).equals(toponimo)) {
+            if (ubicacion.getToponimo().toLowerCase().equals(toponimo)) {
                 return ubicacion;
             }
         }
@@ -136,6 +140,10 @@ public class Gestor implements Serializable {
             return gestorUbicaciones.activarUbicacion(toponimo);
         }
         return false;
+    }
+
+    public boolean desactivarUbicacion(String toponimo) {
+        return gestorUbicaciones.desactivarUbicacion(toponimo);
     }
 
 

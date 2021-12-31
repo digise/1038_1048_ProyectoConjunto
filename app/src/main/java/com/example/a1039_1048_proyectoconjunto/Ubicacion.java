@@ -7,7 +7,7 @@ public class Ubicacion {
     private String toponimo;
     private String latitud; //-90, 90
     private String longitud; //-180, 180
-    private boolean activada = true;
+    private boolean activada = false;
     private String pais;
     private boolean servicioGeocodingActivo;
     private boolean servicioOpenWeatherActivo;
@@ -77,11 +77,17 @@ public class Ubicacion {
     }
 
     public boolean activar(){
-        return activada = true;
+        activada = true;
+        return true;
+    }
+
+    public boolean desactivar(){
+        activada = false;
+        return true;
     }
 
     public boolean isActivada(){
-        return this.activada;
+        return activada;
     }
 
     public boolean issetCoord(){

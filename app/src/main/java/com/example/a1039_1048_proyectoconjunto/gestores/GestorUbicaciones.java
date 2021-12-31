@@ -51,11 +51,19 @@ public class GestorUbicaciones {
 
     public boolean activarUbicacion(String toponimo){
         for (Ubicacion ubicacion : ubicaciones){
-            if (ubicacion.getToponimo().equals(toponimo)){
+            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
                 return ubicacion.activar();
             }
         }
         return false;
     }
 
+    public boolean desactivarUbicacion(String toponimo) {
+        for (Ubicacion ubicacion : ubicaciones){
+            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
+                return ubicacion.desactivar();
+            }
+        }
+        return false;
+    }
 }

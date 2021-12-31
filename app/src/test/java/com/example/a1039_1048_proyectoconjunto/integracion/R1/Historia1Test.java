@@ -30,21 +30,22 @@ public class Historia1Test {
           Gestor gestor = Gestor.getInstance();
           String toponimo = "sagunto";
           gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
-          Ubicacion ubicacionMock = new Ubicacion(toponimo, "España", "39.6833", "-0.2667");
+          Ubicacion ubicacionMock = new Ubicacion(toponimo, "Spain", "39.6833", "-0.2667");
 
-          when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(ubicacionMock);
+          when(mockServicioGeocoding.getInformacion(toponimo)).thenReturn(ubicacionMock);
 
           int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
           // When
-          boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+          Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
+          boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
           int nUbicacionesAlInsertar = gestor.getAllUbicaciones().size();
 
           // Then
           assertTrue(dadoAlta);
           assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
-          assertEquals(gestor.getUbicacion(toponimo), ubicacionMock);
+          assertEquals(gestor.getUbicacionGuardada(toponimo), ubicacionMock);
        }
 
        @Test
@@ -54,13 +55,14 @@ public class Historia1Test {
           String toponimo = "noExiste";
           gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
 
-          when(mockServicioGeocoding.getInformacionPorToponimo(toponimo)).thenReturn(null);
+          when(mockServicioGeocoding.getInformacion(toponimo)).thenReturn(null);
 
           int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
           // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
-          boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+          Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
+          boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
           int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 

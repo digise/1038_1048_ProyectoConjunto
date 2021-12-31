@@ -2,13 +2,10 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,59 +13,47 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class Historia3Test {
-    /*
+import java.util.HashMap;
 
-    @Mock private ServicioOpenWeather servicioOpenWeather;
+public class Historia3Test {
+
+    @Mock private ServicioOpenWeather mockServicioOpenWeather;
+    private Gestor  gestor;
 
     @BeforeEach
     void setUp(){
         MockitoAnnotations.initMocks(this);
+        gestor = Gestor.getInstance();
+        gestor.getGestorServicios().setServicioOpenWeather(mockServicioOpenWeather);
     }
 
     @Test
     public void validarToponimo_APIOpenWeather_toponimoValido(){
         //Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.addServicio("Open Weather", servicioOpenWeather);
-
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
-
         String toponimo = "Castello";
-        when(servicioOpenWeather.isValid(toponimo)).thenReturn(true);
+        when(mockServicioOpenWeather.getInformacion(toponimo)).thenReturn(new HashMap<>());
 
 
         //When
-        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
+        boolean valido = gestor.validarToponimo("OPENWEATHER", toponimo);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(toponimo);
         assertTrue(valido);
     }
 
     @Test
     public void validarToponimo_APIOpenWeather_toponimoNoValido(){
         //Given
-        GestorServicios gestorServicios = GestorServicios.getInstance();
-        gestorServicios.addServicio("Open Weather", servicioOpenWeather);
-
-        GestorUbicaciones gestorUbicaciones = GestorUbicaciones.getInstance();
-        Gestor gestor = new Gestor(gestorUbicaciones, gestorServicios);
-
         String toponimo = "NoExiste";
-        when(servicioOpenWeather.isValid(toponimo)).thenReturn(false);
+        when(mockServicioOpenWeather.getInformacion(toponimo)).thenReturn(null);
+
 
         //When
-        boolean valido = gestor.toponimoValido(servicioOpenWeather, toponimo);
+        boolean valido = gestor.validarToponimo("OPENWEATHER", toponimo);
 
 
         //Then
-        verify(servicioOpenWeather, times(1)).isValid(toponimo);
         assertFalse(valido);
     }
-
-     */
 }

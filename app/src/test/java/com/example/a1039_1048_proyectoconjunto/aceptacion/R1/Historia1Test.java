@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
@@ -16,23 +17,24 @@ public class Historia1Test {
     public void altaUbicacion_toponimoExistente_anadir() {
         // Given
         Gestor gestor = Gestor.getInstance();
-        String toponimo = "sagunto";
+        String toponimo = "Sagunto";
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
-
+        Ubicacion ubicacionMock = new Ubicacion(toponimo, "Spain", "39.69250", "-0.28686");
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // When
-
-        boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+        Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
+        boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
         int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
         // Then
         assertTrue(dadoAlta);
         assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
+        assertEquals(ubicacionMock.getToponimo(), gestor.getUbicacionGuardada(toponimo).getToponimo());
     }
 
     @Test
@@ -47,7 +49,8 @@ public class Historia1Test {
 
 
         // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
-        boolean dadoAlta = gestor.darAltaUbicacionPorToponimo(toponimo);
+        Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
+        boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
         int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
 
 
