@@ -10,6 +10,7 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Set;
 
 public class Gestor implements Serializable {
@@ -119,6 +120,14 @@ public class Gestor implements Serializable {
             default:
                 break;
         }
+    }
+    
+    public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion){
+        return gestorServicios.getTiempoPorUbicacion(ubicacion);
+    }
+    
+    public HashMap<String, String> getNoticiasPorUbicacion(Ubicacion ubicacion) {
+        return null;
     }
 
     public Ubicacion getUbicacionGuardada(String toponimo) {
