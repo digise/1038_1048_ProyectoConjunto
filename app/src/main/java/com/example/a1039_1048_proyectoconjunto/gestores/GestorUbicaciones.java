@@ -41,6 +41,17 @@ public class GestorUbicaciones {
         return anadido;
     }
 
+    public boolean removeUbicacion(Ubicacion ubicacion){
+        boolean borrado = false;
+        if (ubicacion != null){
+            borrado = ConexionFirebase.removeDocument("ubicaciones", ubicacion, null);
+            if (borrado) {
+                ubicaciones.remove(ubicacion);
+            }
+        }
+        return borrado;
+    }
+
     public Ubicacion getUbicacionPorToponimo(String name) {
         return null;
     }

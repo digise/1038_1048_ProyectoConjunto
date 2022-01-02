@@ -49,8 +49,12 @@ public class Gestor implements Serializable {
         return gestorServicios.getInformacionPorCoordenadas(latitud, longitud);
     }
 
-    public boolean darAltaUbicacion(Ubicacion ubicacion){
+    public boolean darAltaUbicacion(Ubicacion ubicacion) {
         return gestorUbicaciones.addUbicacion(ubicacion);
+    }
+
+    public boolean darBajaUbicacion(Ubicacion ubicacion){
+        return gestorUbicaciones.removeUbicacion(ubicacion);
     }
 
     public boolean validarToponimo(String servicio, String toponimo) {
@@ -72,8 +76,6 @@ public class Gestor implements Serializable {
                 return gestorServicios.getServicioGeocoding().getInformacion(latitud, longitud) != null;
             case "OPENWEATHER":
                 return gestorServicios.getServicioOpenWeather().getInformacion(latitud, longitud) != null;
-            case "CURRENTS":
-                return gestorServicios.getServicioCurrents().getInformacion(latitud, longitud) != null;
             default:
                 return false;
         }
@@ -82,9 +84,6 @@ public class Gestor implements Serializable {
     public void activarServicio(String servicio) {
         servicio = servicio.toUpperCase();
         switch (servicio) {
-            case "GEOCODING":
-                gestorServicios.getServicioGeocoding().servicioActivo(true);
-                break;
             case "OPENWEATHER":
                 gestorServicios.getServicioOpenWeather().servicioActivo(true);
                 break;
@@ -99,21 +98,15 @@ public class Gestor implements Serializable {
     public void desactivarServicio(String servicio) {
         servicio = servicio.toUpperCase();
         switch (servicio) {
-            case "GEOCODING":
-                ServicioGeocoding servicioGeocoding = gestorServicios.getServicioGeocoding();
-                if (servicioGeocoding != null){
-                    servicioGeocoding.servicioActivo(false);
-                }
-                break;
             case "OPENWEATHER":
                 ServicioOpenWeather servicioOpenWeather = gestorServicios.getServicioOpenWeather();
-                if (servicioOpenWeather != null){
+                if (servicioOpenWeather != null) {
                     servicioOpenWeather.servicioActivo(false);
                 }
                 break;
             case "CURRENTS":
                 ServicioCurrents servicioCurrents = gestorServicios.getServicioCurrents();
-                if (servicioCurrents != null){
+                if (servicioCurrents != null) {
                     servicioCurrents.servicioActivo(false);
                 }
                 break;
@@ -121,13 +114,13 @@ public class Gestor implements Serializable {
                 break;
         }
     }
-    
-    public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion){
+
+    public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion) {
         return gestorServicios.getTiempoPorUbicacion(ubicacion);
     }
-    
-    public HashMap<String, String> getNoticiasPorUbicacion(Ubicacion ubicacion) {
-        return null;
+
+    public HashMap<String, HashMap<String, String>> getNoticiasPorUbicacion(Ubicacion ubicacion) {
+        return gestorServicios.getNoticiasPorUbicacion(ubicacion);
     }
 
     public Ubicacion getUbicacionGuardada(String toponimo) {
@@ -145,10 +138,7 @@ public class Gestor implements Serializable {
     }
 
     public boolean activarUbicacion(String toponimo) {
-        if (gestorServicios.getNumeroServiciosActivos() > 0) {
-            return gestorUbicaciones.activarUbicacion(toponimo);
-        }
-        return false;
+        return gestorUbicaciones.activarUbicacion(toponimo);
     }
 
     public boolean desactivarUbicacion(String toponimo) {

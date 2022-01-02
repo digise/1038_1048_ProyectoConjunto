@@ -22,26 +22,6 @@ public class GestorServicios {
         servicioCurrents = null;
     }
 
-    public int getNumeroServiciosActivos() {
-        int nServiciosActivos = 0;
-        if (servicioGeocoding != null) {
-            if (servicioGeocoding.isActivo()) {
-                nServiciosActivos += 1;
-            }
-        }
-        if (servicioOpenWeather != null) {
-            if (servicioOpenWeather.isActivo()) {
-                nServiciosActivos += 1;
-            }
-        }
-        if (servicioCurrents != null) {
-            if (servicioCurrents.isActivo()) {
-                nServiciosActivos += 1;
-            }
-        }
-        return nServiciosActivos;
-    }
-
     //-------------------------------------------------------------------------------------------//
     //GEOCODE
 
@@ -75,7 +55,12 @@ public class GestorServicios {
     }
 
     public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion) {
-        return servicioOpenWeather.getInformacion(ubicacion.getLatitud(), ubicacion.getLongitud());
+        if (servicioOpenWeather != null && ubicacion != null) {
+            if (ubicacion.isServicioActivo("openweather") && ubicacion.isActivada()) {
+                return servicioOpenWeather.getInformacion(ubicacion.getLatitud(), ubicacion.getLongitud());
+            }
+        }
+        return null;
     }
 
 
@@ -88,6 +73,13 @@ public class GestorServicios {
     public ServicioCurrents getServicioCurrents() {
         return servicioCurrents;
     }
-
     
+    public HashMap<String, HashMap<String, String>> getNoticiasPorUbicacion(Ubicacion ubicacion){
+        if (servicioCurrents != null && ubicacion != null) {
+            if (ubicacion.isServicioActivo("currents") && ubicacion.isActivada()) {
+                return servicioCurrents.getInformacion(ubicacion.getToponimo());
+            }
+        }
+        return null;
+    }
 }

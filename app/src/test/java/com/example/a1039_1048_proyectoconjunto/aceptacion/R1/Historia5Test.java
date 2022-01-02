@@ -11,7 +11,6 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -50,6 +49,8 @@ public class Historia5Test {
     @Test
     public void activarUbicacion_servicioNoDisponible_activar() {
         //Given
+        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+
         gestor.desactivarServicio("OPENWEATHER");
         gestor.desactivarServicio("GEOCODING");
         gestor.desactivarServicio("CURRENTS");
@@ -62,10 +63,10 @@ public class Historia5Test {
 
         //Then
         Ubicacion alicante = gestor.getUbicacionGuardada("alicante");
-        assertFalse(alicante.isActivada());
+        assertTrue(alicante.isActivada());
+
         assertNull(gestor.getUbicacionPorToponimo("alicante"));
         assertNull(gestor.getTiempoPorUbicacion(alicante));
         assertNull(gestor.getNoticiasPorUbicacion(alicante));
-
     }
 }
