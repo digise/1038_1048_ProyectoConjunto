@@ -6,6 +6,8 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
+import java.util.HashMap;
+
 //EN ESTA CLASE ESTÁN TODOS LOS SERVICIOS (OpenWeather, Geocoding y Currents)
 
 public class GestorServicios {
@@ -19,26 +21,6 @@ public class GestorServicios {
         servicioOpenWeather = null;
         servicioCurrents = null;
     }
-    
-    public int getNumeroServiciosActivos(){
-        int nServiciosActivos = 0;
-        if (servicioGeocoding != null){
-            if (servicioGeocoding.isActivo()){
-                nServiciosActivos+=1;
-            }
-        }
-        if (servicioOpenWeather != null){
-            if (servicioOpenWeather.isActivo()){
-                nServiciosActivos+=1;
-            }
-        }
-        if (servicioCurrents != null){
-            if (servicioCurrents.isActivo()){
-                nServiciosActivos+=1;
-            }
-        }
-        return nServiciosActivos;
-    }
 
     //-------------------------------------------------------------------------------------------//
     //GEOCODE
@@ -51,17 +33,17 @@ public class GestorServicios {
         return servicioGeocoding;
     }
 
-    public Ubicacion getInformacionPorToponimo(String toponimo){
+    public Ubicacion getInformacionPorToponimo(String toponimo) {
         return servicioGeocoding.getInformacion(toponimo);
     }
 
-    public Ubicacion getInformacionPorCoordenadas(String latitud, String longitud){
+    public Ubicacion getInformacionPorCoordenadas(String latitud, String longitud) {
         if ((Double.parseDouble(latitud) > -90.0 && Double.parseDouble(latitud) < 90.0)
                 && (Double.parseDouble(longitud) > -180.0 && Double.parseDouble(longitud) < 180.0))
             return servicioGeocoding.getInformacion(latitud, longitud);
         return null;
     }
-    
+
     //-------------------------------------------------------------------------------------------//
     //OPENWEATHER
     public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather) {
@@ -72,10 +54,16 @@ public class GestorServicios {
         return servicioOpenWeather;
     }
 
-    public String getInfoOpenWeather(Ubicacion ubicacion) {
+    public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion) {
+        if (servicioOpenWeather != null && ubicacion != null) {
+            if (ubicacion.isServicioActivo("openweather") && ubicacion.isActivada()) {
+                return servicioOpenWeather.getInformacion(ubicacion.getLatitud(), ubicacion.getLongitud());
+            }
+        }
         return null;
     }
-    
+
+
     //-------------------------------------------------------------------------------------------//
     //CURRENTS
     public void setServicioCurrents(ServicioCurrents servicioCurrents) {
@@ -84,5 +72,14 @@ public class GestorServicios {
 
     public ServicioCurrents getServicioCurrents() {
         return servicioCurrents;
+    }
+    
+    public HashMap<String, HashMap<String, String>> getNoticiasPorUbicacion(Ubicacion ubicacion){
+        if (servicioCurrents != null && ubicacion != null) {
+            if (ubicacion.isServicioActivo("currents") && ubicacion.isActivada()) {
+                return servicioCurrents.getInformacion(ubicacion.getToponimo());
+            }
+        }
+        return null;
     }
 }

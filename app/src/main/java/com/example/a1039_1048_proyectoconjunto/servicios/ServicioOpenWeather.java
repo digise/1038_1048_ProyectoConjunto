@@ -16,22 +16,27 @@ public class ServicioOpenWeather implements Servicio {
 
     public HashMap<String, String> getInformacion(String toponimo) {
         //https://api.openweathermap.org/data/2.5/weather?q=sagunto&appid=157e439fdbc93d1c11163f1bc3a488ab
-        String tempUrl = url + "weather?q=" + toponimo + "&appid=" + appid;
-        OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
-        return openWeatherAdapter.doRequest(tempUrl);
+        if (activo) {
+            String tempUrl = url + "weather?q=" + toponimo + "&appid=" + appid;
+            OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
+            return openWeatherAdapter.doRequest(tempUrl);
+        }
+        return null;
     }
 
     public HashMap<String, String> getInformacion(String latitud, String longitud) {
         //https://api.openweathermap.org/data/2.5/onecall?lat=39.6833&lon=-0.2667&exclude=minutely,hourly,daily,alerts&appid=157e439fdbc93d1c11163f1bc3a488ab
-        String tempUrl = url + "onecall?lat=" + latitud +
-                "&lon=" + longitud+
-                "&exclude=minutely,hourly,daily,alerts&appid=" + appid;
-        OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
-        System.out.println(tempUrl);
-        return openWeatherAdapter.doRequest(tempUrl);
+        if (activo) {
+            String tempUrl = url + "onecall?lat=" + latitud +
+                    "&lon=" + longitud +
+                    "&exclude=minutely,hourly,daily,alerts&appid=" + appid;
+            OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
+            return openWeatherAdapter.doRequest(tempUrl);
+        }
+        return null;
     }
-    
-    public void servicioActivo(boolean activar){
+
+    public void servicioActivo(boolean activar) {
         activo = activar;
     }
 

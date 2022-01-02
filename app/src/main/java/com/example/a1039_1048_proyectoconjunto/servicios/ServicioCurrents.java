@@ -1,24 +1,31 @@
 package com.example.a1039_1048_proyectoconjunto.servicios;
 
+import com.example.a1039_1048_proyectoconjunto.adapter.CurrentsAdapter;
+import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
+
 import java.util.HashMap;
 
 public class ServicioCurrents implements Servicio{
-    private final String url = "https://api.openweathermap.org/data/2.5/weather";
-    private final String appid = "157e439fdbc93d1c11163f1bc3a488ab";
+    private final String url = "https://api.currentsapi.services/v1/search?";
+    private final String apiKey = "O87PinCGKuQ3pk2qL9533nThHwM3dC67aLwNZOGoik5eUqF-";
     private boolean activo;
-    
+
+    //https://api.currentsapi.services/v1/search?keywords=castellon&language=ES&apiKey=O87PinCGKuQ3pk2qL9533nThHwM3dC67aLwNZOGoik5eUqF-
+
+
     public ServicioCurrents(){
         activo = true;
     }
 
-    public HashMap<String, String> getInformacion(String toponimo) {
-        // https://geocode.xyz/castellon?json=1&auth=57673066339488579050x115589
+    public HashMap<String, HashMap<String, String>> getInformacion(String toponimo) {
+        if (activo) {
+            String tempUrl = url + "keywords=" + toponimo + "&language=ES&apiKey=" + apiKey;
+            CurrentsAdapter currentsAdapter = new CurrentsAdapter();
+            return currentsAdapter.doRequest(tempUrl);
+        }
         return null;
     }
 
-    public HashMap<String, String> getInformacion(String latitud, String longitud) {
-        return null;
-    }
     public void servicioActivo(boolean activar){
         activo = activar;
     }

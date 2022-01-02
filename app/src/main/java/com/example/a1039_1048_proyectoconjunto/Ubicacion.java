@@ -10,17 +10,15 @@ public class Ubicacion {
     private boolean activada = false;
     private String pais;
     private String alias;
-    private boolean servicioGeocodingActivo;
     private boolean servicioOpenWeatherActivo;
     private boolean servicioCurrentsActivo;
 
-    public Ubicacion(){
+    public Ubicacion() {
         this.toponimo = null;
         this.latitud = null;
         this.longitud = null;
         this.pais = null;
         this.alias = "";
-        this.servicioGeocodingActivo = false;
         this.servicioOpenWeatherActivo = false;
         this.servicioCurrentsActivo = false;
     }
@@ -33,7 +31,7 @@ public class Ubicacion {
         this.alias = "";
     }
 
-    public Ubicacion(String latitud, String longitud){
+    public Ubicacion(String latitud, String longitud) {
         this.toponimo = null;
         this.pais = null;
         this.latitud = latitud;
@@ -53,7 +51,7 @@ public class Ubicacion {
         return this.toponimo;
     }
 
-    public void setToponimo(String toponimo){
+    public void setToponimo(String toponimo) {
         this.toponimo = toponimo;
     }
 
@@ -81,25 +79,25 @@ public class Ubicacion {
         this.pais = pais;
     }
 
-    public boolean activar(){
+    public boolean activar() {
         activada = true;
         return true;
     }
 
-    public boolean desactivar(){
+    public boolean desactivar() {
         activada = false;
         return true;
     }
 
-    public boolean isActivada(){
+    public boolean isActivada() {
         return activada;
     }
 
-    public boolean issetCoord(){
+    public boolean issetCoord() {
         return this.latitud == null && this.longitud == null;
     }
 
-    public boolean issetToponimo(){
+    public boolean issetToponimo() {
         return this.toponimo == null;
     }
 
@@ -115,7 +113,33 @@ public class Ubicacion {
         return false;
     }
 
+    public boolean isServicioActivo(String nombreServicio) {
+        String servicioMinusculas = nombreServicio.toLowerCase();
 
+        switch (servicioMinusculas) {
+            case "openweather":
+                return this.servicioOpenWeatherActivo;
+            case "currents":
+                return this.servicioCurrentsActivo;
+            default:
+                return false;
+        }
+    }
+
+    public void activarServicio(String nombreServicio, boolean activar){
+        String servicioMinusculas = nombreServicio.toLowerCase();
+
+        switch (servicioMinusculas) {
+            case "openweather":
+                this.servicioOpenWeatherActivo = activar;
+                break;
+            case "currents":
+                this.servicioCurrentsActivo = activar;
+                break;
+            default:
+                break;
+        }
+    }
 
     @Override
     public String toString() {

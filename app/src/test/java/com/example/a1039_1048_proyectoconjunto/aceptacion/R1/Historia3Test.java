@@ -6,19 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 public class Historia3Test {
 
-    private static Gestor gestor;
+    private Gestor  gestor;
 
-    @BeforeAll
-    public static void setServicioOpenWeather(){
+    @BeforeEach
+    public void setServicioOpenWeather(){
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
     }
-
 
 
     @Test

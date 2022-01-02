@@ -41,16 +41,15 @@ public class GestorUbicaciones {
         return anadido;
     }
 
-    public boolean darDeBajaUbicacion(Ubicacion ubicacion){
-        /*boolean eliminada = false;
-        if (ubicacion != null) {
-            eliminada = ConexionFirebase.("ubicaciones", ubicacion, null);
-            if (anadido) {
-                ubicaciones.add(ubicacion);
+    public boolean removeUbicacion(Ubicacion ubicacion){
+        boolean borrado = false;
+        if (ubicacion != null){
+            borrado = ConexionFirebase.removeDocument("ubicaciones", ubicacion, null);
+            if (borrado) {
+                ubicaciones.remove(ubicacion);
             }
         }
-        return anadido;*/
-        return false;
+        return borrado;
     }
 
     public Ubicacion getUbicacionPorToponimo(String name) {
