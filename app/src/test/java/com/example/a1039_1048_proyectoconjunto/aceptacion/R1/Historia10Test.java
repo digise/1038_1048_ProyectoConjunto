@@ -22,19 +22,19 @@ public class Historia10Test {
     @Test
     public void darBajaUbicacionExistente_ubicacion_valido(){
         //GIVEN
-        String albacete = "albacete";
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo(albacete));
+        String toponimo = "albacete";
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo(toponimo));
 
 
         //WHEN
         int numUbicacionesAntesBorrado = gestor.getAllUbicaciones().size();
-        gestor.darBajaUbicacion(gestor.getUbicacionGuardada(albacete));
+        gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
 
 
         //THEN
         int numUbicacionesDespuesBorrado = gestor.getAllUbicaciones().size();
         assertEquals(numUbicacionesAntesBorrado, numUbicacionesDespuesBorrado + 1);
-        assertNull(gestor.getUbicacionGuardada(albacete));
+        assertNull(gestor.getUbicacionGuardada(toponimo));
     }
 
     @Test

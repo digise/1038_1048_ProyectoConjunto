@@ -2,6 +2,7 @@ package com.example.a1039_1048_proyectoconjunto.firebase;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -85,7 +86,6 @@ public class ConexionFirebase {
     }
 
     public static boolean createDocument(String referencia, Object data, String idDocumento) {
-
         if (contieneUbicacion((Ubicacion) data)) {
             return false;
         }
@@ -150,7 +150,11 @@ public class ConexionFirebase {
         return false;
     }
 
-    public boolean borrarDocument(String referencia, String idDocumento){
+    public boolean removeDocument(String referencia, Object data){
+        if (data.equals(Ubicacion.class))
+            contieneUbicacion((Ubicacion) data);
+        else
+            con
         //Url para identificar documento
         String url = generarURL(referencia);
         url = url + "/" + idDocumento + ".json";
@@ -174,6 +178,16 @@ public class ConexionFirebase {
 
     private static boolean contieneUbicacion(Ubicacion ubicacion) {
         Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getUbicaciones();
+        for (Ubicacion u : ubicaciones) {
+            if (u.equals(ubicacion)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean contieneServicio(Servicio servicio) {
+        Set<Servicio> servicios = Gestor.getInstance().getGestorServicios().getServicios();
         for (Ubicacion u : ubicaciones) {
             if (u.equals(ubicacion)) {
                 return true;

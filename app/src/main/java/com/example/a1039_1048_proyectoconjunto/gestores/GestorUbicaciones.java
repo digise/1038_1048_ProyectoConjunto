@@ -30,7 +30,7 @@ public class GestorUbicaciones {
     }
 
 
-    public boolean addUbicacion(Ubicacion ubicacion) {
+    public boolean darAltaUbicacion(Ubicacion ubicacion) {
         boolean anadido = false;
         if (ubicacion != null) {
             anadido = ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
@@ -44,7 +44,7 @@ public class GestorUbicaciones {
     public boolean removeUbicacion(Ubicacion ubicacion){
         boolean borrado = false;
         if (ubicacion != null){
-            borrado = ConexionFirebase.removeDocument("ubicaciones", ubicacion, null);
+            borrado = ConexionFirebase.removeDocument("ubicaciones", ubicacion);
             if (borrado) {
                 ubicaciones.remove(ubicacion);
             }

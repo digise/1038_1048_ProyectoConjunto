@@ -6,7 +6,6 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
@@ -50,7 +49,7 @@ public class Gestor implements Serializable {
     }
 
     public boolean darAltaUbicacion(Ubicacion ubicacion) {
-        return gestorUbicaciones.addUbicacion(ubicacion);
+        return gestorUbicaciones.darAltaUbicacion(ubicacion);
     }
 
     public boolean darBajaUbicacion(Ubicacion ubicacion){
