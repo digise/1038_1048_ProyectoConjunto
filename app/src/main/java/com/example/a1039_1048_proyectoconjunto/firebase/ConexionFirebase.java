@@ -150,6 +150,28 @@ public class ConexionFirebase {
         return false;
     }
 
+    public boolean borrarDocument(String referencia, String idDocumento){
+        //Url para identificar documento
+        String url = generarURL(referencia);
+        url = url + "/" + idDocumento + ".json";
+
+        //Comprobar si la url es correcta
+        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        Request request = new Request.Builder().url(url).delete().build();
+        Call call = client.newCall(request);
+        try {
+            Response response = call.execute();
+            if (response.isSuccessful()){
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
     private static boolean contieneUbicacion(Ubicacion ubicacion) {
         Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getUbicaciones();
         for (Ubicacion u : ubicaciones) {

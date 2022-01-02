@@ -16,7 +16,7 @@ public class Historia8Test {
     private static Gestor gestor;
 
     @BeforeAll
-    public static void anadirSagunto(){
+    public static void anadirUbicacionParaHacerPrueba(){
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
 

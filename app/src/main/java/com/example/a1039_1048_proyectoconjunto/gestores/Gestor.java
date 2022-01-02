@@ -10,6 +10,8 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class Gestor implements Serializable {
@@ -53,7 +55,7 @@ public class Gestor implements Serializable {
     }
 
     public boolean validarToponimo(String servicio, String toponimo) {
-        switch (servicio) {
+        switch (servicio.toUpperCase()) {
             case "GEOCODING":
                 return gestorServicios.getServicioGeocoding().getInformacion(toponimo) != null;
             case "OPENWEATHER":

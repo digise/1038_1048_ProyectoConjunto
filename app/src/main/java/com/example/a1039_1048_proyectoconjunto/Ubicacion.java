@@ -115,6 +115,8 @@ public class Ubicacion {
         return false;
     }
 
+
+
     @Override
     public String toString() {
         return "Ubicacion{" +
