@@ -1,4 +1,4 @@
-package com.example.a1039_1048_proyectoconjunto.aceptacion.R2.historia4;
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R2;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,7 +23,7 @@ public class Historia5Test {
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
     }
-/*
+
     @Test
     public void consultar_informacionCurrentsDeUnaUbicacion_todoDisponible(){
         //GIVEN
@@ -53,6 +53,4 @@ public class Historia5Test {
         //THEN
         assertNull(infoNoticias);
     }
-
- */
 }

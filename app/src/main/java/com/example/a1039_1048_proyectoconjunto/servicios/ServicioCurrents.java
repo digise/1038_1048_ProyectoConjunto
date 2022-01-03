@@ -29,8 +29,7 @@ public class ServicioCurrents implements Servicio{
 
     public HashMap<String, HashMap<String, String>> getInformacion(String toponimo) {
         if (activo) {
-            String tempUrl = url + "keywords=" + toponimo + "&language=ES&apiKey=" + apiKey;
-            CurrentsAdapter currentsAdapter = new CurrentsAdapter();
+            String tempUrl = url + "language=es&keywords=" + toponimo + "&apiKey=" + apiKey;
             return currentsAdapter.doRequest(tempUrl);
         }
         return null;
