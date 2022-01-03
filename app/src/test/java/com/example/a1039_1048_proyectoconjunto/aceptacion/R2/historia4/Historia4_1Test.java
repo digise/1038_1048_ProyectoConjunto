@@ -21,6 +21,7 @@ public class Historia4_1Test {
     public static void crearGestor(){
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }
 
     @Test
@@ -34,10 +35,15 @@ public class Historia4_1Test {
 
         //WHEN
         Map<String, String> infoOpenWeather = gestor.getTiempoPorUbicacion(ubicacion);
+        System.out.println(infoOpenWeather);
 
 
         //THEN
         assertNotNull(infoOpenWeather);
+        assertNotNull(infoOpenWeather.get("sensacionTermica"));
+        assertNotNull(infoOpenWeather.get("temperaturaMedia"));
+        assertNotNull(infoOpenWeather.get("humedad"));
+        assertNotNull(infoOpenWeather.get("presion"));
     }
 
     @Test

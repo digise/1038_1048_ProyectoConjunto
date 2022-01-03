@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Historia4_2Test {
 
@@ -23,6 +24,7 @@ public class Historia4_2Test {
     public static void crearGestor(){
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }
 
     @Test
@@ -36,10 +38,16 @@ public class Historia4_2Test {
 
         //WHEN
         Map<String, HashMap<String, String>> infoNoticias = gestor.getNoticiasPorUbicacion(ubicacion);
+        System.out.println(infoNoticias);
 
 
         //THEN
         assertNotNull(infoNoticias);
+        for (String id : infoNoticias.keySet()) {
+            assertNotNull(Objects.requireNonNull(infoNoticias.get(id)).get("titulo"));
+            assertNotNull(Objects.requireNonNull(infoNoticias.get(id)).get("descripcion"));
+            assertNotNull(Objects.requireNonNull(infoNoticias.get(id)).get("urlNew"));
+        }
     }
 
     @Test
