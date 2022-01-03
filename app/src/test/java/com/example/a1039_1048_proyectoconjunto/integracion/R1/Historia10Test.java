@@ -2,10 +2,15 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
@@ -19,7 +24,7 @@ public class Historia10Test {
     private static Gestor gestor;
 
     @BeforeAll
-    public static void setSpy() {
+    public static void setConfiguracion() {
         Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
         Ubicacion castellon = new Ubicacion("castello", "spain" , "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
@@ -35,15 +40,20 @@ public class Historia10Test {
         gestor = Gestor.getInstance();
 
         GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
-
         doReturn(ubicacionesMentira).when(gestorUbicaciones).getCollectionFirebase();
+        doReturn(true).when(gestorUbicaciones).removeDocument("ubicaciones", eq(anyString()));
+
+        GeocodingAdapter geocodingAdapterMock = mock(GeocodingAdapter.class);
+        gestor.getGestorServicios().getServicioGeocoding().setGeocodingAdapter(geocodingAdapterMock);
+        when(geocodingAdapterMock.doRequest(anyString())).thenReturn(castellon);
+
     }
 
     @Test
     public void darBajaUbicacionExistente_ubicacion_valido(){
         //GIVEN
-        String toponimo = "calig";
-        gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
+        String toponimo = "castello";
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo(toponimo));
 
 
         //WHEN
@@ -60,7 +70,7 @@ public class Historia10Test {
     @Test
     public void darBajaUbicacionNoExistente_ubicacion_noValido(){
         //GIVEN
-        String toponimo = "albacete";
+        String toponimo = "castello";
 
 
         //WHEN
