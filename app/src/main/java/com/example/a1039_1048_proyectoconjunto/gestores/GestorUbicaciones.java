@@ -5,8 +5,13 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
 
+import org.apache.commons.collections4.list.FixedSizeList;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,11 +21,13 @@ import java.util.stream.Collectors;
 public class GestorUbicaciones {
 
     private Map<String, Ubicacion> ubicaciones;
+    private List<Ubicacion> listaHastaTresUbicacionesMostradas;
 
     protected GestorUbicaciones() {
         ubicaciones = new HashMap<>();
         Map<String, Object> objectosUbicaciones = getCollectionFirebase();
         ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
+        listaHastaTresUbicacionesMostradas = FixedSizeList.fixedSizeList(Arrays.asList(new Ubicacion[3]));
     }
 
     public Map<String, Ubicacion> getAllUbicaciones() {
