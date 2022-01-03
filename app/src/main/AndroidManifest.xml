@@ -21,8 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.1039_1048_ProyectoConjunto" >
         <activity
-            android:name=".activities.GeocodingActivity"
-            android:exported="false" />
+            android:name=".activities.GeocodingActivity">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" >
