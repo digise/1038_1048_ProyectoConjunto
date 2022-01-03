@@ -39,7 +39,7 @@ public class Historia2Test {
         // When
         Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
         boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // Then
@@ -59,13 +59,13 @@ public class Historia2Test {
         gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
         when(mockServicioGeocoding.getInformacion(latitud, longitud)).thenReturn(null);
 
-        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // When
         Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
         boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // Then

@@ -10,8 +10,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +33,8 @@ public class ConexionFirebase {
         return "https://proyectoparadis-8f0c6-default-rtdb.europe-west1.firebasedatabase.app/" + aux;
     }
 
-    public static Set<Object> getCollection(String referencia) {
-        Set<Object> res = new HashSet<>();
+    public static Map<String, Object> getCollection(String referencia) {
+        Map<String, Object> res = new HashMap();
         String url = generarURL(referencia);
         url = url + ".json";
         OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
@@ -45,11 +47,12 @@ public class ConexionFirebase {
                 return res;
             }
             JSONObject jsonObject = new JSONObject(jsonData);
+            res = new Gson().fromJson(jsonObject.toString(), HashMap.class);
             for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                 String x = it.next();
                 JSONObject y = jsonObject.getJSONObject(x);
                 Ubicacion data = new Gson().fromJson(y.toString(), Ubicacion.class);
-                res.add(data);
+                res.put(x, data);
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -85,9 +88,9 @@ public class ConexionFirebase {
 
     }
 
-    public static boolean createDocument(String referencia, Object data, String idDocumento) {
+    public static String createDocument(String referencia, Object data, String idDocumento) {
         if (contieneUbicacion((Ubicacion) data)) {
-            return false;
+            return null;
         }
 
         //Si el documento tiene clave aleatoria o específica
@@ -111,13 +114,18 @@ public class ConexionFirebase {
         Call call = client.newCall(request);
         try {
             Response response = call.execute();
-            if (response.isSuccessful())
-                return true;
-        } catch (
-                IOException e) {
+            if (!response.isSuccessful())
+                return null;
+            if (idDocumento == null){
+                JSONObject jsonObjectResponse = new JSONObject(response.body().string());
+                idDocumento = jsonObjectResponse.getString("name");
+            }
+            return idDocumento;
+
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public static boolean updateDocument(String referencia, Object data, String idDocumento) {
@@ -150,14 +158,10 @@ public class ConexionFirebase {
         return false;
     }
 
-    public boolean removeDocument(String referencia, Object data){
-        if (data.equals(Ubicacion.class))
-            contieneUbicacion((Ubicacion) data);
-        else
-            con
+    public static boolean removeDocument(String referencia, String idDocumento){
         //Url para identificar documento
         String url = generarURL(referencia);
-        url = url + "/" + idDocumento + ".json";
+        url += "/" + idDocumento + ".json";
 
         //Comprobar si la url es correcta
         OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
@@ -177,8 +181,8 @@ public class ConexionFirebase {
 
 
     private static boolean contieneUbicacion(Ubicacion ubicacion) {
-        Set<Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getUbicaciones();
-        for (Ubicacion u : ubicaciones) {
+        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getAllUbicaciones();
+        for (Ubicacion u : ubicaciones.values()) {
             if (u.equals(ubicacion)) {
                 return true;
             }
@@ -187,9 +191,9 @@ public class ConexionFirebase {
     }
 
     private static boolean contieneServicio(Servicio servicio) {
-        Set<Servicio> servicios = Gestor.getInstance().getGestorServicios().getServicios();
-        for (Ubicacion u : ubicaciones) {
-            if (u.equals(ubicacion)) {
+        Set<Servicio> servicios = Gestor.getInstance().getGestorServicios().getAllServicios();
+        for (Servicio s : servicios) {
+            if (s.equals(servicio)) {
                 return true;
             }
         }

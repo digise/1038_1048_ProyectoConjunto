@@ -9,12 +9,22 @@ public class ServicioCurrents implements Servicio{
     private final String url = "https://api.currentsapi.services/v1/search?";
     private final String apiKey = "O87PinCGKuQ3pk2qL9533nThHwM3dC67aLwNZOGoik5eUqF-";
     private boolean activo;
+    private CurrentsAdapter currentsAdapter;
 
     //https://api.currentsapi.services/v1/search?keywords=castellon&language=ES&apiKey=O87PinCGKuQ3pk2qL9533nThHwM3dC67aLwNZOGoik5eUqF-
 
 
     public ServicioCurrents(){
         activo = true;
+        currentsAdapter = new CurrentsAdapter();
+    }
+
+    public CurrentsAdapter getCurrentsAdapter() {
+        return currentsAdapter;
+    }
+
+    public void setCurrentsAdapter(CurrentsAdapter currentsAdapter) {
+        this.currentsAdapter = currentsAdapter;
     }
 
     public HashMap<String, HashMap<String, String>> getInformacion(String toponimo) {

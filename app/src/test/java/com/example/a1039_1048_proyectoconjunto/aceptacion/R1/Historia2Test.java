@@ -22,13 +22,13 @@ public class Historia2Test {
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
-        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // When
         Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
         boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // Then
@@ -45,13 +45,13 @@ public class Historia2Test {
         ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
         gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
-        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
         Ubicacion ubicacion = gestor.getUbicacionPorCoordenadas(latitud, longitud);
         boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
-        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+        int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
         // Then

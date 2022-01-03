@@ -1,16 +1,15 @@
-package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R2;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class Historia10Test {
+public class Historia1Test {
     private static Gestor gestor;
 
     @BeforeAll

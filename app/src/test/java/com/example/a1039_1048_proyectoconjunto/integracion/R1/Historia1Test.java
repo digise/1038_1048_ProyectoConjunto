@@ -34,7 +34,7 @@ public class Historia1Test {
 
           when(mockServicioGeocoding.getInformacion(toponimo)).thenReturn(ubicacionMock);
 
-          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
           // When
@@ -57,13 +57,13 @@ public class Historia1Test {
 
           when(mockServicioGeocoding.getInformacion(toponimo)).thenReturn(null);
 
-          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+          int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
           // When --> Cuando se va a dar de alta ubicacion inexistente devuelve null
           Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
           boolean dadoAlta = gestor.darAltaUbicacion(ubicacion);
-          int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getUbicaciones().size();
+          int nUbicacionesAlInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
 
           // Then

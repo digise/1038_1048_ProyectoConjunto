@@ -9,16 +9,25 @@ public class ServicioOpenWeather implements Servicio {
     private final String url = "https://api.openweathermap.org/data/2.5/";
     private final String appid = "157e439fdbc93d1c11163f1bc3a488ab";
     private boolean activo;
+    OpenWeatherAdapter openWeatherAdapter;
 
     public ServicioOpenWeather() {
         this.activo = true;
+        this.openWeatherAdapter = new OpenWeatherAdapter();
+    }
+
+    public OpenWeatherAdapter getOpenWeatherAdapter() {
+        return openWeatherAdapter;
+    }
+
+    public void setOpenWeatherAdapter(OpenWeatherAdapter openWeatherAdapter) {
+        this.openWeatherAdapter = openWeatherAdapter;
     }
 
     public HashMap<String, String> getInformacion(String toponimo) {
         //https://api.openweathermap.org/data/2.5/weather?q=sagunto&appid=157e439fdbc93d1c11163f1bc3a488ab
         if (activo) {
             String tempUrl = url + "weather?q=" + toponimo + "&appid=" + appid;
-            OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
             return openWeatherAdapter.doRequest(tempUrl);
         }
         return null;
@@ -30,7 +39,6 @@ public class ServicioOpenWeather implements Servicio {
             String tempUrl = url + "onecall?lat=" + latitud +
                     "&lon=" + longitud +
                     "&exclude=minutely,hourly,daily,alerts&appid=" + appid;
-            OpenWeatherAdapter openWeatherAdapter = new OpenWeatherAdapter();
             return openWeatherAdapter.doRequest(tempUrl);
         }
         return null;

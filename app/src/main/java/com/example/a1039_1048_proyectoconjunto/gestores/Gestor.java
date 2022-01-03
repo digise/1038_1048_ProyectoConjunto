@@ -5,11 +5,13 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class Gestor implements Serializable {
@@ -53,7 +55,7 @@ public class Gestor implements Serializable {
     }
 
     public boolean darBajaUbicacion(Ubicacion ubicacion){
-        return gestorUbicaciones.removeUbicacion(ubicacion);
+        return gestorUbicaciones.darBajaUbicacion(ubicacion);
     }
 
     public boolean validarToponimo(String servicio, String toponimo) {
@@ -78,6 +80,10 @@ public class Gestor implements Serializable {
             default:
                 return false;
         }
+    }
+
+    public Servicio getServicio(String servicio){
+        return gestorServicios.getServicio(servicio);
     }
 
     public void activarServicio(String servicio) {
@@ -124,7 +130,7 @@ public class Gestor implements Serializable {
 
     public Ubicacion getUbicacionGuardada(String toponimo) {
         toponimo = toponimo.toLowerCase();
-        for (Ubicacion ubicacion : gestorUbicaciones.getUbicaciones()) {
+        for (Ubicacion ubicacion : gestorUbicaciones.getAllUbicaciones().values()) {
             if (ubicacion.getToponimo().toLowerCase().equals(toponimo)) {
                 return ubicacion;
             }
@@ -132,8 +138,12 @@ public class Gestor implements Serializable {
         return null;
     }
 
-    public Set<Ubicacion> getAllUbicaciones() {
-        return gestorUbicaciones.getUbicaciones();
+    public Map<String, Ubicacion> getAllUbicaciones() {
+        return gestorUbicaciones.getAllUbicaciones();
+    }
+
+    public Map<String, Ubicacion> getUbicacionesActivas(){
+        return gestorUbicaciones.getUbicacionesActivas();
     }
 
     public boolean activarUbicacion(String toponimo) {

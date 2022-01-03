@@ -31,6 +31,7 @@ public class GeocodingAdapter {
         String jsonData = null;
         try {
             response = call.execute();
+            System.out.println(response.body().toString());
             jsonData = response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +52,6 @@ public class GeocodingAdapter {
         try {
             JSONObject jsonResponse = new JSONObject(jsonData);
             if (jsonResponse.isNull("error")) { //si no hay errores
-
                 if (jsonResponse.isNull("standard")) {
                     //toponimo
                     toponimo = jsonResponse.getString("city");

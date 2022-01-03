@@ -14,13 +14,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Map;
 import java.util.Set;
 
 public class Historia5Test {
 
     // TODO Revisar
 
-    private static Set<Object> ubicaciones;
+    private static Map<String, Object> ubicaciones;
     private static Gestor gestor;
     private ServicioOpenWeather mockServicioOpenWeather;
 

@@ -6,17 +6,25 @@ import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 public class ServicioGeocoding {
 
     private final String url = "https://geocode.xyz/";
-    private final String auth = "57673066339488579050x115589";
+    private final String auth = "13482831714732e15824441x54004";
+    private GeocodingAdapter geocodingAdapter;
 
     public ServicioGeocoding() {
+        geocodingAdapter = new GeocodingAdapter();
+    }
 
+    public GeocodingAdapter getGeocodingAdapter() {
+        return geocodingAdapter;
+    }
+
+    public void setGeocodingAdapter(GeocodingAdapter geocodingAdapter) {
+        this.geocodingAdapter = geocodingAdapter;
     }
 
     public Ubicacion getInformacion(String toponimo) {
         // https://geocode.xyz/castellon?json=1&auth=57673066339488579050x115589
         String tempUrl = url + toponimo;
         tempUrl += "?json=1&auth=" + auth;
-        GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
         return geocodingAdapter.doRequest(tempUrl);
     }
 
@@ -24,7 +32,6 @@ public class ServicioGeocoding {
         //https://geocode.xyz/25.311261,-44.156168?geoit=json&auth=57673066339488579050x115589
         String tempUrl = url + latitud + ',' + longitud;
         tempUrl += "?geoit=json&auth=" + auth;
-        GeocodingAdapter geocodingAdapter = new GeocodingAdapter();
         return geocodingAdapter.doRequest(tempUrl);
     }
 

@@ -1,12 +1,14 @@
 package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 
 import java.util.HashMap;
+import java.util.Set;
 
 //EN ESTA CLASE ESTÁN TODOS LOS SERVICIOS (OpenWeather, Geocoding y Currents)
 
@@ -16,12 +18,31 @@ public class GestorServicios {
     private ServicioOpenWeather servicioOpenWeather;
     private ServicioCurrents servicioCurrents;
 
+    private Set<Servicio> servicios;
+
+
     protected GestorServicios() {
         servicioGeocoding = null;
         servicioOpenWeather = null;
         servicioCurrents = null;
     }
+    
+    public Set<Servicio> getAllServicios(){
+        return servicios;
+    }
 
+    public Servicio getServicio(String servicio){
+        servicio = servicio.toUpperCase();
+        switch (servicio) {
+            case "OPENWEATHER":
+                return this.servicioOpenWeather;
+            case "CURRENTS":
+                return this.servicioCurrents;
+            default:
+                break;
+        }
+        return null;
+    }
     //-------------------------------------------------------------------------------------------//
     //GEOCODE
 

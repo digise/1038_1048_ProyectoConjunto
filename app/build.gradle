@@ -79,6 +79,9 @@ dependencies {
 
     //json
     implementation 'org.json:json:20140107'
+
+    //bidiMap
+    implementation 'org.apache.commons:commons-collections4:4.4'
 }
 
 apply plugin: 'com.android.application'

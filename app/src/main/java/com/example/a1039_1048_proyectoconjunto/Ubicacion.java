@@ -1,5 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto;
 
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+
 import java.util.Comparator;
 
 public class Ubicacion {
@@ -129,15 +131,18 @@ public class Ubicacion {
     public void activarServicio(String nombreServicio, boolean activar){
         String servicioMinusculas = nombreServicio.toLowerCase();
 
-        switch (servicioMinusculas) {
-            case "openweather":
-                this.servicioOpenWeatherActivo = activar;
-                break;
-            case "currents":
-                this.servicioCurrentsActivo = activar;
-                break;
-            default:
-                break;
+        if (Gestor.getInstance().getServicio(nombreServicio)!= null){
+
+            switch (servicioMinusculas) {
+                case "openweather":
+                    this.servicioOpenWeatherActivo = activar;
+                    break;
+                case "currents":
+                    this.servicioCurrentsActivo = activar;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
