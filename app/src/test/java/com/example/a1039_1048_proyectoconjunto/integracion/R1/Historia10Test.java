@@ -13,7 +13,6 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

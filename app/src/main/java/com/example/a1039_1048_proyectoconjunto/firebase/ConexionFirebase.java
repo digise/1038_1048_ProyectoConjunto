@@ -190,15 +190,6 @@ public class ConexionFirebase {
         return false;
     }
 
-    private static boolean contieneServicio(Servicio servicio) {
-        Set<Servicio> servicios = Gestor.getInstance().getGestorServicios().getAllServicios();
-        for (Servicio s : servicios) {
-            if (s.equals(servicio)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 
 }

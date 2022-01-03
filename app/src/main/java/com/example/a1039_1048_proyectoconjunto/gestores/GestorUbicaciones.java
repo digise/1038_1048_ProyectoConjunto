@@ -7,13 +7,10 @@ import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
 import org.apache.commons.collections4.list.FixedSizeList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES

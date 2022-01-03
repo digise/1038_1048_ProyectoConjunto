@@ -82,18 +82,20 @@ public class Gestor implements Serializable {
         }
     }
 
-    public Servicio getServicio(String servicio){
-        return gestorServicios.getServicio(servicio);
-    }
-
     public void activarServicio(String servicio) {
         servicio = servicio.toUpperCase();
         switch (servicio) {
             case "OPENWEATHER":
-                gestorServicios.getServicioOpenWeather().servicioActivo(true);
+                ServicioOpenWeather servicioOpenWeather = gestorServicios.getServicioOpenWeather();
+                if (servicioOpenWeather != null){
+                    servicioOpenWeather.servicioActivo(true);
+                }
                 break;
             case "CURRENTS":
-                gestorServicios.getServicioCurrents().servicioActivo(true);
+                ServicioCurrents servicioCurrents = gestorServicios.getServicioCurrents();
+                if (servicioCurrents != null){
+                    servicioCurrents.servicioActivo(true);
+                }
                 break;
             default:
                 break;
