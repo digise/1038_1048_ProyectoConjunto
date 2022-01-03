@@ -96,6 +96,7 @@ public class GestorUbicaciones {
         return false;
     }
 
+
     public boolean desactivarUbicacion(String toponimo) {
         for (Ubicacion ubicacion : ubicaciones.values()){
             if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
