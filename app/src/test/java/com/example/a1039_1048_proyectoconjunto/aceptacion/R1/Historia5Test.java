@@ -21,7 +21,6 @@ public class Historia5Test {
     @BeforeAll
     public static void crear_gestor() {
         gestor = Gestor.getInstance();
-        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
 
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("alicante"));
         gestor.activarUbicacion("alicante");

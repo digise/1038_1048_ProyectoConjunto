@@ -18,7 +18,6 @@ public class Historia7Test {
     @BeforeEach
     public void crear_gestor(){
         gestor = Gestor.getInstance();
-        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
     }
 
     @Test

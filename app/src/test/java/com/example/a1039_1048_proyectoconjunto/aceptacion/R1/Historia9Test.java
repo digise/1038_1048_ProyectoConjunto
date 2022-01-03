@@ -20,7 +20,6 @@ public class Historia9Test {
         gestor = Gestor.getInstance();
 
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
-        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
 
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castellon"));
     }

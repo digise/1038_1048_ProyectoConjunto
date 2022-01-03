@@ -19,7 +19,6 @@ public class Historia8Test {
     @BeforeAll
     public static void anadirUbicacionParaHacerPrueba(){
         gestor = Gestor.getInstance();
-        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
 
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.activarUbicacion("sagunto");

@@ -19,8 +19,6 @@ public class Historia2Test {
         String latitud = "40.4619719";
         String longitud = "0.3548686";
 
-        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 
@@ -42,8 +40,6 @@ public class Historia2Test {
         Gestor gestor = Gestor.getInstance();
         String latitud = "-91";
         String longitud = "100";
-        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 

@@ -14,18 +14,16 @@ import java.util.stream.Collectors;
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
 
 public class GestorUbicaciones {
-
-
+    
     private Map<String, Ubicacion> ubicaciones;
-
-
+    
     protected GestorUbicaciones() {
         ubicaciones = new HashMap<>();
         Map<String, Object> objectosUbicaciones = getCollectionFirebase();
         ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
     }
 
-    private Map<String, Object> getCollectionFirebase(){
+    public Map<String, Object> getCollectionFirebase(){
         return ConexionFirebase.getCollection("ubicaciones");
     }
 
@@ -42,7 +40,6 @@ public class GestorUbicaciones {
         }
         return ubicacionesActivas;
     }
-
 
     public boolean darAltaUbicacion(Ubicacion ubicacion) {
         boolean anadido = false;

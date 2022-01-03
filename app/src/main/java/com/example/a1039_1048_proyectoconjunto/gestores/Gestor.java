@@ -130,7 +130,7 @@ public class Gestor implements Serializable {
 
     public Ubicacion getUbicacionGuardada(String toponimo) {
         toponimo = toponimo.toLowerCase();
-        for (Ubicacion ubicacion : gestorUbicaciones.getAllUbicaciones().values()) {
+        for (Ubicacion ubicacion : getAllUbicaciones().values()) {
             if (ubicacion.getToponimo().toLowerCase().equals(toponimo)) {
                 return ubicacion;
             }

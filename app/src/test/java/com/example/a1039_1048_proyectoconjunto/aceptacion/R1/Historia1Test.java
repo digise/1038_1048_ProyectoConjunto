@@ -25,8 +25,6 @@ public class Historia1Test {
     public void altaUbicacion_toponimoExistente_anadir() {
         // Given
         String toponimo = "alicante";
-        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
         Ubicacion ubicacionMock = new Ubicacion(toponimo, "Spain", "39.69250", "-0.28686");
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
@@ -49,8 +47,6 @@ public class Historia1Test {
         // Given
         Gestor gestor = Gestor.getInstance();
         String toponimo = "noExiste";
-        ServicioGeocoding servicioGeocoding = new ServicioGeocoding();
-        gestor.getGestorServicios().setServicioGeocoding(servicioGeocoding);
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();
 

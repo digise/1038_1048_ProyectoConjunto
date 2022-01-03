@@ -22,7 +22,7 @@ public class GestorServicios {
 
 
     protected GestorServicios() {
-        servicioGeocoding = null;
+        servicioGeocoding = new ServicioGeocoding();
         servicioOpenWeather = null;
         servicioCurrents = null;
     }
