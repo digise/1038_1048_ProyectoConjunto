@@ -53,11 +53,9 @@ public class Historia10Test {
         //GIVEN
         String toponimo = "castello";
 
-
         //WHEN
         int numUbicacionesAntesBorrado = gestor.getAllUbicaciones().size();
         boolean borrada = gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
-
 
         //THEN
         int numUbicacionesDespuesBorrado = gestor.getAllUbicaciones().size();

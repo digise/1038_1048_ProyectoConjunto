@@ -20,6 +20,7 @@ public class Historia9Test {
 
     private static Gestor gestor;
 
+
     @BeforeAll
     public static void setSpy() {
         Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
