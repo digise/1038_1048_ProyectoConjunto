@@ -88,7 +88,7 @@ public class ConexionFirebase {
 
     public static String createDocument(String referencia, Object data, String idDocumento) {
         if (data.equals(Ubicacion.class)) {
-            if (contieneUbicacion((Ubicacion) data))
+            if (!contieneUbicacion((Ubicacion) data))
                 return null;
         }else{
             contieneServicio((Servicio) data);
