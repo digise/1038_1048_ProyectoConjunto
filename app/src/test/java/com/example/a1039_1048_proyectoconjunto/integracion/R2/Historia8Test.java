@@ -31,7 +31,7 @@ public class Historia8Test {
     public void ordenarUbicaciones_listaUbicacionesVacia_noValido(){
         //GIVEN
         ubicacionesMentira = new HashMap<>();
-        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getCollectionFirebase();
+        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getUbicacionesFirebase();
 
         //WHEN
         //THEN
@@ -50,7 +50,7 @@ public class Historia8Test {
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
 
-        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getCollectionFirebase();
+        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getUbicacionesFirebase();
         //WHEN
 
         //boolean reordenado = gestor.reordenarUbicacion(ubicacion, 2);

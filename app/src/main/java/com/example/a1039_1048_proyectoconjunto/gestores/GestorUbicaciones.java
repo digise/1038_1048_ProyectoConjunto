@@ -22,7 +22,7 @@ public class GestorUbicaciones {
 
     protected GestorUbicaciones() {
         ubicaciones = new HashMap<>();
-        Map<String, Object> objectosUbicaciones = getCollectionFirebase();
+        Map<String, Object> objectosUbicaciones = getUbicacionesFirebase();
         ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
         listaHastaTresUbicacionesMostradas = FixedSizeList.fixedSizeList(Arrays.asList(new Ubicacion[3]));
     }
@@ -72,7 +72,7 @@ public class GestorUbicaciones {
         }
         return borrado;
     }
-    public Map<String, Object> getCollectionFirebase(){
+    public Map<String, Object> getUbicacionesFirebase(){
         return ConexionFirebase.getCollection("ubicaciones");
     }
 

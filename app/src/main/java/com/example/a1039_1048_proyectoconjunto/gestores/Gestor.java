@@ -140,6 +140,10 @@ public class Gestor implements Serializable {
         return null;
     }
 
+    public Map<String, Servicio> getAllServicios(){
+        return gestorServicios.getAllServicios();
+    }
+
     public Map<String, Ubicacion> getAllUbicaciones() {
         return gestorUbicaciones.getAllUbicaciones();
     }

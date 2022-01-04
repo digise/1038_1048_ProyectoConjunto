@@ -14,9 +14,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Historia9Test {
 
@@ -38,7 +36,7 @@ public class Historia9Test {
 
         GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
 
-        doReturn(ubicacionesMentira).when(gestorUbicaciones).getCollectionFirebase();
+        doReturn(ubicacionesMentira).when(gestorUbicaciones).getUbicacionesFirebase();
     }
 
     @Test

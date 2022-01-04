@@ -39,7 +39,7 @@ public class Historia10Test {
         gestor = Gestor.getInstance();
 
         GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
-        doReturn(ubicacionesMentira).when(gestorUbicaciones).getCollectionFirebase();
+        doReturn(ubicacionesMentira).when(gestorUbicaciones).getUbicacionesFirebase();
         doReturn(true).when(gestorUbicaciones).removeDocument("ubicaciones", eq(anyString()));
 
         GeocodingAdapter geocodingAdapterMock = mock(GeocodingAdapter.class);

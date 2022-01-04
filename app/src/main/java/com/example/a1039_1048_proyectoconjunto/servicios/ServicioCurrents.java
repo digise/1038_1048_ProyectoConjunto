@@ -1,7 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto.servicios;
 
 import com.example.a1039_1048_proyectoconjunto.adapter.CurrentsAdapter;
-import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 
 import java.util.HashMap;
 
