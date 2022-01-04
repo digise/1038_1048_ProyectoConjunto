@@ -69,9 +69,9 @@ public class GestorServicios {
     //OPENWEATHER
     public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather) {
         this.servicioOpenWeather = servicioOpenWeather;
-        String idDocumento = ConexionFirebase.createDocument("servicios", servicioOpenWeather, null);
+        /*String idDocumento = ConexionFirebase.createDocument("servicios", servicioOpenWeather, null);
         if (idDocumento!=null)
-            servicios.put("openweather", servicioOpenWeather);
+            servicios.put("openweather", servicioOpenWeather);*/
     }
 
     public ServicioOpenWeather getServicioOpenWeather() {
@@ -92,9 +92,9 @@ public class GestorServicios {
     //CURRENTS
     public void setServicioCurrents(ServicioCurrents servicioCurrents) {
         this.servicioCurrents = servicioCurrents;
-        String idDocumento = ConexionFirebase.createDocument("servicios", servicioCurrents, null);
+        /*String idDocumento = ConexionFirebase.createDocument("servicios", servicioCurrents, null);
         if (idDocumento!=null)
-            servicios.put("currents", servicioCurrents);
+            servicios.put("currents", servicioCurrents);*/
     }
 
     public ServicioCurrents getServicioCurrents() {

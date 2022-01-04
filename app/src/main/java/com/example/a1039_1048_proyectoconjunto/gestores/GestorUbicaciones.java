@@ -89,7 +89,7 @@ public class GestorUbicaciones {
         }
         return borrado;
     }
-    public Map<String, Object> getCollectionFirebase(){
+    public Map<String, Object> getUbicacionesFirebase(){
         return ConexionFirebase.getCollection("ubicaciones");
     }
 

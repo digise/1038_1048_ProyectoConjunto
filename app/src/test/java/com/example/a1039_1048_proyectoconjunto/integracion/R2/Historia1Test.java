@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Historia1Test {
 
@@ -47,7 +46,7 @@ public class Historia1Test {
         gestor = Gestor.getInstance();
 
         GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
-        doReturn(ubicacionesMentira).when(gestorUbicaciones).getCollectionFirebase();
+        doReturn(ubicacionesMentira).when(gestorUbicaciones).getUbicacionesFirebase();
 
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
