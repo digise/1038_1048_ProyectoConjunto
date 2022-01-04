@@ -45,9 +45,10 @@ public class GestorUbicaciones {
         boolean anadido = false;
         if (ubicacion != null) {
             String idDocumento = ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
+            ubicaciones.put(idDocumento, ubicacion);
             if (idDocumento!=null) {
-                anadido = true;
-                ubicaciones.put(idDocumento, ubicacion);
+                ubicaciones.get(idDocumento).setIdDocumento(idDocumento);
+                anadido = ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
             }
         }
         return anadido;

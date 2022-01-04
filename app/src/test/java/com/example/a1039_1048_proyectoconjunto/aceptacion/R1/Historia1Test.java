@@ -8,9 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
+import com.google.gson.Gson;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class Historia1Test {
     private static Gestor gestor;
