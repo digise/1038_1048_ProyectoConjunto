@@ -13,12 +13,10 @@ import com.example.a1039_1048_proyectoconjunto.adapter.CurrentsAdapter;
 import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.HashMap;
 
@@ -62,6 +60,5 @@ public class Historia2_2Test {
 
         assertNotNull(gestor.getTiempoPorUbicacion(castellon));
         assertNull(gestor.getNoticiasPorUbicacion(castellon));
-
     }
 }

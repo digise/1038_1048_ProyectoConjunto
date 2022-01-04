@@ -1,5 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto.integracion.R2;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -12,36 +15,40 @@ import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Historia1Test {
 
     private static Gestor gestor;
-    private static HashMap<String, Ubicacion> ubicacionesMentira;
 
     @BeforeAll
-    public static void setUbicaciones() {
-        Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
-        Ubicacion castellon = new Ubicacion("castello", "spain" , "40.67830", "0.28421");
-        Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
+    public static void setUbicaciones_setOpenWeatherMock() {
+        Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
+        Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
+        Ubicacion valencia = new Ubicacion("valencia", "spain", "39.50337", "-0.40466");
 
-        ubicacionesMentira = new HashMap<>();
+        sagunto.ponerEnListaTresUbicaciones(true);
+        castellon.ponerEnListaTresUbicaciones(true);
+        valencia.ponerEnListaTresUbicaciones(true);
+
+        Map<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
         ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
-        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
-        ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
+        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
+        ubicacionesMentira.put("-MsT0srQkDHs540AArXS", valencia);
 
         gestor = Gestor.getInstance();
 
         GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
         doReturn(ubicacionesMentira).when(gestorUbicaciones).getCollectionFirebase();
-    }
 
-    @BeforeAll
-    public static void setInfoOpenWeatherMentira(){
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
         OpenWeatherAdapter openWeatherAdapterMock = mock(OpenWeatherAdapter.class);
@@ -58,17 +65,28 @@ public class Historia1Test {
     }
 
     @Test
-    public void informacionTresUbicaciones_ubicacionesActivas_valido(){
+    public void informacionTresUbicaciones_ubicacionesActivas_valido() {
         //GIVEN
-        //HashMap<String, String> tresUbicaciones = gestor.getTresUbicaciones();
+        Gestor gestor = Gestor.getInstance();
+        Map<String, Ubicacion> ubicacionesGuardadas = gestor.getAllUbicaciones();
+        List<Ubicacion> listaUbicaciones = new ArrayList<>(ubicacionesGuardadas.values());
 
+        listaUbicaciones.forEach(ubicacion -> {
+            ubicacion.activar();
+            ubicacion.activarServicio("openweather", true);
+        });
 
         //WHEN
-
+        List<Ubicacion> listaTresUbicaciones = gestor.getListaHastaTresUbicacionesMostradas();
 
 
         //THEN
-
+        assertTrue(ubicacionesGuardadas.size() > 0);
+        assertEquals(listaTresUbicaciones.size(), 3);
+        for (Ubicacion ubicacion : listaTresUbicaciones) {
+            assertNotNull(ubicacion);
+            assertNotNull(gestor.getTiempoPorUbicacion(ubicacion));
+        }
 
     }
 

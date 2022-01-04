@@ -2,7 +2,6 @@ package com.example.a1039_1048_proyectoconjunto.firebase;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -11,10 +10,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;

@@ -11,6 +11,7 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,6 +37,10 @@ public class Gestor implements Serializable {
 
     public GestorUbicaciones getGestorUbicaciones() {
         return gestorUbicaciones;
+    }
+
+    public void setGestorUbicaciones(GestorUbicaciones gestorUbicaciones){
+        this.gestorUbicaciones = gestorUbicaciones;
     }
 
     public GestorServicios getGestorServicios() {
@@ -154,6 +159,14 @@ public class Gestor implements Serializable {
 
     public boolean desactivarUbicacion(String toponimo) {
         return gestorUbicaciones.desactivarUbicacion(toponimo);
+    }
+
+    public List<Ubicacion> getListaHastaTresUbicacionesMostradas(){
+        return gestorUbicaciones.getListaHastaTresUbicacionesMostradas();
+    }
+
+    public boolean replaceEnListaTresUbicaciones(Ubicacion ubicacionVieja, Ubicacion ubicacionNueva){
+        return gestorUbicaciones.replaceEnListaTresUbicaciones(ubicacionVieja, ubicacionNueva);
     }
 
 
