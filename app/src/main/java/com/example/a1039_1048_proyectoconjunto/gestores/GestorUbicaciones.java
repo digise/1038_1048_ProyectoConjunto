@@ -40,7 +40,7 @@ public class GestorUbicaciones {
     }
 
     public void generarUbicaciones(){
-        Map<String, Object> objectosUbicaciones = getCollectionFirebase();
+        Map<String, Object> objectosUbicaciones = getUbicacionesFirebase();
         ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
     }
 

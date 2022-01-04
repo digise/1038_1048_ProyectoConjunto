@@ -2,6 +2,7 @@ package com.example.a1039_1048_proyectoconjunto.firebase;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -86,12 +87,8 @@ public class ConexionFirebase {
     }
 
     public static String createDocument(String referencia, Object data, String idDocumento) {
-        if (data.equals(Ubicacion.class)) {
-            if (contieneUbicacion((Ubicacion) data))
-                return null;
-        }else{
-            contieneServicio((Servicio) data);
-        }
+        if (contieneUbicacion((Ubicacion) data))
+            return null;
 
         //Si el documento tiene clave aleatoria o específica
         String url = generarURL(referencia);

@@ -30,14 +30,15 @@ public class Historia9Test {
         Map<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
         ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
-        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
-        ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
+        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
+        ubicacionesMentira.put("-MsT0srQkDHs540AArXS", valencia);
 
         gestor = Gestor.getInstance();
 
-        GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
-
-        doReturn(ubicacionesMentira).when(gestorUbicaciones).getUbicacionesFirebase();
+        GestorUbicaciones gestorUbicacionesSpy = spy(gestor.getGestorUbicaciones());
+        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getUbicacionesFirebase();
+        gestor.setGestorUbicaciones(gestorUbicacionesSpy);
+        gestorUbicacionesSpy.generarUbicaciones();
     }
 
     @Test
