@@ -1,6 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
+import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
@@ -28,19 +29,20 @@ public class GestorServicios {
         servicioGeocoding = new ServicioGeocoding();
         servicioOpenWeather = null;
         servicioCurrents = null;
-        generarServicios();
+        servicios = new HashMap<>();
     }
 
-    public Map<String, Object> getServiciosFirebase(){
-        return ConexionFirebase.getCollection("servicios");
-    }
     public Map<String, Servicio> getAllServicios(){
         return servicios;
     }
 
-    public void generarServicios(){
-        Map<String, Object> objetosServicios = getServiciosFirebase();
-        servicios = objetosServicios.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Servicio) e.getValue()));
+    public int nServiciosActivos(){
+        int total = 0;
+        for (Servicio servicio : servicios.values()){
+            if (servicio.isActivo())
+                total += 1;
+        }
+        return total;
     }
     
     //-------------------------------------------------------------------------------------------//
@@ -68,10 +70,18 @@ public class GestorServicios {
     //-------------------------------------------------------------------------------------------//
     //OPENWEATHER
     public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather) {
-        this.servicioOpenWeather = servicioOpenWeather;
-        /*String idDocumento = ConexionFirebase.createDocument("servicios", servicioOpenWeather, null);
-        if (idDocumento!=null)
-            servicios.put("openweather", servicioOpenWeather);*/
+        if (servicioOpenWeather == null && servicios.containsKey("openweather")) {
+            boolean eliminar = eliminarServicioFirebase("openweather");
+            if (eliminar)
+                servicios.remove("openweather");
+        }else{
+            if (this.servicioOpenWeather == null) {
+                this.servicioOpenWeather = servicioOpenWeather;
+                String idDocumento = crearServicioFirebase(servicioOpenWeather);
+                if (idDocumento != null)
+                    servicios.put("openweather", servicioOpenWeather);
+            }
+        }
     }
 
     public ServicioOpenWeather getServicioOpenWeather() {
@@ -91,10 +101,18 @@ public class GestorServicios {
     //-------------------------------------------------------------------------------------------//
     //CURRENTS
     public void setServicioCurrents(ServicioCurrents servicioCurrents) {
-        this.servicioCurrents = servicioCurrents;
-        /*String idDocumento = ConexionFirebase.createDocument("servicios", servicioCurrents, null);
-        if (idDocumento!=null)
-            servicios.put("currents", servicioCurrents);*/
+        if (servicioCurrents == null && servicios.containsKey("currents")) {
+            boolean eliminar = eliminarServicioFirebase("currents");
+            if (eliminar)
+                servicios.remove("currents");
+        }else {
+            if (this.servicioCurrents == null) {
+                this.servicioCurrents = servicioCurrents;
+                String idDocumento = crearServicioFirebase(servicioCurrents);
+                if (idDocumento != null)
+                    servicios.put("currents", servicioCurrents);
+            }
+        }
     }
 
     public ServicioCurrents getServicioCurrents() {
@@ -109,4 +127,25 @@ public class GestorServicios {
         }
         return null;
     }
+
+    //Firebase
+    public ServicioOpenWeather getServicioOpenWeatherFirebase(){
+        return ConexionFirebase.getDocument("servicios", "openweather", ServicioOpenWeather.class);
+    }
+
+    public ServicioCurrents getServicioCurrentsFirebase(){
+        return ConexionFirebase.getDocument("servicios", "currents", ServicioCurrents.class);
+    }
+
+    public String crearServicioFirebase(Servicio servicio){
+        if (servicio.getClass() == ServicioCurrents.class)
+            return ConexionFirebase.createDocument("servicios", servicio, "currents");
+        else
+            return ConexionFirebase.createDocument("servicios", servicio, "openweather");
+    }
+
+    public boolean eliminarServicioFirebase(String idDocumento){
+        return ConexionFirebase.removeDocument("servicios", idDocumento);
+    }
+
 }

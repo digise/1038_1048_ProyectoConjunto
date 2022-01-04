@@ -31,11 +31,11 @@ public class ConexionFirebase {
         return "https://proyectoparadis-8f0c6-default-rtdb.europe-west1.firebasedatabase.app/" + aux;
     }
 
-    public static Map<String, Object> getCollection(String referencia) {
-        Map<String, Object> res = new HashMap();
+    public static <T> Map<String, T> getCollection(String referencia, Class<T> c) {
+        Map<String, T> res = new HashMap<>();
         String url = generarURL(referencia);
         url = url + ".json";
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).get().build();
         Call call = client.newCall(request);
         try {
@@ -46,10 +46,10 @@ public class ConexionFirebase {
             }
             JSONObject jsonObject = new JSONObject(jsonData);
             res = new Gson().fromJson(jsonObject.toString(), HashMap.class);
-            for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+            for (Iterator<String> it = jsonObject.keys(); it.hasNext();) {
                 String x = it.next();
                 JSONObject y = jsonObject.getJSONObject(x);
-                Ubicacion data = new Gson().fromJson(y.toString(), Ubicacion.class);
+                T data = new Gson().fromJson(y.toString(), c);
                 res.put(x, data);
             }
         } catch (IOException | JSONException e) {
@@ -59,14 +59,14 @@ public class ConexionFirebase {
 
     }
 
-    public static Object getDocument(String referencia, String idDocumento) {
+    public static <T> T getDocument(String referencia, String idDocumento, Class<T> c) {
         String url = generarURL(referencia);
         if (idDocumento != null) {
             url = url + "/" + idDocumento + ".json";
         } else {
             return null;
         }
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).get().build();
         Call call = client.newCall(request);
         try {
@@ -76,7 +76,7 @@ public class ConexionFirebase {
                 return null;
 
             JSONObject jsonObjectDocumento = new JSONObject(dataDocumento);
-            Ubicacion data = new Gson().fromJson(jsonObjectDocumento.toString(), Ubicacion.class);
+            T data = new Gson().fromJson(jsonObjectDocumento.toString(), c);
             return data;
 
         } catch (IOException | JSONException e) {
@@ -86,9 +86,14 @@ public class ConexionFirebase {
 
     }
 
-    public static String createDocument(String referencia, Object data, String idDocumento) {
-        if (contieneUbicacion((Ubicacion) data))
-            return null;
+    public static <T> String createDocument(String referencia, T data, String idDocumento) {
+        if (data.getClass() == Ubicacion.class) {
+            if (contieneUbicacion((Ubicacion) data))
+                return null;
+        } else{
+            if (contieneServicio((Servicio) data))
+                return null;
+        }
 
         //Si el documento tiene clave aleatoria o específica
         String url = generarURL(referencia);
@@ -97,7 +102,7 @@ public class ConexionFirebase {
         Gson gson = new Gson();
         String jsonBody = gson.toJson(data);
         RequestBody body = RequestBody.create(jsonBody, JSON);
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = null;
         if (idDocumento != null) {
             url = url + "/" + idDocumento + ".json";
@@ -125,10 +130,13 @@ public class ConexionFirebase {
         return null;
     }
 
-    public static boolean updateDocument(String referencia, Object data, String idDocumento) {
-
-        if (!contieneUbicacion(idDocumento)) {
-            return false;
+    public static <T> boolean updateDocument(String referencia, T data, String idDocumento) {
+        if (data.getClass() == Ubicacion.class) {
+            if (!contieneUbicacion((Ubicacion) data))
+                return false;
+        } else{
+            if (!contieneServicio((Servicio) data))
+                return false;
         }
 
         //Url para identificar documento
@@ -139,7 +147,7 @@ public class ConexionFirebase {
         Gson gson = new Gson();
         String jsonBody = gson.toJson(data);
         RequestBody body = RequestBody.create(jsonBody, JSON);
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).patch(body).build();
 
         //Hacer llamada y recibir respuesta
@@ -161,7 +169,7 @@ public class ConexionFirebase {
         url += "/" + idDocumento + ".json";
 
         //Comprobar si la url es correcta
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(url).delete().build();
         Call call = client.newCall(request);
         try {
@@ -178,7 +186,7 @@ public class ConexionFirebase {
 
 
     private static boolean contieneUbicacion(Ubicacion ubicacion) {
-        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getAllUbicaciones();
+        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getAllUbicaciones();
         for (Ubicacion u : ubicaciones.values()) {
             if (u.equals(ubicacion)) {
                 return true;

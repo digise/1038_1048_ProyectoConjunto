@@ -40,8 +40,7 @@ public class GestorUbicaciones {
     }
 
     public void generarUbicaciones(){
-        Map<String, Object> objectosUbicaciones = getUbicacionesFirebase();
-        ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
+        ubicaciones = getUbicacionesFirebase();
     }
 
     public Map<String, Ubicacion> getAllUbicaciones() {
@@ -62,8 +61,8 @@ public class GestorUbicaciones {
         boolean anadido = false;
         if (ubicacion != null) {
             String idDocumento = ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
-            ubicaciones.put(idDocumento, ubicacion);
             if (idDocumento!=null) {
+                ubicaciones.put(idDocumento, ubicacion);
                 ubicaciones.get(idDocumento).setIdDocumento(idDocumento);
                 anadido = ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
             }
@@ -89,9 +88,7 @@ public class GestorUbicaciones {
         }
         return borrado;
     }
-    public Map<String, Object> getUbicacionesFirebase(){
-        return ConexionFirebase.getCollection("ubicaciones");
-    }
+
 
     public boolean removeDocument(String referencia, String idDocumento){
         return ConexionFirebase.removeDocument(referencia, idDocumento);
@@ -138,5 +135,11 @@ public class GestorUbicaciones {
             }
         }
         return cambiado;
+    }
+
+    //Firebase
+
+    public Map<String, Ubicacion> getUbicacionesFirebase(){
+        return ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
     }
 }

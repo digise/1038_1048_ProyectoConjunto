@@ -1,6 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto.servicios;
 
 import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 
 import java.util.HashMap;
 
@@ -44,11 +45,27 @@ public class ServicioOpenWeather implements Servicio {
         return null;
     }
 
-    public void servicioActivo(boolean activar) {
+    public void servicioActivo(boolean activar){
         activo = activar;
+        boolean s = updateServicioFirebase(this, "openweather");
+        if (!s)
+            activo = !activar;
+
     }
 
     public boolean isActivo() {
         return activo;
+    }
+
+    @Override
+    public String toString() {
+        return "ServicioOpenWeather{" +
+                "activo=" + activo +
+                '}';
+    }
+
+    //Firebase
+    public boolean updateServicioFirebase(ServicioOpenWeather servicio, String idDocumento){
+        return ConexionFirebase.updateDocument("servicios", servicio, idDocumento);
     }
 }

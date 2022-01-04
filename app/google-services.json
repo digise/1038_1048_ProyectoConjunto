@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "928064399559",
-    "project_id": "proyectoparadis-64cf2",
-    "storage_bucket": "proyectoparadis-64cf2.appspot.com"
+    "project_number": "748321464495",
+    "firebase_url": "https://proyectoparadis-8f0c6-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "proyectoparadis-8f0c6",
+    "storage_bucket": "proyectoparadis-8f0c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:928064399559:android:192df7f77071fe901fb6e2",
+        "mobilesdk_app_id": "1:748321464495:android:edb2f6ff1580139f58b45a",
         "android_client_info": {
           "package_name": "com.example.a1039_1048_proyectoconjunto"
         }
       },
       "oauth_client": [
         {
-          "client_id": "928064399559-osimsc13949km7fkd1eveboqhfiacsef.apps.googleusercontent.com",
+          "client_id": "748321464495-qb87dlqdmt68rjp737an3tkhjpkk5158.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAzK09u34nERf3XJSITn6ylxYIN6ZTgI_M"
+          "current_key": "AIzaSyBj7psoU18-hEO-5ltG6AqF7CW-hWrfFw8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "928064399559-osimsc13949km7fkd1eveboqhfiacsef.apps.googleusercontent.com",
+              "client_id": "748321464495-qb87dlqdmt68rjp737an3tkhjpkk5158.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

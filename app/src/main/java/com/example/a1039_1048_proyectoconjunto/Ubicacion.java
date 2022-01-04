@@ -10,7 +10,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
     private String alias;
     private boolean servicioOpenWeatherActivo;
     private boolean servicioCurrentsActivo;
-    private String idDocumento = null;
+    private String idDocumento = "";
     private boolean enListaTresUbicaciones;
 
     public Ubicacion() {

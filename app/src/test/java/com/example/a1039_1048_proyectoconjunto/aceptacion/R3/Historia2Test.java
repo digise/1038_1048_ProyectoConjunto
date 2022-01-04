@@ -5,21 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 
-public class Historia1Test {
+public class Historia2Test {
     private static Gestor gestor;
 
     @BeforeAll
@@ -30,8 +26,11 @@ public class Historia1Test {
     }
 
     @Test
-    public void consultar_listaServiciosDisponibles(){
+    public void activar_serviciosAPIDisponibles(){
         //GIVEN
+        gestor.activarServicio("currents");
+        gestor.desactivarServicio("openweather");
+
         Map<String, Servicio> servicios = gestor.getAllServicios();
         servicios.get("openweather").servicioActivo(false);
         servicios.get("currents").servicioActivo(false);
@@ -72,5 +71,4 @@ public class Historia1Test {
         assertEquals(nServiciosAntesDeEliminarlos, 2);
         assertEquals(nServiciosActuales, 0);
     }
-
 }

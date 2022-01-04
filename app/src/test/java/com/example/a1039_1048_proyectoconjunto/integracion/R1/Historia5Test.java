@@ -21,13 +21,13 @@ public class Historia5Test {
 
     // TODO Revisar
 
-    private static Map<String, Object> ubicaciones;
+    private static Map<String, Ubicacion> ubicaciones;
     private static Gestor gestor;
     private ServicioOpenWeather mockServicioOpenWeather;
 
     @BeforeAll
     public static void crear_firebase(){
-        ubicaciones = ConexionFirebase.getCollection("ubicaciones");
+        ubicaciones = ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
     }
 
     // TODO Igual hay que cambiar la ubicación de ejemplo y insertarla en este mismo test. Sino depende de si se realiza o no la historia 1.
