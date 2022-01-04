@@ -130,7 +130,7 @@ public class ConexionFirebase {
 
     public static boolean updateDocument(String referencia, Object data, String idDocumento) {
 
-        if (!contieneUbicacion((Ubicacion) data)) {
+        if (!contieneUbicacion(idDocumento)) {
             return false;
         }
 
@@ -149,8 +149,8 @@ public class ConexionFirebase {
         Call call = client.newCall(request);
         try {
             Response response = call.execute();
-            Ubicacion ubicacion = new Gson().fromJson(response.body().string(), Ubicacion.class);
-            if (response.isSuccessful() && ubicacion.equals((Ubicacion) data))
+            String x = response.body().string();
+            if (response.isSuccessful())
                 return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -188,6 +188,11 @@ public class ConexionFirebase {
             }
         }
         return false;
+    }
+
+    private static boolean contieneUbicacion(String idDocumento) {
+        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getAllUbicaciones();
+        return ubicaciones.containsKey(idDocumento);
     }
 
 

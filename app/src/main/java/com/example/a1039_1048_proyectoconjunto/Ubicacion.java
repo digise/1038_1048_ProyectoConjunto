@@ -1,6 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto;
 
-public class Ubicacion {
+public class Ubicacion implements Comparable<Ubicacion>{
 
     private String toponimo;
     private String latitud; //-90, 90
@@ -10,6 +10,7 @@ public class Ubicacion {
     private String alias;
     private boolean servicioOpenWeatherActivo;
     private boolean servicioCurrentsActivo;
+    private String idDocumento = null;
 
     public Ubicacion() {
         this.toponimo = null;
@@ -75,6 +76,14 @@ public class Ubicacion {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getIdDocumento() {
+        return idDocumento;
+    }
+
+    public void setIdDocumento(String idDocumento) {
+        this.idDocumento = idDocumento;
     }
 
     public boolean activar() {
@@ -153,4 +162,10 @@ public class Ubicacion {
         return ubicacion.longitud.equals(this.longitud) && ubicacion.latitud.equals(this.latitud);
     }
 
+    @Override
+    public int compareTo(Ubicacion o) {
+        if (o.longitud.equals(this.longitud) && o.latitud.equals(this.latitud))
+            return 0;
+        return -1;
+    }
 }
