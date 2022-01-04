@@ -2,7 +2,6 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -19,10 +18,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Historia10Test {
-
     private static Gestor gestor;
 
     @BeforeAll
@@ -32,7 +29,7 @@ public class Historia10Test {
         Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
         Ubicacion calig = new Ubicacion("calig", "spain" , "40.47058", "0.36725");
 
-        Map<String, Ubicacion> ubicacionesMentira = new HashMap<>();
+        HashMap<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
         ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
@@ -41,27 +38,30 @@ public class Historia10Test {
 
         gestor = Gestor.getInstance();
 
-        GestorUbicaciones gestorUbicacionesSpy = spy(gestor.getGestorUbicaciones());
-        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getCollectionFirebase();
-        doReturn(true).when(gestorUbicacionesSpy).removeDocument("ubicaciones", eq(anyString()));
-        gestor.setGestorUbicaciones(gestorUbicacionesSpy);
-        gestorUbicacionesSpy.generarUbicaciones();
+        GestorUbicaciones gestorUbicaciones = spy(Gestor.getInstance().getGestorUbicaciones());
+        doReturn(ubicacionesMentira).when(gestorUbicaciones).getUbicacionesFirebase();
+        doReturn(true).when(gestorUbicaciones).removeDocument("ubicaciones", eq(anyString()));
+
+        GeocodingAdapter geocodingAdapterMock = mock(GeocodingAdapter.class);
+        gestor.getGestorServicios().getServicioGeocoding().setGeocodingAdapter(geocodingAdapterMock);
+        when(geocodingAdapterMock.doRequest(anyString())).thenReturn(castellon);
+
     }
 
     @Test
     public void darBajaUbicacionExistente_ubicacion_valido(){
         //GIVEN
         String toponimo = "castello";
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo(toponimo));
 
 
         //WHEN
         int numUbicacionesAntesBorrado = gestor.getAllUbicaciones().size();
-        boolean borrada = gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
+        gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
 
 
         //THEN
         int numUbicacionesDespuesBorrado = gestor.getAllUbicaciones().size();
-        assertTrue(borrada);
         assertEquals(numUbicacionesAntesBorrado, numUbicacionesDespuesBorrado + 1);
         assertNull(gestor.getUbicacionGuardada(toponimo));
     }

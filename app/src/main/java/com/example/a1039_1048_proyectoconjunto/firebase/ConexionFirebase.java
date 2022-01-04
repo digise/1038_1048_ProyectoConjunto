@@ -86,8 +86,11 @@ public class ConexionFirebase {
     }
 
     public static String createDocument(String referencia, Object data, String idDocumento) {
-        if (contieneUbicacion((Ubicacion) data)) {
-            return null;
+        if (data.equals(Ubicacion.class)) {
+            if (contieneUbicacion((Ubicacion) data))
+                return null;
+        }else{
+            contieneServicio((Servicio) data);
         }
 
         //Si el documento tiene clave aleatoria o específica
@@ -188,8 +191,23 @@ public class ConexionFirebase {
     }
 
     private static boolean contieneUbicacion(String idDocumento) {
-        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getGestorUbicaciones().getAllUbicaciones();
+        Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getAllUbicaciones();
         return ubicaciones.containsKey(idDocumento);
+    }
+
+    private static boolean contieneServicio(Servicio servicio) {
+        Map<String, Servicio> servicios = Gestor.getInstance().getAllServicios();
+        for (Servicio s : servicios.values()) {
+            if (s.equals(servicio)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean contieneServicio(String idDocumento) {
+        Map<String, Servicio> servicios = Gestor.getInstance().getAllServicios();
+        return servicios.containsKey(idDocumento);
     }
 
 
