@@ -22,9 +22,26 @@ public class GestorUbicaciones {
 
     protected GestorUbicaciones() {
         ubicaciones = new HashMap<>();
-        Map<String, Object> objectosUbicaciones = getUbicacionesFirebase();
+        /*
+        Map<String, Object> objectosUbicaciones = getCollectionFirebase();
         ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
+        */
+        generarUbicaciones();
         listaHastaTresUbicacionesMostradas = FixedSizeList.fixedSizeList(Arrays.asList(new Ubicacion[3]));
+        generarListaTresUbicaciones();
+    }
+
+    private void generarListaTresUbicaciones(){
+        for (Ubicacion ubicacion: ubicaciones.values()) {
+            if (ubicacion.isEnListaTresUbicaciones()){
+                listaHastaTresUbicacionesMostradas.add(ubicacion);
+            }
+        }
+    }
+
+    public void generarUbicaciones(){
+        Map<String, Object> objectosUbicaciones = getCollectionFirebase();
+        ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
     }
 
     public Map<String, Ubicacion> getAllUbicaciones() {
@@ -77,7 +94,7 @@ public class GestorUbicaciones {
     }
 
     public boolean removeDocument(String referencia, String idDocumento){
-        return ConexionFirebase.removeDocument("ubicaciones", idDocumento);
+        return ConexionFirebase.removeDocument(referencia, idDocumento);
     }
 
     public Ubicacion getUbicacionPorToponimo(String name) {
@@ -97,6 +114,7 @@ public class GestorUbicaciones {
         return false;
     }
 
+
     public boolean desactivarUbicacion(String toponimo) {
         for (Ubicacion ubicacion : ubicaciones.values()){
             if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
@@ -104,5 +122,21 @@ public class GestorUbicaciones {
             }
         }
         return false;
+    }
+
+    public List<Ubicacion> getListaHastaTresUbicacionesMostradas(){
+        return listaHastaTresUbicacionesMostradas;
+    }
+
+    public boolean replaceEnListaTresUbicaciones(Ubicacion ubicacionVieja, Ubicacion ubicacionNueva){
+        boolean cambiado = false;
+        for (int i = 0; i < listaHastaTresUbicacionesMostradas.size(); i++) {
+            Ubicacion ubicacionActual = listaHastaTresUbicacionesMostradas.get(i);
+            if (ubicacionActual.equals(ubicacionVieja)){
+                listaHastaTresUbicacionesMostradas.set(i, ubicacionNueva);
+                cambiado = true;
+            }
+        }
+        return cambiado;
     }
 }

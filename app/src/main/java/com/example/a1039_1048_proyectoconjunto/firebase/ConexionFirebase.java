@@ -2,7 +2,6 @@ package com.example.a1039_1048_proyectoconjunto.firebase;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.google.gson.Gson;
 
 import org.json.JSONException;

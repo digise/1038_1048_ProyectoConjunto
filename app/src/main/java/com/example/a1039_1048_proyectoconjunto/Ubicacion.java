@@ -11,6 +11,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
     private boolean servicioOpenWeatherActivo;
     private boolean servicioCurrentsActivo;
     private String idDocumento = null;
+    private boolean enListaTresUbicaciones;
 
     public Ubicacion() {
         this.toponimo = null;
@@ -20,6 +21,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.alias = "";
         this.servicioOpenWeatherActivo = false;
         this.servicioCurrentsActivo = false;
+        this.enListaTresUbicaciones = false;
     }
 
     public Ubicacion(String toponimo) {
@@ -28,6 +30,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.longitud = null;
         this.pais = null;
         this.alias = "";
+        this.enListaTresUbicaciones = false;
     }
 
     public Ubicacion(String latitud, String longitud) {
@@ -36,6 +39,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.latitud = latitud;
         this.longitud = longitud;
         this.alias = "";
+        this.enListaTresUbicaciones = false;
     }
 
     public Ubicacion(String toponimo, String pais, String latitud, String longitud) {
@@ -44,6 +48,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.latitud = latitud;
         this.longitud = longitud;
         this.alias = "";
+        this.enListaTresUbicaciones = false;
     }
 
     public String getToponimo() {
@@ -145,6 +150,14 @@ public class Ubicacion implements Comparable<Ubicacion>{
                 default:
                     break;
             }
+    }
+
+    public void ponerEnListaTresUbicaciones(boolean activar){
+        this.enListaTresUbicaciones = activar;
+    }
+
+    public boolean isEnListaTresUbicaciones(){
+        return enListaTresUbicaciones;
     }
 
     @Override
