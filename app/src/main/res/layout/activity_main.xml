@@ -7,80 +7,73 @@
     tools:context="activities.GeocodingActivity">
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#E6F6FD"
+        android:id="@+id/linearLayout"
+        android:layout_width="310dp"
+        android:layout_height="578dp"
         android:orientation="vertical"
-        android:padding="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:text="@string/ubication_button_base_text"
+            app:cornerRadius="25dp" />
 
         <TextView
-            android:id="@+id/currents_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="25sp"
-            android:layout_marginBottom="40sp"
-            android:text="APP tiempo"
-            android:textAlignment="center"
-            android:textColor="#00278A"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/etCity"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15sp"
-            android:background="@drawable/etcity_redondo"
-            android:drawableStart="?android:attr/actionModeWebSearchDrawable"
-            android:ems="10"
-            android:hint="Ciudad o coordenadas"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:paddingStart="20sp"
-            android:textColor="#000000"
-            tools:ignore="RtlSymmetry" />
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <TableRow
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:text="@string/ubication_button_base_text"
+            app:cornerRadius="25dp" />
+
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
-                android:id="@+id/button_getByCoords"
-                android:layout_width="170sp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20sp"
-                android:background="@drawable/border_grey"
-                android:onClick="getUbicacionPorCoords"
-                android:text="Validar coordenadas"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
-
-            <Button
-                android:id="@+id/button_getByName"
-                android:layout_width="170sp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/border_grey"
-                android:onClick="getUbicacionPorNombre"
-                android:text="Validar toponimo"
-                android:textColor="#000000"
-                android:textSize="10sp"
-                tools:ignore="SmallSp" />
-        </TableRow>
-
-        <ListView
-            android:id="@+id/listView_nuevasUbicaciones"
+        <Button
+            android:id="@+id/button13"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="123dp"
+            android:text="@string/ubication_button_base_text"
+            app:cornerRadius="25dp" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="275dp"
+        android:layout_height="18dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

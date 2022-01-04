@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">1039_1048_ProyectoConjunto</string>
     <string name="title_activity_geocoding">Leanback GeocodingActivity</string>
+    <string name="ubication_button_base_text">Ubicación</string>
+
+
+
+
     <string name="browse_title">Videos by Your Company</string>
     <string name="related_movies">Related Videos</string>
     <string name="grid_view">Grid View</string>
