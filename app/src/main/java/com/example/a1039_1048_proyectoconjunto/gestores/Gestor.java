@@ -172,6 +172,23 @@ public class Gestor {
         return gestorUbicaciones.getUbicacionesFavoritas();
     }
 
+    public void borrarServicio(String servicio) {
+        switch (servicio.toUpperCase()) {
+            case "CURRENTS":
+                if (gestorServicios.getServicioCurrents() != null){
+                    gestorServicios.setServicioCurrents(null);
+                }
+                break;
+            case "OPENWEATHER":
+                if (gestorServicios.getServicioOpenWeather() != null){
+                    gestorServicios.setServicioOpenWeather(null);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 
 
 
