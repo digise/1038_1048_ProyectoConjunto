@@ -12,11 +12,11 @@ public class ServicioOpenWeather implements Servicio {
     private final String url = "https://api.openweathermap.org/data/2.5/";
     private final String appid = "157e439fdbc93d1c11163f1bc3a488ab";
     private boolean activo;
-    private final String descripcion = "";/*"OpenWeather es un equipo de expertos en TI y científicos de datos que ha estado practicando la ciencia de datos meteorológicos profundos desde 2014. Para cada punto del mundo, OpenWeather proporciona datos meteorológicos históricos, actuales y pronosticados a través de API a la velocidad de la luz. Sede en Londres, Reino Unido.\n" +
+    private final String descripcion = "OpenWeather es un equipo de expertos en TI y científicos de datos que ha estado practicando la ciencia de datos meteorológicos profundos desde 2014. Para cada punto del mundo, OpenWeather proporciona datos meteorológicos históricos, actuales y pronosticados a través de API a la velocidad de la luz. Sede en Londres, Reino Unido.\n" +
             "Caracterisitcas de la api gratuita (la que hemos utilizado):\n" +
             "- 60 llamadas/minuto\n" +
             "- Clima actual, pronóstico en minutos para 1 hora, pronóstico por hora para 48 horas, pronóstico diario para 7 días, alertas meteorológicas globales y datos históricos\\n\" +\n" +
-            "            \"para 5 días anteriores para cualquier ubicación";*/
+            "            \"para 5 días anteriores para cualquier ubicación";
 
     OpenWeatherAdapter openWeatherAdapter;
 

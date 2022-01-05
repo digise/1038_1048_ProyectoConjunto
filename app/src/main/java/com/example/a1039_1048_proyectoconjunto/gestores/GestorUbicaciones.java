@@ -64,6 +64,16 @@ public class GestorUbicaciones {
 
     }
 
+    public List<Ubicacion> getUbicacionesFavoritas(){
+        List<Ubicacion> ubicacionesFavoritas = new ArrayList<>();
+        for (Ubicacion ubicacion : ubicaciones.values()){
+            if (ubicacion.getFavorita()){
+                ubicacionesFavoritas.add(ubicacion);
+            }
+        }
+        return ubicacionesFavoritas;
+    }
+
 
     public Map<String, Ubicacion> getAllUbicaciones() {
         return ubicaciones;

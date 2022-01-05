@@ -15,6 +15,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
     private String idDocumento = "";
     private boolean enListaTresUbicaciones;
     private int numCreacion;
+    private boolean favorita;
 
     public Ubicacion() {
         this.toponimo = null;
@@ -26,6 +27,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
         this.servicioCurrentsActivo = false;
         this.enListaTresUbicaciones = false;
         this.numCreacion = 0;
+        this.favorita = false;
     }
 
     public Ubicacion(String toponimo) {
@@ -36,6 +38,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
         this.alias = "";
         this.enListaTresUbicaciones = false;
         this.numCreacion = 0;
+        this.favorita = false;
     }
 
     public Ubicacion(String latitud, String longitud) {
@@ -46,6 +49,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
         this.alias = "";
         this.enListaTresUbicaciones = false;
         this.numCreacion = 0;
+        this.favorita = false;
     }
 
     public Ubicacion(String toponimo, String pais, String latitud, String longitud) {
@@ -56,6 +60,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
         this.alias = "";
         this.enListaTresUbicaciones = false;
         this.numCreacion = 0;
+        this.favorita = false;
     }
 
     public String getToponimo() {
@@ -141,6 +146,17 @@ public class Ubicacion implements Comparable<Ubicacion> {
             return s;
         }
         return false;
+    }
+
+    public boolean setFavorita(boolean marcar){
+        boolean s = updateUbicacionFirebase(this, this.idDocumento);
+        if (s)
+            this.favorita = marcar;
+        return s;
+    }
+
+    public boolean getFavorita(){
+        return this.favorita;
     }
 
     public boolean isServicioActivo(String nombreServicio) {

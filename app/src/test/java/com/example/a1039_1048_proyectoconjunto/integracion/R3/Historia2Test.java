@@ -1,12 +1,10 @@
 package com.example.a1039_1048_proyectoconjunto.integracion.R3;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -23,11 +21,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Historia1Test {
-
+public class Historia2Test {
     private static Gestor gestor;
     private static ConexionFirebase mockConexionFirebaseServicios;
 
@@ -57,7 +53,7 @@ public class Historia1Test {
     }
 
     @Test
-    public void listarServiciosAPI_listadoConServicios_valido(){
+    public void activarServiciosAPI_listadoConServicios_valido(){
         //GIVEN
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
         mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
@@ -70,7 +66,7 @@ public class Historia1Test {
         servicioCurrents.setCurrentsAdapter(mockCurrentsAdapter);
 
         ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
-        servicioOpenWeather.servicioActivo(false);
+        servicioOpenWeather.servicioActivo(true);
         servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
 
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
@@ -89,7 +85,7 @@ public class Historia1Test {
         assertNull(servicioCurrentsGestor.getInformacion("sagunto"));
     }
     @Test
-    public void listarServiciosAPI_listadoSinServicios_valido(){
+    public void activarServiciosAPI_listadoSinServicios_valido(){
         //GIVEN
 
 

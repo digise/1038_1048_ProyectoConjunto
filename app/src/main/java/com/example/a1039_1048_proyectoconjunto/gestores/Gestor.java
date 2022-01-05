@@ -164,6 +164,14 @@ public class Gestor {
         return gestorUbicaciones.desactivarUbicacion(toponimo);
     }
 
+    public boolean marcarComoFavorita(Ubicacion ubicacion, boolean marcar){
+        return ubicacion.setFavorita(marcar);
+    }
+
+    public List<Ubicacion> getUbicacionesFavoritas(){
+        return gestorUbicaciones.getUbicacionesFavoritas();
+    }
+
 
 
 
