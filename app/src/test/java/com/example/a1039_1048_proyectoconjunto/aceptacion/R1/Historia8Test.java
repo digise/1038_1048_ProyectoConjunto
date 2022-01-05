@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
@@ -18,6 +19,7 @@ public class Historia8Test {
 
     @BeforeAll
     public static void anadirUbicacionParaHacerPrueba(){
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
 
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));

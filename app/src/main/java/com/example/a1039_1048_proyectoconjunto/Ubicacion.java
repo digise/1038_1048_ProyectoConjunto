@@ -1,5 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto;
 
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+
 public class Ubicacion implements Comparable<Ubicacion>{
 
     private String toponimo;
@@ -91,14 +94,24 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.idDocumento = idDocumento;
     }
 
+
+
     public boolean activar() {
         activada = true;
-        return true;
+        boolean s = updateServicioFirebase(this, this.idDocumento);
+        if (!s)
+            activada = false;
+
+        return activada;
     }
 
     public boolean desactivar() {
         activada = false;
-        return true;
+        boolean s = updateServicioFirebase(this, this.idDocumento);
+        if (!s)
+            activada = true;
+
+        return activada;
     }
 
     public boolean isActivada() {
@@ -142,10 +155,16 @@ public class Ubicacion implements Comparable<Ubicacion>{
         String servicioMinusculas = nombreServicio.toLowerCase();
             switch (servicioMinusculas) {
                 case "openweather":
-                    this.servicioOpenWeatherActivo = activar;
+                    if (Gestor.getInstance().getGestorServicios().getServicioOpenWeather() != null) {
+                        this.servicioOpenWeatherActivo = activar;
+                        updateServicioFirebase(this, this.idDocumento);
+                    }
                     break;
                 case "currents":
-                    this.servicioCurrentsActivo = activar;
+                    if (Gestor.getInstance().getGestorServicios().getServicioCurrents() != null) {
+                        this.servicioCurrentsActivo = activar;
+                        updateServicioFirebase(this, this.idDocumento);
+                    }
                     break;
                 default:
                     break;
@@ -180,5 +199,9 @@ public class Ubicacion implements Comparable<Ubicacion>{
         if (o.longitud.equals(this.longitud) && o.latitud.equals(this.latitud))
             return 0;
         return -1;
+    }
+
+    public boolean updateServicioFirebase(Ubicacion ubicacion, String idDocumento){
+        return ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
     }
 }

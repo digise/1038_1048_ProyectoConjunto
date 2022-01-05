@@ -3,6 +3,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 
 
 import org.apache.commons.collections4.list.FixedSizeList;
@@ -142,4 +143,6 @@ public class GestorUbicaciones {
     public Map<String, Ubicacion> getUbicacionesFirebase(){
         return ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
     }
+
+
 }

@@ -5,6 +5,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
@@ -88,43 +89,11 @@ public class Gestor implements Serializable {
     }
 
     public void activarServicio(String servicio) {
-        servicio = servicio.toUpperCase();
-        switch (servicio) {
-            case "OPENWEATHER":
-                ServicioOpenWeather servicioOpenWeather = gestorServicios.getServicioOpenWeather();
-                if (servicioOpenWeather != null){
-                    servicioOpenWeather.servicioActivo(true);
-                }
-                break;
-            case "CURRENTS":
-                ServicioCurrents servicioCurrents = gestorServicios.getServicioCurrents();
-                if (servicioCurrents != null){
-                    servicioCurrents.servicioActivo(true);
-                }
-                break;
-            default:
-                break;
-        }
+        gestorServicios.activarServicio(servicio);
     }
 
     public void desactivarServicio(String servicio) {
-        servicio = servicio.toUpperCase();
-        switch (servicio) {
-            case "OPENWEATHER":
-                ServicioOpenWeather servicioOpenWeather = gestorServicios.getServicioOpenWeather();
-                if (servicioOpenWeather != null) {
-                    servicioOpenWeather.servicioActivo(false);
-                }
-                break;
-            case "CURRENTS":
-                ServicioCurrents servicioCurrents = gestorServicios.getServicioCurrents();
-                if (servicioCurrents != null) {
-                    servicioCurrents.servicioActivo(false);
-                }
-                break;
-            default:
-                break;
-        }
+        gestorServicios.desactivarServicio(servicio);
     }
 
     public HashMap<String, String> getTiempoPorUbicacion(Ubicacion ubicacion) {

@@ -44,6 +44,47 @@ public class GestorServicios {
         }
         return total;
     }
+
+
+    public void activarServicio(String servicio) {
+        servicio = servicio.toUpperCase();
+        switch (servicio) {
+            case "OPENWEATHER":
+                ServicioOpenWeather servicioOpenWeather = this.servicioOpenWeather;
+                if (servicioOpenWeather != null){
+                    servicioOpenWeather.servicioActivo(true);
+                }
+                break;
+            case "CURRENTS":
+                ServicioCurrents servicioCurrents = this.servicioCurrents;
+                if (servicioCurrents != null){
+                    servicioCurrents.servicioActivo(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void desactivarServicio(String servicio) {
+        servicio = servicio.toUpperCase();
+        switch (servicio) {
+            case "OPENWEATHER":
+                ServicioOpenWeather servicioOpenWeather = this.servicioOpenWeather;
+                if (servicioOpenWeather != null) {
+                    servicioOpenWeather.servicioActivo(false);
+                }
+                break;
+            case "CURRENTS":
+                ServicioCurrents servicioCurrents = this.servicioCurrents;
+                if (servicioCurrents != null) {
+                    servicioCurrents.servicioActivo(false);
+                }
+                break;
+            default:
+                break;
+        }
+    }
     
     //-------------------------------------------------------------------------------------------//
     //GEOCODE
@@ -70,18 +111,18 @@ public class GestorServicios {
     //-------------------------------------------------------------------------------------------//
     //OPENWEATHER
     public void setServicioOpenWeather(ServicioOpenWeather servicioOpenWeather) {
-        if (servicioOpenWeather == null && servicios.containsKey("openweather")) {
+        if (servicioOpenWeather == null && this.servicioOpenWeather != null) {
             boolean eliminar = eliminarServicioFirebase("openweather");
             if (eliminar)
                 servicios.remove("openweather");
         }else{
-            if (this.servicioOpenWeather == null) {
-                this.servicioOpenWeather = servicioOpenWeather;
+            if (this.servicioOpenWeather == null && servicioOpenWeather != null) {
                 String idDocumento = crearServicioFirebase(servicioOpenWeather);
                 if (idDocumento != null)
                     servicios.put("openweather", servicioOpenWeather);
             }
         }
+        this.servicioOpenWeather = servicioOpenWeather;
     }
 
     public ServicioOpenWeather getServicioOpenWeather() {
@@ -101,18 +142,18 @@ public class GestorServicios {
     //-------------------------------------------------------------------------------------------//
     //CURRENTS
     public void setServicioCurrents(ServicioCurrents servicioCurrents) {
-        if (servicioCurrents == null && servicios.containsKey("currents")) {
+        if (servicioCurrents == null && this.servicioCurrents != null) {
             boolean eliminar = eliminarServicioFirebase("currents");
             if (eliminar)
                 servicios.remove("currents");
         }else {
-            if (this.servicioCurrents == null) {
-                this.servicioCurrents = servicioCurrents;
+            if (this.servicioCurrents == null && servicioCurrents != null) {
                 String idDocumento = crearServicioFirebase(servicioCurrents);
                 if (idDocumento != null)
                     servicios.put("currents", servicioCurrents);
             }
         }
+        this.servicioCurrents = servicioCurrents;
     }
 
     public ServicioCurrents getServicioCurrents() {

@@ -1,5 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
@@ -8,13 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class Historia10Test {
-    private static Gestor gestor;
+    private Gestor gestor;
 
-    @BeforeAll
-    public static void crearGestor(){
+    @BeforeEach
+    public void crearGestor(){
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
     }
 
