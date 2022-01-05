@@ -32,19 +32,19 @@ public class GestorServicios {
         servicios = new HashMap<>();
     }
 
-    public Map<String, Servicio> getAllServicios(){
+    public Map<String, Servicio> getAllServicios() {
         return servicios;
     }
 
-    public int nServiciosActivos(){
+    public int nServiciosActivos() {
         int total = 0;
-        for (Servicio servicio : servicios.values()){
+        for (Servicio servicio : servicios.values()) {
             if (servicio.isActivo())
                 total += 1;
         }
         return total;
     }
-    
+
     //-------------------------------------------------------------------------------------------//
     //GEOCODE
 
@@ -74,7 +74,7 @@ public class GestorServicios {
             boolean eliminar = eliminarServicioFirebase("openweather");
             if (eliminar)
                 servicios.remove("openweather");
-        }else{
+        } else {
             if (this.servicioOpenWeather == null) {
                 this.servicioOpenWeather = servicioOpenWeather;
                 String idDocumento = crearServicioFirebase(servicioOpenWeather);
@@ -105,7 +105,7 @@ public class GestorServicios {
             boolean eliminar = eliminarServicioFirebase("currents");
             if (eliminar)
                 servicios.remove("currents");
-        }else {
+        } else {
             if (this.servicioCurrents == null) {
                 this.servicioCurrents = servicioCurrents;
                 String idDocumento = crearServicioFirebase(servicioCurrents);
@@ -118,8 +118,8 @@ public class GestorServicios {
     public ServicioCurrents getServicioCurrents() {
         return servicioCurrents;
     }
-    
-    public HashMap<String, HashMap<String, String>> getNoticiasPorUbicacion(Ubicacion ubicacion){
+
+    public HashMap<String, HashMap<String, String>> getNoticiasPorUbicacion(Ubicacion ubicacion) {
         if (servicioCurrents != null && ubicacion != null) {
             if (ubicacion.isServicioActivo("currents") && ubicacion.isActivada()) {
                 return servicioCurrents.getInformacion(ubicacion.getToponimo());
@@ -129,22 +129,22 @@ public class GestorServicios {
     }
 
     //Firebase
-    public ServicioOpenWeather getServicioOpenWeatherFirebase(){
+    public ServicioOpenWeather getServicioOpenWeatherFirebase() {
         return ConexionFirebase.getDocument("servicios", "openweather", ServicioOpenWeather.class);
     }
 
-    public ServicioCurrents getServicioCurrentsFirebase(){
+    public ServicioCurrents getServicioCurrentsFirebase() {
         return ConexionFirebase.getDocument("servicios", "currents", ServicioCurrents.class);
     }
 
-    public String crearServicioFirebase(Servicio servicio){
+    public String crearServicioFirebase(Servicio servicio) {
         if (servicio.getClass() == ServicioCurrents.class)
             return ConexionFirebase.createDocument("servicios", servicio, "currents");
         else
             return ConexionFirebase.createDocument("servicios", servicio, "openweather");
     }
 
-    public boolean eliminarServicioFirebase(String idDocumento){
+    public boolean eliminarServicioFirebase(String idDocumento) {
         return ConexionFirebase.removeDocument("servicios", idDocumento);
     }
 

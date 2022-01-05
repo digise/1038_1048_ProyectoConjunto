@@ -66,26 +66,14 @@ public class Historia1Test {
     @Test
     public void informacionTresUbicaciones_ubicacionesActivas_valido() {
         //GIVEN
-        Gestor gestor = Gestor.getInstance();
-        Map<String, Ubicacion> ubicacionesGuardadas = gestor.getAllUbicaciones();
-        List<Ubicacion> listaUbicaciones = new ArrayList<>(ubicacionesGuardadas.values());
 
-        listaUbicaciones.forEach(ubicacion -> {
-            ubicacion.activar();
-            ubicacion.activarServicio("openweather", true);
-        });
 
         //WHEN
-        List<Ubicacion> listaTresUbicaciones = gestor.getListaHastaTresUbicacionesMostradas();
+
 
 
         //THEN
-        assertTrue(ubicacionesGuardadas.size() > 0);
-        assertEquals(listaTresUbicaciones.size(), 3);
-        for (Ubicacion ubicacion : listaTresUbicaciones) {
-            assertNotNull(ubicacion);
-            assertNotNull(gestor.getTiempoPorUbicacion(ubicacion));
-        }
+
 
     }
 

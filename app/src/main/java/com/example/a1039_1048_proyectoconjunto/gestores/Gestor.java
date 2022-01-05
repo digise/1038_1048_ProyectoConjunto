@@ -9,13 +9,11 @@ import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class Gestor implements Serializable {
+public class Gestor {
 
     //Singleton
     private static Gestor INSTANCE;
@@ -41,6 +39,13 @@ public class Gestor implements Serializable {
 
     public void setGestorUbicaciones(GestorUbicaciones gestorUbicaciones){
         this.gestorUbicaciones = gestorUbicaciones;
+    }
+    public void setGestorServicios(GestorServicios gestorServicios){
+        this.gestorServicios = gestorServicios;
+    }
+
+    public void borrarGestor(){
+        INSTANCE = null;
     }
 
     public GestorServicios getGestorServicios() {
@@ -153,6 +158,18 @@ public class Gestor implements Serializable {
         return gestorUbicaciones.getAllUbicaciones();
     }
 
+    public List<Ubicacion> getUbicacionesOrdenadas(String tipo){
+        String tipoFormateado = tipo.toLowerCase();
+        switch (tipoFormateado){
+            case "alfabeticamente":
+                return gestorUbicaciones.getUbicacionesOrdenadasAlfabeticamente();
+            case "recientemente":
+                return gestorUbicaciones.getUbicacionesOrdenadasRecientes();
+            default:
+                return null;
+        }
+    }
+
     public Map<String, Ubicacion> getUbicacionesActivas(){
         return gestorUbicaciones.getUbicacionesActivas();
     }
@@ -163,14 +180,6 @@ public class Gestor implements Serializable {
 
     public boolean desactivarUbicacion(String toponimo) {
         return gestorUbicaciones.desactivarUbicacion(toponimo);
-    }
-
-    public List<Ubicacion> getListaHastaTresUbicacionesMostradas(){
-        return gestorUbicaciones.getListaHastaTresUbicacionesMostradas();
-    }
-
-    public boolean replaceEnListaTresUbicaciones(Ubicacion ubicacionVieja, Ubicacion ubicacionNueva){
-        return gestorUbicaciones.replaceEnListaTresUbicaciones(ubicacionVieja, ubicacionNueva);
     }
 
 

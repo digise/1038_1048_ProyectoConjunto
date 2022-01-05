@@ -1,6 +1,7 @@
 package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -38,9 +39,6 @@ public class Historia5Test {
         gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
         when(mockServicioGeocoding.getInformacion("sagunto"))
                 .thenReturn(new Ubicacion("Sagunto", "Spain", "39.6833", "-0.2667"));
-
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
-        gestor.activarUbicacion("sagunto");
     }
 
 
@@ -48,6 +46,8 @@ public class Historia5Test {
     public void activarUbicacion_servicioDisponible_activar(){
         //Given
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
+        gestor.activarUbicacion("sagunto");
 
         //When
         gestor.activarUbicacion("sagunto");
@@ -61,16 +61,18 @@ public class Historia5Test {
     @Test
     public void activarUbicacion_servicioNoDisponible_activar(){
         //Given
-        gestor.desactivarUbicacion("sagunto");
+        gestor.desactivarUbicacion("alicante");
+
         gestor.desactivarServicio("OPENWEATHER");
         gestor.desactivarServicio("GEOCODING");
 
         //When
-        gestor.activarUbicacion("sagunto");
+        boolean alicanteActiva = gestor.activarUbicacion("alicante");
 
 
         //Then
-        Ubicacion castellon = gestor.getUbicacionGuardada("sagunto");
-        assertFalse(castellon.isActivada());
+        Ubicacion alicante = gestor.getUbicacionGuardada("alicante");
+        assertNull(alicante);
+        assertFalse(alicanteActiva);
     }
 }
