@@ -166,7 +166,7 @@ public class ConexionFirebase {
     public static boolean removeDocument(String referencia, String idDocumento){
         //Url para identificar documento
         String url = generarURL(referencia);
-        url += "/" + idDocumento + ".json";
+        url += idDocumento + ".json";
 
         //Comprobar si la url es correcta
         OkHttpClient client = new OkHttpClient.Builder().build();

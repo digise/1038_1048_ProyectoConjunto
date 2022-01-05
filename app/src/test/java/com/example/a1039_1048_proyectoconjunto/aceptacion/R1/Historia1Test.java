@@ -6,21 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.google.gson.Gson;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Historia1Test {
-    private static Gestor gestor;
+    private Gestor gestor;
 
-    @BeforeAll
-    public static void crear_gestor() {
+    @BeforeEach
+    public void crear_gestor() {
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
 
     }

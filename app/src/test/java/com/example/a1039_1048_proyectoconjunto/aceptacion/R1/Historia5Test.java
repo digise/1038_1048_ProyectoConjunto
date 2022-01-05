@@ -6,41 +6,43 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 public class Historia5Test {
 
-    private static Gestor gestor;
+    private Gestor gestor;
 
-    @BeforeAll
-    public static void crear_gestor() {
+    @BeforeEach
+    public void crear_gestor() {
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
-
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("alicante"));
-        gestor.activarUbicacion("alicante");
     }
 
     @Test
-    public void activarUbicacion_servicioDisponible_activar() {
+    public void ubicacionDisponible_activar() {
         //Given
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        Ubicacion sagunto = gestor.getUbicacionGuardada("sagunto");
 
 
         //When
-        gestor.activarUbicacion("alicante");
+        gestor.activarUbicacion("sagunto");
+        sagunto.activarServicio("openweather", true);
 
 
         //Then
-        Ubicacion alicante = gestor.getUbicacionGuardada("alicante");
-        assertTrue(alicante.isActivada());
-        assertNotNull(gestor.getUbicacionPorToponimo("alicante"));
-        assertNotNull(gestor.getTiempoPorUbicacion(alicante));
+        assertTrue(sagunto.isActivada());
+        assertNotNull(gestor.getUbicacionPorToponimo("sagunto"));
+        assertNotNull(gestor.getTiempoPorUbicacion(sagunto));
 
         
     }
@@ -48,24 +50,19 @@ public class Historia5Test {
     @Test
     public void activarUbicacion_servicioNoDisponible_activar() {
         //Given
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
         gestor.desactivarServicio("OPENWEATHER");
-        gestor.desactivarServicio("GEOCODING");
-        gestor.desactivarServicio("CURRENTS");
-        gestor.desactivarUbicacion("alicante");
+        gestor.desactivarUbicacion("sagunto");
 
 
         //When
-        gestor.activarUbicacion("alicante");
-
+        gestor.activarUbicacion("sagunto");
+        Ubicacion sagunto = gestor.getUbicacionGuardada("sagunto");
 
         //Then
-        Ubicacion alicante = gestor.getUbicacionGuardada("alicante");
-        assertTrue(alicante.isActivada());
-
-        assertNull(gestor.getUbicacionPorToponimo("alicante"));
-        assertNull(gestor.getTiempoPorUbicacion(alicante));
-        assertNull(gestor.getNoticiasPorUbicacion(alicante));
+        assertTrue(sagunto.isActivada());
+        assertNull(gestor.getTiempoPorUbicacion(sagunto));
     }
 }

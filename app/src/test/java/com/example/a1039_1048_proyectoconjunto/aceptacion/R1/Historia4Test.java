@@ -4,6 +4,7 @@ package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
@@ -14,10 +15,11 @@ import org.junit.jupiter.api.Test;
 
 public class Historia4Test {
 
-    private Gestor  gestor;
+    private Gestor gestor;
 
     @BeforeEach
     public void setServicioOpenWeather(){
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
     }

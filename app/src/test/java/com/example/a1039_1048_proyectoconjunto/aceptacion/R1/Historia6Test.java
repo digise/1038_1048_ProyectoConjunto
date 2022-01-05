@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
@@ -17,6 +18,7 @@ public class Historia6Test {
 
     @BeforeEach
     public void crear_gestor(){
+        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
     }
 
