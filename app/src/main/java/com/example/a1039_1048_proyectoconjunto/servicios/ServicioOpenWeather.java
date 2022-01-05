@@ -2,6 +2,8 @@ package com.example.a1039_1048_proyectoconjunto.servicios;
 
 import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
 import java.util.HashMap;
 
@@ -60,7 +62,6 @@ public class ServicioOpenWeather implements Servicio {
         boolean s = updateServicioFirebase(this, "openweather");
         if (!s)
             activo = !activar;
-
     }
 
     public boolean isActivo() {
@@ -76,6 +77,6 @@ public class ServicioOpenWeather implements Servicio {
 
     //Firebase
     public boolean updateServicioFirebase(ServicioOpenWeather servicio, String idDocumento){
-        return ConexionFirebase.updateDocument("servicios", servicio, idDocumento);
+        return Gestor.getInstance().getGestorServicios().updateServicioFirebase(servicio, idDocumento);
     }
 }

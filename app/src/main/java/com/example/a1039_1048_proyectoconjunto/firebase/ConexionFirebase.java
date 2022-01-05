@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -24,14 +23,14 @@ import okhttp3.Response;
 
 public class ConexionFirebase {
 
-    public static final MediaType JSON
+    public final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
-    public static String generarURL(String aux) {
+    public String generarURL(String aux) {
         return "https://proyectoparadis-8f0c6-default-rtdb.europe-west1.firebasedatabase.app/" + aux;
     }
 
-    public static <T> Map<String, T> getCollection(String referencia, Class<T> c) {
+    public <T> Map<String, T> getCollection(String referencia, Class<T> c) {
         Map<String, T> res = new HashMap<>();
         String url = generarURL(referencia);
         url = url + ".json";
@@ -46,7 +45,7 @@ public class ConexionFirebase {
             }
             JSONObject jsonObject = new JSONObject(jsonData);
             res = new Gson().fromJson(jsonObject.toString(), HashMap.class);
-            for (Iterator<String> it = jsonObject.keys(); it.hasNext();) {
+            for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
                 String x = it.next();
                 JSONObject y = jsonObject.getJSONObject(x);
                 T data = new Gson().fromJson(y.toString(), c);
@@ -59,7 +58,7 @@ public class ConexionFirebase {
 
     }
 
-    public static <T> T getDocument(String referencia, String idDocumento, Class<T> c) {
+    public <T> T getDocument(String referencia, String idDocumento, Class<T> c) {
         String url = generarURL(referencia);
         if (idDocumento != null) {
             url = url + "/" + idDocumento + ".json";
@@ -86,11 +85,11 @@ public class ConexionFirebase {
 
     }
 
-    public static <T> String createDocument(String referencia, T data, String idDocumento) {
+    public <T> String createDocument(String referencia, T data, String idDocumento) {
         if (data.getClass() == Ubicacion.class) {
             if (contieneUbicacion((Ubicacion) data))
                 return null;
-        } else{
+        } else {
             if (contieneServicio((Servicio) data))
                 return null;
         }
@@ -118,7 +117,7 @@ public class ConexionFirebase {
             Response response = call.execute();
             if (!response.isSuccessful())
                 return null;
-            if (idDocumento == null){
+            if (idDocumento == null) {
                 JSONObject jsonObjectResponse = new JSONObject(response.body().string());
                 idDocumento = jsonObjectResponse.getString("name");
             }
@@ -130,11 +129,11 @@ public class ConexionFirebase {
         return null;
     }
 
-    public static <T> boolean updateDocument(String referencia, T data, String idDocumento) {
+    public <T> boolean updateDocument(String referencia, T data, String idDocumento) {
         if (data.getClass() == Ubicacion.class) {
             if (!contieneUbicacion((Ubicacion) data))
                 return false;
-        } else{
+        } else {
             if (!contieneServicio((Servicio) data))
                 return false;
         }
@@ -163,7 +162,7 @@ public class ConexionFirebase {
         return false;
     }
 
-    public static boolean removeDocument(String referencia, String idDocumento){
+    public boolean removeDocument(String referencia, String idDocumento) {
         //Url para identificar documento
         String url = generarURL(referencia);
         url += idDocumento + ".json";
@@ -174,7 +173,7 @@ public class ConexionFirebase {
         Call call = client.newCall(request);
         try {
             Response response = call.execute();
-            if (response.isSuccessful()){
+            if (response.isSuccessful()) {
                 return true;
             }
         } catch (IOException e) {
@@ -184,8 +183,7 @@ public class ConexionFirebase {
     }
 
 
-
-    private static boolean contieneUbicacion(Ubicacion ubicacion) {
+    private boolean contieneUbicacion(Ubicacion ubicacion) {
         Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getAllUbicaciones();
         for (Ubicacion u : ubicaciones.values()) {
             if (u.equals(ubicacion)) {
@@ -195,12 +193,12 @@ public class ConexionFirebase {
         return false;
     }
 
-    private static boolean contieneUbicacion(String idDocumento) {
+    private boolean contieneUbicacion(String idDocumento) {
         Map<String, Ubicacion> ubicaciones = Gestor.getInstance().getAllUbicaciones();
         return ubicaciones.containsKey(idDocumento);
     }
 
-    private static boolean contieneServicio(Servicio servicio) {
+    private boolean contieneServicio(Servicio servicio) {
         Map<String, Servicio> servicios = Gestor.getInstance().getAllServicios();
         for (Servicio s : servicios.values()) {
             if (s.equals(servicio)) {
@@ -210,11 +208,10 @@ public class ConexionFirebase {
         return false;
     }
 
-    private static boolean contieneServicio(String idDocumento) {
+    private boolean contieneServicio(String idDocumento) {
         Map<String, Servicio> servicios = Gestor.getInstance().getAllServicios();
         return servicios.containsKey(idDocumento);
     }
-
 
 
 }

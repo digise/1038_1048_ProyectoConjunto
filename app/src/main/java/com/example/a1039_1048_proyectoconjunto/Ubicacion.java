@@ -1,9 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto;
 
-import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
-public class Ubicacion implements Comparable<Ubicacion>{
+public class Ubicacion implements Comparable<Ubicacion> {
 
     private String toponimo;
     private String latitud; //-90, 90
@@ -15,6 +14,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
     private boolean servicioCurrentsActivo;
     private String idDocumento = "";
     private boolean enListaTresUbicaciones;
+    private int numCreacion;
 
     public Ubicacion() {
         this.toponimo = null;
@@ -25,6 +25,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.servicioOpenWeatherActivo = false;
         this.servicioCurrentsActivo = false;
         this.enListaTresUbicaciones = false;
+        this.numCreacion = 0;
     }
 
     public Ubicacion(String toponimo) {
@@ -34,6 +35,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.pais = null;
         this.alias = "";
         this.enListaTresUbicaciones = false;
+        this.numCreacion = 0;
     }
 
     public Ubicacion(String latitud, String longitud) {
@@ -43,6 +45,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.longitud = longitud;
         this.alias = "";
         this.enListaTresUbicaciones = false;
+        this.numCreacion = 0;
     }
 
     public Ubicacion(String toponimo, String pais, String latitud, String longitud) {
@@ -52,6 +55,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
         this.longitud = longitud;
         this.alias = "";
         this.enListaTresUbicaciones = false;
+        this.numCreacion = 0;
     }
 
     public String getToponimo() {
@@ -95,10 +99,9 @@ public class Ubicacion implements Comparable<Ubicacion>{
     }
 
 
-
     public boolean activar() {
         activada = true;
-        boolean s = updateServicioFirebase(this, this.idDocumento);
+        boolean s = updateUbicacionFirebase(this, this.idDocumento);
         if (!s)
             activada = false;
 
@@ -107,7 +110,7 @@ public class Ubicacion implements Comparable<Ubicacion>{
 
     public boolean desactivar() {
         activada = false;
-        boolean s = updateServicioFirebase(this, this.idDocumento);
+        boolean s = updateUbicacionFirebase(this, this.idDocumento);
         if (!s)
             activada = true;
 
@@ -132,8 +135,10 @@ public class Ubicacion implements Comparable<Ubicacion>{
 
     public boolean setAlias(String alias) {
         if (alias.length() > 0 && alias.length() <= 20) {
-            this.alias = alias;
-            return true;
+            boolean s = updateUbicacionFirebase(this, this.idDocumento);
+            if (s)
+                this.alias = alias;
+            return s;
         }
         return false;
     }
@@ -151,32 +156,40 @@ public class Ubicacion implements Comparable<Ubicacion>{
         }
     }
 
-    public void activarServicio(String nombreServicio, boolean activar){
+    public void activarServicio(String nombreServicio, boolean activar) {
         String servicioMinusculas = nombreServicio.toLowerCase();
-            switch (servicioMinusculas) {
-                case "openweather":
-                    if (Gestor.getInstance().getGestorServicios().getServicioOpenWeather() != null) {
-                        this.servicioOpenWeatherActivo = activar;
-                        updateServicioFirebase(this, this.idDocumento);
-                    }
-                    break;
-                case "currents":
-                    if (Gestor.getInstance().getGestorServicios().getServicioCurrents() != null) {
-                        this.servicioCurrentsActivo = activar;
-                        updateServicioFirebase(this, this.idDocumento);
-                    }
-                    break;
-                default:
-                    break;
-            }
+        switch (servicioMinusculas) {
+            case "openweather":
+                if (Gestor.getInstance().getGestorServicios().getServicioOpenWeather() != null) {
+                    this.servicioOpenWeatherActivo = activar;
+                    updateUbicacionFirebase(this, this.idDocumento);
+                }
+                break;
+            case "currents":
+                if (Gestor.getInstance().getGestorServicios().getServicioCurrents() != null) {
+                    this.servicioCurrentsActivo = activar;
+                    updateUbicacionFirebase(this, this.idDocumento);
+                }
+                break;
+            default:
+                break;
+        }
     }
 
-    public void ponerEnListaTresUbicaciones(boolean activar){
+    public void ponerEnListaTresUbicaciones(boolean activar) {
         this.enListaTresUbicaciones = activar;
     }
 
-    public boolean isEnListaTresUbicaciones(){
+    public boolean isEnListaTresUbicaciones() {
         return enListaTresUbicaciones;
+    }
+
+    public int getNumCreacion() {
+        return numCreacion;
+    }
+
+    public void setNumCreacion(int numCreacion) {
+        this.numCreacion = numCreacion;
     }
 
     @Override
@@ -201,7 +214,8 @@ public class Ubicacion implements Comparable<Ubicacion>{
         return -1;
     }
 
-    public boolean updateServicioFirebase(Ubicacion ubicacion, String idDocumento){
-        return ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+    public boolean updateUbicacionFirebase(Ubicacion ubicacion, String idDocumento) {
+        return Gestor.getInstance().getGestorUbicaciones().updateUbicacionFirebase(ubicacion, idDocumento);
     }
+
 }

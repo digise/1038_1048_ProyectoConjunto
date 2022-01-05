@@ -3,54 +3,78 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 
-
-import org.apache.commons.collections4.list.FixedSizeList;
-
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
 
 public class GestorUbicaciones {
 
     private Map<String, Ubicacion> ubicaciones;
-    private List<Ubicacion> listaHastaTresUbicacionesMostradas;
+    private int ultimoNumUbicacionAnadido;
+    private List<Ubicacion> ubicacionesOrdenadasRecientes;
+    private List<Ubicacion> ubicacionesOrdenadasAlfabeticamente;
+
+    private ConexionFirebase conexionFirebase;
 
     protected GestorUbicaciones() {
+        conexionFirebase = new ConexionFirebase();
         ubicaciones = new HashMap<>();
-        /*
-        Map<String, Object> objectosUbicaciones = getCollectionFirebase();
-        ubicaciones = objectosUbicaciones.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> (Ubicacion) e.getValue()));
-        */
         generarUbicaciones();
-        listaHastaTresUbicacionesMostradas = FixedSizeList.fixedSizeList(Arrays.asList(new Ubicacion[3]));
-        generarListaTresUbicaciones();
+        generarUbicacionesOrdenadasRecientes(); //para saber ultimo num añadido
+        generarUbicacionesOrdenadasAlfabeticamente();
     }
 
-    private void generarListaTresUbicaciones(){
-        for (Ubicacion ubicacion: ubicaciones.values()) {
-            if (ubicacion.isEnListaTresUbicaciones()){
-                listaHastaTresUbicacionesMostradas.add(ubicacion);
-            }
-        }
-    }
-
-    public void generarUbicaciones(){
+    public void generarUbicaciones() {
         ubicaciones = getUbicacionesFirebase();
     }
+
+    public void generarUbicacionesOrdenadasRecientes() {
+        ubicacionesOrdenadasRecientes = new ArrayList<>(ubicaciones.values());
+        ubicacionesOrdenadasRecientes.sort(new Comparator<Ubicacion>() {
+            @Override
+            public int compare(Ubicacion o1, Ubicacion o2) {
+                return o1.getNumCreacion() - o2.getNumCreacion();
+            }
+        });
+        if (ubicacionesOrdenadasRecientes.isEmpty()) {
+            ultimoNumUbicacionAnadido = 0;
+        } else {
+            ultimoNumUbicacionAnadido =
+                    ubicacionesOrdenadasRecientes.get(ubicacionesOrdenadasRecientes.size() - 1).getNumCreacion();
+        }
+    }
+    public void generarUbicacionesOrdenadasAlfabeticamente() {
+        ubicacionesOrdenadasAlfabeticamente = new ArrayList<>(ubicaciones.values());
+        ubicacionesOrdenadasAlfabeticamente.sort(new Comparator<Ubicacion>() {
+            @Override
+            public int compare(Ubicacion o1, Ubicacion o2) {
+                return o1.getToponimo().compareTo(o2.getToponimo());
+            }
+        });
+
+    }
+
 
     public Map<String, Ubicacion> getAllUbicaciones() {
         return ubicaciones;
     }
 
-    public Map<String, Ubicacion> getUbicacionesActivas(){
+    public List<Ubicacion> getUbicacionesOrdenadasRecientes() {
+        return ubicacionesOrdenadasRecientes;
+    }
+
+    public List<Ubicacion> getUbicacionesOrdenadasAlfabeticamente() {
+        return ubicacionesOrdenadasAlfabeticamente;
+    }
+
+    public Map<String, Ubicacion> getUbicacionesActivas() {
         Map<String, Ubicacion> ubicacionesActivas = new HashMap<>();
-        for (String id: ubicaciones.keySet()){
+        for (String id : ubicaciones.keySet()) {
             Ubicacion ubicacion = ubicaciones.get(id);
             if (ubicacion.isActivada())
                 ubicacionesActivas.put(id, ubicacion);
@@ -61,21 +85,23 @@ public class GestorUbicaciones {
     public boolean darAltaUbicacion(Ubicacion ubicacion) {
         boolean anadido = false;
         if (ubicacion != null) {
-            String idDocumento = ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
-            if (idDocumento!=null) {
+            ubicacion.setNumCreacion(ultimoNumUbicacionAnadido);
+            ultimoNumUbicacionAnadido += 1;
+            String idDocumento = crearUbicacionFirebase(ubicacion);
+            if (idDocumento != null) {
                 ubicaciones.put(idDocumento, ubicacion);
                 ubicaciones.get(idDocumento).setIdDocumento(idDocumento);
-                anadido = ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+                anadido = updateUbicacionFirebase(ubicacion, idDocumento);
             }
         }
         return anadido;
     }
 
-    public boolean darBajaUbicacion(Ubicacion ubicacion){
+    public boolean darBajaUbicacion(Ubicacion ubicacion) {
         boolean borrado = false;
-        if (ubicacion != null){
+        if (ubicacion != null) {
             String idDocumento = null;
-            for (String id : ubicaciones.keySet()){
+            for (String id : ubicaciones.keySet()) {
                 Ubicacion aux = ubicaciones.get(id);
                 if (aux.equals(ubicacion)) {
                     idDocumento = id;
@@ -90,11 +116,6 @@ public class GestorUbicaciones {
         return borrado;
     }
 
-
-    public boolean removeDocument(String referencia, String idDocumento){
-        return ConexionFirebase.removeDocument(referencia, idDocumento);
-    }
-
     public Ubicacion getUbicacionPorToponimo(String name) {
         return null;
     }
@@ -103,9 +124,9 @@ public class GestorUbicaciones {
         return null;
     }
 
-    public boolean activarUbicacion(String toponimo){
-        for (Ubicacion ubicacion : ubicaciones.values()){
-            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
+    public boolean activarUbicacion(String toponimo) {
+        for (Ubicacion ubicacion : ubicaciones.values()) {
+            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)) {
                 return ubicacion.activar();
             }
         }
@@ -114,34 +135,34 @@ public class GestorUbicaciones {
 
 
     public boolean desactivarUbicacion(String toponimo) {
-        for (Ubicacion ubicacion : ubicaciones.values()){
-            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)){
+        for (Ubicacion ubicacion : ubicaciones.values()) {
+            if (ubicacion.getToponimo().equalsIgnoreCase(toponimo)) {
                 return ubicacion.desactivar();
             }
         }
         return false;
     }
 
-    public List<Ubicacion> getListaHastaTresUbicacionesMostradas(){
-        return listaHastaTresUbicacionesMostradas;
-    }
-
-    public boolean replaceEnListaTresUbicaciones(Ubicacion ubicacionVieja, Ubicacion ubicacionNueva){
-        boolean cambiado = false;
-        for (int i = 0; i < listaHastaTresUbicacionesMostradas.size(); i++) {
-            Ubicacion ubicacionActual = listaHastaTresUbicacionesMostradas.get(i);
-            if (ubicacionActual.equals(ubicacionVieja)){
-                listaHastaTresUbicacionesMostradas.set(i, ubicacionNueva);
-                cambiado = true;
-            }
-        }
-        return cambiado;
+    public void setConexionFirebase(ConexionFirebase conexionFirebase){
+        this.conexionFirebase = conexionFirebase;
     }
 
     //Firebase
 
-    public Map<String, Ubicacion> getUbicacionesFirebase(){
-        return ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
+    public Map<String, Ubicacion> getUbicacionesFirebase() {
+        return conexionFirebase.getCollection("ubicaciones", Ubicacion.class);
+    }
+
+    public String crearUbicacionFirebase(Ubicacion ubicacion){
+        return conexionFirebase.createDocument("ubicaciones", ubicacion, null);
+    }
+
+    public boolean updateUbicacionFirebase(Ubicacion ubicacion, String idDocumento){
+        return conexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+    }
+
+    public boolean removeDocument(String referencia, String idDocumento) {
+        return conexionFirebase.removeDocument(referencia, idDocumento);
     }
 
 

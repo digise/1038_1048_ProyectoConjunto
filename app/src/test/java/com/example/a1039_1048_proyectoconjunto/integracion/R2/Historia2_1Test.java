@@ -23,8 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Historia2_2Test {
-
+public class Historia2_1Test {
     private static Gestor gestor;
 
     private static OpenWeatherAdapter mockOpenWeatherAdapter;
@@ -66,7 +65,7 @@ public class Historia2_2Test {
     }
 
     @Test
-    public void desactivarAPIsIndependientes_valido(){
+    public void activarAPIs_valido(){
         //GIVEN
         mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
@@ -95,28 +94,28 @@ public class Historia2_2Test {
         gestor.getGestorServicios().setServicioCurrents(servicioCurrents);
 
         Ubicacion castellon = gestor.getUbicacionGuardada("castello");
-        castellon.activarServicio("openweather", true);
-        castellon.activarServicio("currents", true);
+        castellon.activarServicio("openweather", false);
+        castellon.activarServicio("currents", false);
 
 
         //WHEN
-        castellon.activarServicio("openweather", false);
+        castellon.activarServicio("openweather", true);
 
         //THEN
         assertNotNull(castellon);
-        assertNull(gestor.getTiempoPorUbicacion(castellon));
-        assertNotNull(gestor.getNoticiasPorUbicacion(castellon));
+        assertNotNull(gestor.getTiempoPorUbicacion(castellon));
+        assertNull(gestor.getNoticiasPorUbicacion(castellon));
     }
 
     @Test
-    public void desactivarAPIsIndependientes_noValido(){
+    public void activarAPIs_noValido(){
         //GIVEN
         Ubicacion castellon = gestor.getUbicacionGuardada("castello");
-        castellon.activarServicio("openweather", true);
-        castellon.activarServicio("currents", true);
+        castellon.activarServicio("openweather", false);
+        castellon.activarServicio("currents", false);
 
         //WHEN
-        castellon.activarServicio("openweather", false);
+        castellon.activarServicio("openweather", true);
 
         //THEN
         assertNull(gestor.getTiempoPorUbicacion(castellon));

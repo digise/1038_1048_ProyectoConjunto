@@ -2,33 +2,48 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorServicios;
-import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Historia4Test {
 
-    private Gestor  gestor;
-    @Mock private ServicioOpenWeather mockServicioOpenWeather;
+    private static OpenWeatherAdapter mockOpenWeatherAdapter;
+    private static ConexionFirebase mockConexionFirebase;
+    private static Gestor gestor;
 
     @BeforeEach
-    void setUp(){
-        MockitoAnnotations.initMocks(this);
+    public void setGestor(){
         gestor = Gestor.getInstance();
-        gestor.getGestorServicios().setServicioOpenWeather(mockServicioOpenWeather);
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
+    }
+
+    @BeforeAll
+    public static void setUp(){
+        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
+        mockConexionFirebase = mock(ConexionFirebase.class);
+
+        gestor = Gestor.getInstance();
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
+
+        when(mockConexionFirebase.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>());
+
+        when(mockConexionFirebase.removeDocument(anyString(), anyString())).thenReturn(true);
+        when(mockConexionFirebase.createDocument(anyString(), anyObject(),anyString())).thenReturn("true");
     }
 
     @Test
@@ -41,15 +56,20 @@ public class Historia4Test {
         mapa.put("temperaturaMedia", "11.410000000000025");
         mapa.put("humedad", "-238.0");
         mapa.put("presion", "751.0");
-        when(mockServicioOpenWeather.getInformacion(latitud, longitud)).thenReturn(mapa);
 
+        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(mapa);
+
+        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
+        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
+
+        gestor.getGestorServicios().setConexionFirebase(mockConexionFirebase);
+        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
         //When
         boolean valido = gestor.validarCoordenadas("OPENWEATHER", latitud, longitud);
 
 
         //Then
-        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertTrue(valido);
 
     }
@@ -59,15 +79,19 @@ public class Historia4Test {
         //Given
         String latitud = "-100";
         String longitud = "-100";
-        when(mockServicioOpenWeather.getInformacion(latitud, longitud)).thenReturn(null);
+        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(null);
 
+        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
+        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
+
+        gestor.getGestorServicios().setConexionFirebase(mockConexionFirebase);
+        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
         //When
         boolean valido = gestor.validarCoordenadas("OPENWEATHER", latitud, longitud);
 
 
         //Then
-        //TODO: COMPROBAR QUE LA UBICACIÓN DE ESA LATITUD Y LONGITUD ES LA QUE SE ESPERA
         assertFalse(valido);
     }
 }
