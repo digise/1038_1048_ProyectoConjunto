@@ -19,8 +19,8 @@ public class Historia9Test {
 
     @BeforeEach
     public void anadirUbicacionParaHacerPrueba(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
 
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
 

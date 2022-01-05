@@ -21,8 +21,8 @@ public class Historia2_1 {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
 
     }
@@ -51,7 +51,7 @@ public class Historia2_1 {
     }
 
     @Test
-    public void activarApisEnUbicaciones_noDisponibles(){
+    public void activar_ApisEnUbicaciones_noDisponibles(){
         //GIVEN
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         gestor.getGestorServicios().setServicioCurrents(null);

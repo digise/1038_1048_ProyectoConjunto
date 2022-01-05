@@ -22,8 +22,8 @@ public class Historia5Test {
 
     @BeforeEach
     public void crear_gestor() {
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
     }
 
     @Test
@@ -50,7 +50,8 @@ public class Historia5Test {
     @Test
     public void activarUbicacion_servicioNoDisponible_activar() {
         //Given
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
+        Ubicacion ubicacion = gestor.getUbicacionPorToponimo("sagunto");
+        gestor.darAltaUbicacion(ubicacion);
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
         gestor.desactivarServicio("OPENWEATHER");

@@ -22,8 +22,8 @@ public class Historia3Test {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
     }
 
     @Test

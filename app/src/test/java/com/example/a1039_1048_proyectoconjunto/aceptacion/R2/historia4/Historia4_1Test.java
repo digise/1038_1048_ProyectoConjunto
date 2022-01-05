@@ -21,8 +21,8 @@ public class Historia4_1Test {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
         gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }

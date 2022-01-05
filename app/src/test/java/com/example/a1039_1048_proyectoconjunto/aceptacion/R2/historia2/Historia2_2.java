@@ -22,16 +22,16 @@ public class Historia2_2 {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }
 
     @Test
-    public void activar_ServiciosAPIIndependientes_disponible(){
+    public void desactivar_ServiciosAPIIndependientes_disponible(){
         //GIVEN
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
         ubicacion.activarServicio("openweather", true);
@@ -48,9 +48,8 @@ public class Historia2_2 {
         assertNull(informacionTiempoDespuesDeDesactivarApis);
     }
 
-    // TODO Es la misma historia que la 2_1 segundo escenario, ¿la ponemos o no?
     @Test
-    public void darBajaUbicacionNoExistente_ubicacion_noValido(){
+    public void desactivar_ServiciosAPIIndependientes_noDisponible(){
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         gestor.getGestorServicios().setServicioCurrents(null);
         gestor.getGestorServicios().setServicioOpenWeather(null);

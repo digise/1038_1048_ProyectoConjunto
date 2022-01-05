@@ -19,8 +19,8 @@ public class Historia4Test {
 
     @BeforeEach
     public void setServicioOpenWeather(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
     }
 

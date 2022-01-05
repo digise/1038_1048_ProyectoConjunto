@@ -19,8 +19,8 @@ public class Historia8Test {
 
     @BeforeAll
     public static void anadirUbicacionParaHacerPrueba(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
 
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.activarUbicacion("sagunto");

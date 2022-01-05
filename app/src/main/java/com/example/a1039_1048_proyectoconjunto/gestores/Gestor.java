@@ -142,5 +142,14 @@ public class Gestor implements Serializable {
         return gestorUbicaciones.replaceEnListaTresUbicaciones(ubicacionVieja, ubicacionNueva);
     }
 
+    public void borrarTodaLaInformacionDeLaAplicacion(){
+        ConexionFirebase.removeDocument("","");
+        gestorServicios.setServicioCurrents(null);
+        gestorServicios.setServicioOpenWeather(null);
+        gestorServicios.getAllServicios().clear();
+        gestorUbicaciones.getAllUbicaciones().clear();
+
+    }
+
 
 }

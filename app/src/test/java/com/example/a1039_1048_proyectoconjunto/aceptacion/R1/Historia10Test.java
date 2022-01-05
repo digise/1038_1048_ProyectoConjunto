@@ -1,5 +1,6 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R1;
 
+import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
@@ -17,15 +18,16 @@ public class Historia10Test {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
     }
 
     @Test
     public void darBajaUbicacionExistente_ubicacion_valido(){
         //GIVEN
         String toponimo = "calig";
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo(toponimo));
+        Ubicacion ubicacion = gestor.getUbicacionPorToponimo(toponimo);
+        gestor.darAltaUbicacion(ubicacion);
 
 
         //WHEN

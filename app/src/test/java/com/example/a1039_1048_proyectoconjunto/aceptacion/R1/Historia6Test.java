@@ -18,8 +18,8 @@ public class Historia6Test {
 
     @BeforeEach
     public void crear_gestor(){
-        ConexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
+        gestor.borrarTodaLaInformacionDeLaAplicacion();
     }
 
     @Test
