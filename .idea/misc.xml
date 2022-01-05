@@ -12,10 +12,14 @@
         <entry key="..\:/mis_cosas_importantes/informatica/cuartoCarrera/proyecto_1039_1048/codigo/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res/drawable/border_grey.xml" value="0.22685185185185186" />
+        <entry key="app/src/main/res/drawable/boton_ubicacion_background.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/drawable/boton_ubicacion_disabled.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/drawable/boton_ubicacion_enabled.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/drawable/boton_ubicacion_pressed.xml" value="0.20520833333333333" />
         <entry key="app/src/main/res/drawable/etcity_redondo.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2857789855072464" />
-        <entry key="app/src/main/res/layout/boton_ubicacion.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/boton_ubicacion.xml" value="0.22" />
         <entry key="app/src/main/res/layout/ubicacion_shortcut.xml" value="0.36041666666666666" />
       </map>
     </option>

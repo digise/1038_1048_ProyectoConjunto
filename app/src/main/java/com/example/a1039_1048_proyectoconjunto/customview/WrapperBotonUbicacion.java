@@ -34,9 +34,9 @@ public class WrapperBotonUbicacion extends ConstraintLayout {
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.boton_ubicacion, this);
 
-        this.Alias = view.findViewById(R.id.text_top);
-        this.Toponimo = view.findViewById(R.id.text_middle);
-        this.Coordenadas = view.findViewById(R.id.text_bottom);
+        this.Alias = view.findViewById(R.id.alias);
+        this.Toponimo = view.findViewById(R.id.toponimo);
+        this.Coordenadas = view.findViewById(R.id.coordenadas);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.WrapperBotonUbicacion, 0, 0);
         try {
