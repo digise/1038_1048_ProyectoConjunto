@@ -7,13 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
@@ -76,7 +74,7 @@ public class Historia5Test {
     public void activarUbicacion_servicioDisponible_activar(){
         //Given
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().setAllServiciosFromFirebase();
+        gestor.getGestorServicios().recuperarInformacionServicios();
 
         when(mockConexionFirebaseUbicaciones.createDocument(anyString(), anyObject(),anyString())).thenReturn("true");
         when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(true);
@@ -102,7 +100,7 @@ public class Historia5Test {
     public void activarUbicacion_servicioNoDisponible_activar(){
         //Given
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().setAllServiciosFromFirebase();
+        gestor.getGestorServicios().recuperarInformacionServicios();
 
         when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(false);
 

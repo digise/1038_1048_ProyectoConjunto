@@ -5,6 +5,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 
 import java.util.HashMap;
@@ -29,6 +30,21 @@ public class Gestor {
             INSTANCE = new Gestor();
         }
         return INSTANCE;
+    }
+
+    public void recuperarTodaLaInformacionDeLaAplicacion(){
+        gestorServicios.recuperarInformacionServicios();
+        gestorUbicaciones.recuperarInformacionUbicaciones();
+    }
+
+    public void borrarTodaLaInformacionDeLaAplicacion(){
+        ConexionFirebase conexionFirebase = new ConexionFirebase();
+        conexionFirebase.removeDocument("","");
+        gestorServicios.setServicioCurrents(null);
+        gestorServicios.setServicioOpenWeather(null);
+        gestorServicios.getAllServicios().clear();
+        gestorUbicaciones.getAllUbicaciones().clear();
+
     }
 
     public GestorUbicaciones getGestorUbicaciones() {
@@ -148,22 +164,8 @@ public class Gestor {
         return gestorUbicaciones.desactivarUbicacion(toponimo);
     }
 
-    public List<Ubicacion> getListaHastaTresUbicacionesMostradas(){
-        return gestorUbicaciones.getListaHastaTresUbicacionesMostradas();
-    }
 
-    public boolean replaceEnListaTresUbicaciones(Ubicacion ubicacionVieja, Ubicacion ubicacionNueva){
-        return gestorUbicaciones.replaceEnListaTresUbicaciones(ubicacionVieja, ubicacionNueva);
-    }
 
-    public void borrarTodaLaInformacionDeLaAplicacion(){
-        ConexionFirebase.removeDocument("","");
-        gestorServicios.setServicioCurrents(null);
-        gestorServicios.setServicioOpenWeather(null);
-        gestorServicios.getAllServicios().clear();
-        gestorUbicaciones.getAllUbicaciones().clear();
-
-    }
 
 
 }

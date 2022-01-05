@@ -42,7 +42,7 @@ public class Historia1_2Test {
         gestor.getGestorUbicaciones().generarUbicaciones();
 
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().setAllServiciosFromFirebase();
+        gestor.getGestorServicios().recuperarInformacionServicios();
     }
 
     @BeforeAll

@@ -29,6 +29,11 @@ public class GestorServicios {
         servicioGeocoding = new ServicioGeocoding();
     }
 
+    public void recuperarInformacionServicios(){
+        setServicioOpenWeather(getServicioOpenWeatherFirebase());
+        setServicioCurrents(getServicioCurrentsFirebase());
+    }
+
     public Map<String, Servicio> getAllServicios(){
         return servicios;
     }
@@ -87,10 +92,6 @@ public class GestorServicios {
         }
     }
 
-    public void setAllServiciosFromFirebase(){
-        setServicioOpenWeather(getServicioOpenWeatherFirebase());
-        setServicioCurrents(getServicioCurrentsFirebase());
-    }
     
     //-------------------------------------------------------------------------------------------//
     //GEOCODE

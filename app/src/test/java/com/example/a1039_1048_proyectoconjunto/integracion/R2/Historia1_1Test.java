@@ -19,10 +19,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Historia1_1Test {
     private static Gestor gestor;
@@ -41,7 +39,7 @@ public class Historia1_1Test {
         gestor.getGestorUbicaciones().generarUbicaciones();
 
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().setAllServiciosFromFirebase();
+        gestor.getGestorServicios().recuperarInformacionServicios();
     }
 
     @BeforeAll

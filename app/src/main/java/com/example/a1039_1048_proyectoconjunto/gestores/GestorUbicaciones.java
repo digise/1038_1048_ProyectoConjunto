@@ -24,6 +24,11 @@ public class GestorUbicaciones {
     protected GestorUbicaciones() {
         conexionFirebase = new ConexionFirebase();
         ubicaciones = new HashMap<>();
+        ubicacionesOrdenadasAlfabeticamente = new ArrayList<>();
+        ubicacionesOrdenadasRecientes = new ArrayList<>();
+    }
+
+    public void recuperarInformacionUbicaciones(){
         generarUbicaciones();
         generarUbicacionesOrdenadasRecientes(); //para saber ultimo num añadido
         generarUbicacionesOrdenadasAlfabeticamente();
