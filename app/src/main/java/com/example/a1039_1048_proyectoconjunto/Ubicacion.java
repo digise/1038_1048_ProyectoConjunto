@@ -215,6 +215,6 @@ public class Ubicacion implements Comparable<Ubicacion>{
     }
 
     public boolean updateServicioFirebase(Ubicacion ubicacion, String idDocumento){
-        return ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+        return Gestor.getInstance().getGestorUbicaciones().updateUbicacionFirebase(ubicacion, idDocumento);
     }
 }

@@ -3,18 +3,12 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-
-
-import org.apache.commons.collections4.list.FixedSizeList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 //EN ESTA CLASE ESTÁN TODAS LAS UBICACIONES
 
@@ -25,7 +19,10 @@ public class GestorUbicaciones {
     private List<Ubicacion> ubicacionesOrdenadasRecientes;
     private List<Ubicacion> ubicacionesOrdenadasAlfabeticamente;
 
+    private ConexionFirebase conexionFirebase;
+
     protected GestorUbicaciones() {
+        conexionFirebase = new ConexionFirebase();
         ubicaciones = new HashMap<>();
         generarUbicaciones();
         generarUbicacionesOrdenadasRecientes(); //para saber ultimo num añadido
@@ -108,11 +105,6 @@ public class GestorUbicaciones {
         return borrado;
     }
 
-
-    public boolean removeDocument(String referencia, String idDocumento) {
-        return ConexionFirebase.removeDocument(referencia, idDocumento);
-    }
-
     public Ubicacion getUbicacionPorToponimo(String name) {
         return null;
     }
@@ -140,18 +132,26 @@ public class GestorUbicaciones {
         return false;
     }
 
+    public void setConexionFirebase(ConexionFirebase conexionFirebase){
+        this.conexionFirebase = conexionFirebase;
+    }
+
     //Firebase
 
     public Map<String, Ubicacion> getUbicacionesFirebase() {
-        return ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
+        return conexionFirebase.getCollection("ubicaciones", Ubicacion.class);
     }
 
     public String crearUbicacionFirebase(Ubicacion ubicacion){
-        return ConexionFirebase.createDocument("ubicaciones", ubicacion, null);
+        return conexionFirebase.createDocument("ubicaciones", ubicacion, null);
     }
 
     public boolean updateUbicacionFirebase(Ubicacion ubicacion, String idDocumento){
-        return ConexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+        return conexionFirebase.updateDocument("ubicaciones", ubicacion, idDocumento);
+    }
+
+    public boolean removeDocument(String referencia, String idDocumento) {
+        return conexionFirebase.removeDocument(referencia, idDocumento);
     }
 
 

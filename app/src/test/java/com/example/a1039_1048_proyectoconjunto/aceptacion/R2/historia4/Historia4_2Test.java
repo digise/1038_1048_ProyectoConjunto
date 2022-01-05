@@ -7,10 +7,7 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +21,8 @@ public class Historia4_2Test {
 
     @BeforeEach
     public void crearGestor(){
-        ConexionFirebase.removeDocument("", "");
+        ConexionFirebase conexionFirebase = new ConexionFirebase();
+        conexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }

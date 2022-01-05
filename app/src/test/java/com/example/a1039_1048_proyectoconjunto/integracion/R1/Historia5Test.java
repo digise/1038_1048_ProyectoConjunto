@@ -3,49 +3,81 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
+import com.example.a1039_1048_proyectoconjunto.adapter.OpenWeatherAdapter;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
+import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class Historia5Test {
 
-    // TODO Revisar
-
-    private static Map<String, Ubicacion> ubicaciones;
+    private static OpenWeatherAdapter mockOpenWeatherAdapter;
+    private static ConexionFirebase mockConexionFirebaseUbicaciones;
+    private static GeocodingAdapter mockGeocodingAdapter;
     private static Gestor gestor;
-    private ServicioOpenWeather mockServicioOpenWeather;
 
-    @BeforeAll
-    public static void crear_firebase(){
-        ubicaciones = ConexionFirebase.getCollection("ubicaciones", Ubicacion.class);
+    @BeforeEach
+    public void setGestor(){
+        gestor = Gestor.getInstance();
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
     }
 
-    // TODO Igual hay que cambiar la ubicación de ejemplo y insertarla en este mismo test. Sino depende de si se realiza o no la historia 1.
     @BeforeAll
-    public static void crear_gestor(){
+    public static void setUp(){
+        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
+        mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
+
         gestor = Gestor.getInstance();
-        ServicioGeocoding mockServicioGeocoding = Mockito.mock(ServicioGeocoding.class);
-        gestor.getGestorServicios().setServicioGeocoding(mockServicioGeocoding);
-        when(mockServicioGeocoding.getInformacion("sagunto"))
-                .thenReturn(new Ubicacion("Sagunto", "Spain", "39.6833", "-0.2667"));
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
+
+        Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
+        Ubicacion castellon = new Ubicacion("castello", "spain" , "40.67830", "0.28421");
+        Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
+
+        HashMap<String, Ubicacion> ubicacionesMentira = new HashMap<>();
+
+        ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
+        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
+        ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
+
+        when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
+        when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);
+
+        gestor.getGestorUbicaciones().setConexionFirebase(mockConexionFirebaseUbicaciones);
     }
 
 
     @Test
     public void activarUbicacion_servicioDisponible_activar(){
         //Given
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        when(mockConexionFirebaseUbicaciones.createDocument(anyString(), anyObject(),anyString())).thenReturn("true");
+        when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(true);
+
+        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
+        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
+
+        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.activarUbicacion("sagunto");
 
@@ -54,8 +86,8 @@ public class Historia5Test {
 
 
         //Then
-        Ubicacion castellon = gestor.getUbicacionGuardada("sagunto");
-        assertTrue(castellon.isActivada());
+        Ubicacion sagunto = gestor.getUbicacionGuardada("sagunto");
+        assertTrue(sagunto.isActivada());
     }
 
     @Test

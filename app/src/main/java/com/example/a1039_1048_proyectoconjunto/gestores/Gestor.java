@@ -5,10 +5,7 @@ package com.example.a1039_1048_proyectoconjunto.gestores;
 
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
 import java.util.HashMap;
 import java.util.List;

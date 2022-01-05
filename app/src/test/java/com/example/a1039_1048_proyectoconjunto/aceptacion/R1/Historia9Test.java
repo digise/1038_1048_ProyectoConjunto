@@ -7,9 +7,7 @@ import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
-import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +17,8 @@ public class Historia9Test {
 
     @BeforeEach
     public void anadirUbicacionParaHacerPrueba(){
-        ConexionFirebase.removeDocument("", "");
+        ConexionFirebase conexionFirebase = new ConexionFirebase();
+        conexionFirebase.removeDocument("", "");
         gestor = Gestor.getInstance();
 
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());

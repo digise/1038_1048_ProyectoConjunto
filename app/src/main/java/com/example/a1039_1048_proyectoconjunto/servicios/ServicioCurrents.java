@@ -2,6 +2,7 @@ package com.example.a1039_1048_proyectoconjunto.servicios;
 
 import com.example.a1039_1048_proyectoconjunto.adapter.CurrentsAdapter;
 import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
+import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
 import java.util.HashMap;
 
@@ -67,6 +68,6 @@ public class ServicioCurrents implements Servicio{
 
     //Firebase
     public boolean updateServicioFirebase(ServicioCurrents servicio, String idDocumento){
-        return ConexionFirebase.updateDocument("servicios", servicio, idDocumento);
+        return Gestor.getInstance().getGestorServicios().updateServicioFirebase(servicio, idDocumento);
     }
 }
