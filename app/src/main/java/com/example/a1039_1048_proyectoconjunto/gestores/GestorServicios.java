@@ -24,11 +24,9 @@ public class GestorServicios {
     private ConexionFirebase conexionFirebase;
 
     protected GestorServicios() {
-        servicioGeocoding = new ServicioGeocoding();
-        servicioOpenWeather = null;
-        servicioCurrents = null;
         servicios = new HashMap<>();
         conexionFirebase = new ConexionFirebase();
+        servicioGeocoding = new ServicioGeocoding();
     }
 
     public Map<String, Servicio> getAllServicios(){
@@ -87,6 +85,11 @@ public class GestorServicios {
             default:
                 break;
         }
+    }
+
+    public void setAllServiciosFromFirebase(){
+        setServicioOpenWeather(getServicioOpenWeatherFirebase());
+        setServicioCurrents(getServicioCurrentsFirebase());
     }
     
     //-------------------------------------------------------------------------------------------//

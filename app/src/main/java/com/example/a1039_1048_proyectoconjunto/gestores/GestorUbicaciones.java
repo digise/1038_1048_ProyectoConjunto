@@ -26,6 +26,7 @@ public class GestorUbicaciones {
         ubicaciones = new HashMap<>();
         generarUbicaciones();
         generarUbicacionesOrdenadasRecientes(); //para saber ultimo num añadido
+        generarUbicacionesOrdenadasAlfabeticamente();
     }
 
     public void generarUbicaciones() {
@@ -46,6 +47,16 @@ public class GestorUbicaciones {
             ultimoNumUbicacionAnadido =
                     ubicacionesOrdenadasRecientes.get(ubicacionesOrdenadasRecientes.size() - 1).getNumCreacion();
         }
+    }
+    public void generarUbicacionesOrdenadasAlfabeticamente() {
+        ubicacionesOrdenadasAlfabeticamente = new ArrayList<>(ubicaciones.values());
+        ubicacionesOrdenadasAlfabeticamente.sort(new Comparator<Ubicacion>() {
+            @Override
+            public int compare(Ubicacion o1, Ubicacion o2) {
+                return o1.getToponimo().compareTo(o2.getToponimo());
+            }
+        });
+
     }
 
 

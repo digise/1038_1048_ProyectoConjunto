@@ -3,6 +3,7 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -12,10 +13,12 @@ import static org.mockito.Mockito.when;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
+import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.gestores.GestorUbicaciones;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -24,9 +27,21 @@ import java.util.Map;
 public class Historia10Test {
 
     private static Gestor gestor;
+    private static ConexionFirebase mockConexionFirebaseUbicaciones;
+
+    @BeforeEach
+    public void setGestor(){
+        gestor = Gestor.getInstance();
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
+
+        gestor.getGestorUbicaciones().setConexionFirebase(mockConexionFirebaseUbicaciones);
+        gestor.getGestorUbicaciones().generarUbicaciones();
+    }
 
     @BeforeAll
     public static void setConfiguracion() {
+        mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
         Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
         Ubicacion castellon = new Ubicacion("castello", "spain" , "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
@@ -40,18 +55,17 @@ public class Historia10Test {
         ubicacionesMentira.put("-MsUUdnewn0S9PKoS2DP", calig);
 
         gestor = Gestor.getInstance();
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
 
-        GestorUbicaciones gestorUbicacionesSpy = spy(gestor.getGestorUbicaciones());
-        doReturn(ubicacionesMentira).when(gestorUbicacionesSpy).getUbicacionesFirebase();
-        doReturn(true).when(gestorUbicacionesSpy).removeDocument("ubicaciones", eq(anyString()));
-        gestor.setGestorUbicaciones(gestorUbicacionesSpy);
-        gestorUbicacionesSpy.generarUbicaciones();
+        when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
     }
 
     @Test
     public void darBajaUbicacionExistente_ubicacion_valido(){
         //GIVEN
         String toponimo = "castello";
+        when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);
 
         //WHEN
         int numUbicacionesAntesBorrado = gestor.getAllUbicaciones().size();
