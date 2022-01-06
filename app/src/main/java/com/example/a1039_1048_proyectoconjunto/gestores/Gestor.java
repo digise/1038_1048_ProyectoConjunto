@@ -10,6 +10,7 @@ import com.example.a1039_1048_proyectoconjunto.servicios.Servicio;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Gestor {
@@ -128,6 +129,8 @@ public class Gestor {
             if (ubicacion.getToponimo().toLowerCase().equals(toponimo)) {
                 return ubicacion;
             }
+            if (ubicacion.getToponimo().toLowerCase().contains(toponimo) || toponimo.contains(ubicacion.getToponimo().toLowerCase()))
+                return ubicacion;
         }
         return null;
     }
@@ -140,16 +143,13 @@ public class Gestor {
         return gestorUbicaciones.getAllUbicaciones();
     }
 
-    public List<Ubicacion> getUbicacionesOrdenadas(String tipo){
-        String tipoFormateado = tipo.toLowerCase();
-        switch (tipoFormateado){
-            case "alfabeticamente":
-                return gestorUbicaciones.getUbicacionesOrdenadasAlfabeticamente();
-            case "recientemente":
-                return gestorUbicaciones.getUbicacionesOrdenadasRecientes();
-            default:
-                return null;
-        }
+
+    public List<Ubicacion> getUbicacionesOrdenadasRecientes(){
+        return gestorUbicaciones.getUbicacionesOrdenadasRecientes();
+    }
+
+    public List<Ubicacion> getUbicacionesOrdenadasAlfabeticamente(){
+        return gestorUbicaciones.getUbicacionesOrdenadasAlfabeticamente();
     }
 
     public Map<String, Ubicacion> getUbicacionesActivas(){

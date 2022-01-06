@@ -11,6 +11,7 @@ import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 import com.google.gson.Gson;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,8 @@ public class Historia1Test {
 
     @BeforeEach
     public void crear_gestor() {
+        Gestor.getInstance().borrarTodaLaInformacionDeLaAplicacion();
         gestor = Gestor.getInstance();
-        gestor.borrarTodaLaInformacionDeLaAplicacion();
 
     }
 
@@ -52,7 +53,6 @@ public class Historia1Test {
     @Test
     public void altaUbicacion_toponimoNoExistente_anadir() {
         // Given
-        Gestor gestor = Gestor.getInstance();
         String toponimo = "noExiste";
 
         int nUbicacionesAntesDeInsertar = gestor.getGestorUbicaciones().getAllUbicaciones().size();

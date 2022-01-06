@@ -140,6 +140,7 @@ public class Ubicacion implements Comparable<Ubicacion> {
 
     public boolean setAlias(String alias) {
         if (alias.length() > 0 && alias.length() <= 20) {
+            this.alias = alias;
             boolean s = updateUbicacionFirebase(this, this.idDocumento);
             if (s)
                 this.alias = alias;

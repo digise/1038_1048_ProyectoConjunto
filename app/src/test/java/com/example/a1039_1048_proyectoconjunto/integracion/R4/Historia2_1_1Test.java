@@ -80,7 +80,7 @@ public class Historia2_1_1Test {
     }
 
     @Test
-    public void altaUbicacion_toponimoExistente_anadir() {
+    public void altaUbicacion_toponimoExistente_guardarEstado() {
         // Given
         String toponimo = "sagunto";
 
