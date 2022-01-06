@@ -40,9 +40,6 @@ public class Historia4Test {
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
 
-        when(mockConexionFirebase.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>());
-
-        when(mockConexionFirebase.removeDocument(anyString(), anyString())).thenReturn(true);
         when(mockConexionFirebase.createDocument(anyString(), anyObject(),anyString())).thenReturn("true");
     }
 

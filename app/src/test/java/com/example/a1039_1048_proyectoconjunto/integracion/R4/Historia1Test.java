@@ -53,7 +53,7 @@ public class Historia1Test {
     }
 
     @Test
-    public void noRecuperarEstadoAnterior_valido(){
+    public void rcuperarEstadoAnterior_noValido(){
         //GIVEN -> cargar estado (no habrá nada)
         Gestor gestor = Gestor.getInstance();
 

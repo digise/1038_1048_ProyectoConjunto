@@ -44,7 +44,6 @@ public class Historia4Test {
         gestor.getGestorUbicaciones().generarUbicaciones();
 
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().recuperarInformacionServicios();
     }
 
     @BeforeAll

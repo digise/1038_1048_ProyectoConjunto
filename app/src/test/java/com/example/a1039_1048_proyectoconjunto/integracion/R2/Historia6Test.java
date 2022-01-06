@@ -83,17 +83,16 @@ public class Historia6Test {
     @Test
     public void anadirFavoritos_noValido(){
         //GIVEN
-        Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
+        Ubicacion castellonNoValida = new Ubicacion("castello", "spain", "40.67830", "0.28421");
 
-        castellon.activar();
+        castellonNoValida.activar();
 
         when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>());
 
         gestor.getGestorUbicaciones().generarUbicaciones();
 
-
         //WHEN
-        boolean marcada = gestor.marcarComoFavorita(castellon, true);
+        boolean marcada = gestor.marcarComoFavorita(castellonNoValida, true);
 
 
         //THEN

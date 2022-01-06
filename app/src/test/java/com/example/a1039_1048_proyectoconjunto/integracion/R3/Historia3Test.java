@@ -39,7 +39,7 @@ public class Historia3Test {
         gestor = Gestor.getInstance();
 
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().recuperarInformacionServicios();
+
     }
 
     @BeforeAll
@@ -68,7 +68,7 @@ public class Historia3Test {
     }
 
     @Test
-    public void listarServiciosAPI_listadoConServicios_valido() {
+    public void descripcionServiciosAPI_listadoConServicios_valido() {
         //GIVEN
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
         mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
@@ -100,7 +100,7 @@ public class Historia3Test {
     }
 
     @Test
-    public void listarServiciosAPI_listadoSinServicios_valido() {
+    public void descripcionServiciosAPI_listadoSinServicios_valido() {
         //GIVEN
 
 

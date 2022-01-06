@@ -80,7 +80,7 @@ public class Historia2_1_1Test {
     }
 
     @Test
-    public void altaUbicacion_toponimoExistente_anadir() {
+    public void altaUbicacion_toponimoExistente_guardarEstado() {
         // Given
         String toponimo = "sagunto";
 
@@ -114,7 +114,7 @@ public class Historia2_1_1Test {
     }
 
     @Test
-    public void altaUbicacion_toponimoNoExistente_anadir() {
+    public void altaUbicacion_toponimoNoExistente_noGuardarEstado() {
         mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
         // Given
         String toponimo = "noExiste";

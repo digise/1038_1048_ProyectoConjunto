@@ -24,8 +24,6 @@ import org.mockito.Mockito;
 import java.util.HashMap;
 
 public class Historia2_2_3Test {
-    private static CurrentsAdapter mockCurrentsAdapter;
-    private static OpenWeatherAdapter mockOpenWeatherAdapter;
 
     private static ConexionFirebase mockConexionFirebase;
     private static ConexionFirebase mockConexionFirebaseServicios;
@@ -42,13 +40,11 @@ public class Historia2_2_3Test {
         when(mockConexionFirebase.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
 
         ServicioCurrents servicioCurrents = new ServicioCurrents();
-        servicioCurrents.setCurrentsAdapter(mockCurrentsAdapter);
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebase);
         servicioCurrents.servicioActivo(false);
         gestor.getGestorServicios().setServicioCurrents(servicioCurrents);
 
         ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
-        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
         servicioOpenWeather.servicioActivo(true);
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
@@ -76,13 +72,11 @@ public class Historia2_2_3Test {
 
     @BeforeAll
     public static void setUp() {
-        mockCurrentsAdapter = mock(CurrentsAdapter.class);
-        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
         mockConexionFirebase = mock(ConexionFirebase.class);
     }
 
     @Test
-    public void crearAPI_actualizaEstado_valido() {
+    public void borrarAPI_actualizaEstado_valido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
 
         // WHEN
@@ -96,7 +90,7 @@ public class Historia2_2_3Test {
     }
 
     @Test
-    public void crearAPI_actualizarEstado_novalido() {
+    public void borrarAPI_actualizarEstado_novalido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
 
         // WHEN

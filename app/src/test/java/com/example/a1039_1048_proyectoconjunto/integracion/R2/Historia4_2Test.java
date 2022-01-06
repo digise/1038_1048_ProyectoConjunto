@@ -57,7 +57,7 @@ public class Historia4_2Test {
     }
 
     @Test
-    public void informacionOpenweather_valido() {
+    public void informacionCurrents_valido() {
         //GIVEN
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
         ServicioCurrents servicioCurrents = new ServicioCurrents();
@@ -75,7 +75,7 @@ public class Historia4_2Test {
     }
 
     @Test
-    public void informacionOpenweather_noValido() {
+    public void informacionCurrents_noValido() {
         //GIVEN
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
         ServicioCurrents servicioCurrents = new ServicioCurrents();

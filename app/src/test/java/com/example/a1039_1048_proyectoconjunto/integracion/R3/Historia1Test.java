@@ -4,6 +4,7 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R3;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -76,7 +77,6 @@ public class Historia1Test {
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
         gestor.getGestorServicios().setServicioCurrents(servicioCurrents);
 
-
         Map<String, Servicio> servicios = gestor.getAllServicios();
         ServicioOpenWeather servicioOpenWeatherGestor = (ServicioOpenWeather) servicios.get("openweather");
         ServicioCurrents servicioCurrentsGestor = (ServicioCurrents) servicios.get("currents");
@@ -85,11 +85,12 @@ public class Historia1Test {
         servicioOpenWeatherGestor.servicioActivo(true);
 
         //THEN
+        assertEquals(2, servicios.size());
         assertNotNull(servicioOpenWeatherGestor.getInformacion("sagunto"));
         assertNull(servicioCurrentsGestor.getInformacion("sagunto"));
     }
     @Test
-    public void listarServiciosAPI_listadoSinServicios_valido(){
+    public void listarServiciosAPI_listadoSinServicios_noValido(){
         //GIVEN
 
 

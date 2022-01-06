@@ -25,7 +25,6 @@ import java.util.HashMap;
 public class Historia2_2_1Test {
 
     private static CurrentsAdapter mockCurrentsAdapter;
-    private static OpenWeatherAdapter mockOpenWeatherAdapter;
 
     private static ConexionFirebase mockConexionFirebase;
     private static ConexionFirebase mockConexionFirebaseServicios;
@@ -70,7 +69,6 @@ public class Historia2_2_1Test {
     @BeforeAll
     public static void setUp() {
         mockCurrentsAdapter = mock(CurrentsAdapter.class);
-        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
         mockConexionFirebase = mock(ConexionFirebase.class);
     }
 
