@@ -49,18 +49,7 @@ public class Historia3Test {
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
 
-        Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
-        Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
-
-        HashMap<String, Ubicacion> ubicacionesMentira = new HashMap<>();
-
-        ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
-        ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
-
-        when(mockConexionFirebase.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
-        when(mockConexionFirebase.removeDocument(anyString(), anyString())).thenReturn(true);
         when(mockConexionFirebase.createDocument(anyString(), anyObject(),anyString())).thenReturn("true");
-
     }
 
     @Test
