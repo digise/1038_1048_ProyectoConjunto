@@ -135,6 +135,13 @@ public class Gestor {
         return null;
     }
 
+    public Servicio getServicio(String servicio){
+        if (servicio.equals("currents"))
+            return gestorServicios.getServicioCurrents();
+        else
+            return gestorServicios.getServicioOpenWeather();
+    }
+
     public Map<String, Servicio> getAllServicios(){
         return gestorServicios.getAllServicios();
     }

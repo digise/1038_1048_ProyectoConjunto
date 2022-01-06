@@ -139,20 +139,24 @@ public class Ubicacion implements Comparable<Ubicacion> {
     }
 
     public boolean setAlias(String alias) {
+        String aliasAnterior = this.alias;
         if (alias.length() > 0 && alias.length() <= 20) {
             this.alias = alias;
             boolean s = updateUbicacionFirebase(this, this.idDocumento);
-            if (s)
-                this.alias = alias;
+            if (!s) {
+                this.alias = aliasAnterior;
+            }
             return s;
         }
         return false;
     }
 
     public boolean setFavorita(boolean marcar){
+        boolean favoritaAnterior = this.favorita;
+        this.favorita = marcar;
         boolean s = updateUbicacionFirebase(this, this.idDocumento);
-        if (s)
-            this.favorita = marcar;
+        if (!s)
+            this.favorita = favoritaAnterior;
         return s;
     }
 
@@ -217,6 +221,13 @@ public class Ubicacion implements Comparable<Ubicacion> {
                 ", longitud='" + longitud + '\'' +
                 ", activada=" + activada +
                 ", pais='" + pais + '\'' +
+                ", alias='" + alias + '\'' +
+                ", servicioOpenWeatherActivo=" + servicioOpenWeatherActivo +
+                ", servicioCurrentsActivo=" + servicioCurrentsActivo +
+                ", idDocumento='" + idDocumento + '\'' +
+                ", enListaTresUbicaciones=" + enListaTresUbicaciones +
+                ", numCreacion=" + numCreacion +
+                ", favorita=" + favorita +
                 '}';
     }
 

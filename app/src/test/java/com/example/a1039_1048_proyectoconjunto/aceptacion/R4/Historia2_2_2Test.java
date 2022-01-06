@@ -1,7 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R4;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
@@ -11,8 +12,10 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
 
-public class Historia2_1_2Test {
+public class Historia2_2_2Test {
+
     private Gestor gestor;
 
     @BeforeEach
@@ -23,47 +26,49 @@ public class Historia2_1_2Test {
         Ubicacion valencia = gestor.getUbicacionPorToponimo("valencia");
         gestor.darAltaUbicacion(castello);
         gestor.darAltaUbicacion(valencia);
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
+        gestor.desactivarServicio("currents");
+        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        gestor.desactivarServicio("openweather");
         gestor.activarUbicacion("castello");
         gestor.activarUbicacion("valencia");
-
     }
 
     @Test
-    public void actualizarUbicacion_guardarEstado(){
+    public void desactivarApi_guardarEstado(){
         //GIVEN
-        Ubicacion castellon = gestor.getUbicacionGuardada("castellon");
+        Ubicacion castello = gestor.getUbicacionGuardada("castello");
+        Map<String, String> recibirInformacionAntesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //WHEN
-        castellon.desactivar();
-        castellon.setAlias("provincia valencia");
-
+        gestor.activarServicio("openweather");
+        castello.activarServicio("openweather", true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        Map<String, String> recibirInformacionDespuesDeActualizar = gestor.getTiempoPorUbicacion(castello);
+
 
         //THEN
-        assertEquals(gestor.getUbicacionGuardada("castello").getAlias(), "provincia valencia");
-        assertFalse(gestor.getUbicacionGuardada("castello").isActivada());
+        assertNull(recibirInformacionAntesDeActualizar);
+        assertNotNull(recibirInformacionDespuesDeActualizar);
     }
 
     @Test
-    public void actualizacionUbicacion_novalido_guardarEstado(){
+    public void noDesactivarApi_guardarEstado(){
         //GIVEN
-        Ubicacion valencia = gestor.getUbicacionGuardada("valencia");
-        valencia.setAlias("valenciaCity");
+        Ubicacion castello = gestor.getUbicacionGuardada("castello");
+        Map<String, String> recibirInformacionAntesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //WHEN
-        valencia.desactivar();
-        valencia.setAlias("");
-
+        castello.activarServicio("openweather", true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        Map<String, String> recibirInformacionDespuesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //THEN
-        assertEquals(gestor.getUbicacionGuardada("valencia").getAlias(), "valenciaCity");
-        assertFalse(gestor.getUbicacionGuardada("valencia").isActivada());
+        assertNull(recibirInformacionAntesDeActualizar);
+        assertNull(recibirInformacionDespuesDeActualizar);
     }
 }

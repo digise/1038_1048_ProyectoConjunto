@@ -104,8 +104,8 @@ public class GestorUbicaciones {
             ultimoNumUbicacionAnadido += 1;
             String idDocumento = crearUbicacionFirebase(ubicacion);
             if (idDocumento != null) {
+                ubicacion.setIdDocumento(idDocumento);
                 ubicaciones.put(idDocumento, ubicacion);
-                ubicaciones.get(idDocumento).setIdDocumento(idDocumento);
                 anadido = updateUbicacionFirebase(ubicacion, idDocumento);
             }
         }
@@ -115,14 +115,7 @@ public class GestorUbicaciones {
     public boolean darBajaUbicacion(Ubicacion ubicacion) {
         boolean borrado = false;
         if (ubicacion != null) {
-            String idDocumento = null;
-            for (String id : ubicaciones.keySet()) {
-                Ubicacion aux = ubicaciones.get(id);
-                if (aux.equals(ubicacion)) {
-                    idDocumento = id;
-                    break;
-                }
-            }
+            String idDocumento = ubicacion.getIdDocumento();
             borrado = removeDocument("ubicaciones", idDocumento);
             if (borrado) {
                 ubicaciones.remove(idDocumento);

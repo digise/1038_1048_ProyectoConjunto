@@ -123,11 +123,12 @@ public class GestorServicios {
             if (eliminar)
                 servicios.remove("openweather");
         }else{
-            if (this.servicioOpenWeather == null && servicioOpenWeather != null) {
+            if (servicioOpenWeather != null) {
                 String idDocumento = crearServicioFirebase(servicioOpenWeather);
                 if (idDocumento != null)
                     servicios.put("openweather", servicioOpenWeather);
             }
+
         }
         this.servicioOpenWeather = servicioOpenWeather;
     }
@@ -154,7 +155,7 @@ public class GestorServicios {
             if (eliminar)
                 servicios.remove("currents");
         }else {
-            if (this.servicioCurrents == null && servicioCurrents != null) {
+            if (servicioCurrents != null) {
                 String idDocumento = crearServicioFirebase(servicioCurrents);
                 if (idDocumento != null)
                     servicios.put("currents", servicioCurrents);

@@ -2,6 +2,9 @@ package com.example.a1039_1048_proyectoconjunto.aceptacion.R4;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
@@ -11,8 +14,10 @@ import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Historia2_1_2Test {
+public class Historia2_1_4Test {
     private Gestor gestor;
 
     @BeforeEach
@@ -27,43 +32,43 @@ public class Historia2_1_2Test {
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         gestor.activarUbicacion("castello");
         gestor.activarUbicacion("valencia");
-
     }
 
     @Test
-    public void actualizarUbicacion_guardarEstado(){
+    public void anadirUbicacionAFavoritos_guardarEstado_valido(){
         //GIVEN
         Ubicacion castellon = gestor.getUbicacionGuardada("castellon");
+        List<Ubicacion> ubicacionesAntesDeAnadirAFavoritos = new ArrayList<>(gestor.getUbicacionesFavoritas());
 
         //WHEN
-        castellon.desactivar();
-        castellon.setAlias("provincia valencia");
-
+        gestor.marcarComoFavorita(castellon, true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        List<Ubicacion> ubicacionesDespuesDeAnadirAFavoritosYReiniciarLaAplicacion = gestor.getUbicacionesFavoritas();
+
+
 
         //THEN
-        assertEquals(gestor.getUbicacionGuardada("castello").getAlias(), "provincia valencia");
-        assertFalse(gestor.getUbicacionGuardada("castello").isActivada());
+        assertTrue(gestor.getUbicacionGuardada("castello").getFavorita());
+        assertEquals(ubicacionesAntesDeAnadirAFavoritos.size() + 1, ubicacionesDespuesDeAnadirAFavoritosYReiniciarLaAplicacion.size());
     }
 
     @Test
-    public void actualizacionUbicacion_novalido_guardarEstado(){
-        //GIVEN
-        Ubicacion valencia = gestor.getUbicacionGuardada("valencia");
-        valencia.setAlias("valenciaCity");
+    public void anadirUbicacionAFavoritos_guardarEstado_noValido(){
+        Ubicacion castellon = gestor.getUbicacionGuardada("castellon");
+        List<Ubicacion> ubicacionesAntesDeAnadirAFavoritos = new ArrayList<>(gestor.getUbicacionesFavoritas());
 
         //WHEN
-        valencia.desactivar();
-        valencia.setAlias("");
-
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        List<Ubicacion> ubicacionesDespuesDeReiniciarLaAplicacionSinAnadirFavorita = gestor.getUbicacionesFavoritas();
+
+
 
         //THEN
-        assertEquals(gestor.getUbicacionGuardada("valencia").getAlias(), "valenciaCity");
-        assertFalse(gestor.getUbicacionGuardada("valencia").isActivada());
+        assertFalse(gestor.getUbicacionGuardada("castello").getFavorita());
+        assertEquals(ubicacionesAntesDeAnadirAFavoritos.size(), ubicacionesDespuesDeReiniciarLaAplicacionSinAnadirFavorita.size());
     }
 }

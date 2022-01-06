@@ -1,9 +1,8 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion.R4;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
@@ -17,7 +16,8 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Historia2_1_1Test {
+public class Historia2_2_1Test {
+
     private Gestor gestor;
 
     @BeforeEach
@@ -28,44 +28,47 @@ public class Historia2_1_1Test {
         Ubicacion valencia = gestor.getUbicacionPorToponimo("valencia");
         gestor.darAltaUbicacion(castello);
         gestor.darAltaUbicacion(valencia);
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
+        gestor.desactivarServicio("currents");
         gestor.activarUbicacion("castello");
         gestor.activarUbicacion("valencia");
-
     }
 
     @Test
-    public void altaUbicacion_toponimoExistente_guardarEstado(){
+    public void anadirApi_guardarEstado(){
         //GIVEN
-        Ubicacion alicante = gestor.getUbicacionPorToponimo("alicante");
-        gestor.darAltaUbicacion(alicante);
-        Map<String, Ubicacion> ubicacionesAntesDelCirreAplicacion = gestor.getAllUbicaciones();
+        Ubicacion castello = gestor.getUbicacionGuardada("castello");
+        Map<String, Servicio> serviciosAntesDeAnadir = new HashMap<>(gestor.getAllServicios());
+
+        //WHEN
+        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        castello.activarServicio("openweather", true);
+        gestor.borrarGestor();
+        gestor = Gestor.getInstance();
+        gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        Map<String, Servicio> serviciosDespuesDeAnadirYReiniciarLaAplicacion = gestor.getAllServicios();
+
+        //THEN
+        assertNotNull(gestor.getServicio("openweather"));
+        assertNotNull(gestor.getTiempoPorUbicacion(castello));
+        assertEquals(serviciosAntesDeAnadir.size() + 1, serviciosDespuesDeAnadirYReiniciarLaAplicacion.size());
+    }
+
+    @Test
+    public void noAnadirApi_guardarEstado(){
+        //GIVEN
+        Ubicacion castello = gestor.getUbicacionGuardada("castello");
+        Map<String, Servicio> serviciosAntesDeAnadir = new HashMap<>(gestor.getAllServicios());
 
         //WHEN
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
+        Map<String, Servicio> serviciosDespuesDeReiniciarLaAplicacion = gestor.getAllServicios();
 
         //THEN
-        assertEquals(ubicacionesAntesDelCirreAplicacion.size(), gestor.getAllUbicaciones().size());
-        assertTrue(gestor.getUbicacionGuardada("alicant").equals(alicante));
-    }
-
-    @Test
-    public void altaUbicacion_toponimoNoExistente_noGuardarEstado(){
-        //GIVEN
-        Ubicacion ubicacionNoExistente = gestor.getUbicacionPorToponimo("noExiste");
-        gestor.darAltaUbicacion(ubicacionNoExistente);
-        Map<String, Ubicacion> ubicacionesAntesDelCierreAplicacion = gestor.getAllUbicaciones();
-
-        //WHEN
-        gestor.borrarGestor();
-        gestor = Gestor.getInstance();
-        gestor.recuperarTodaLaInformacionDeLaAplicacion();
-
-        //THEN
-        assertEquals(ubicacionesAntesDelCierreAplicacion.size(), gestor.getAllUbicaciones().size());
-        assertNull(gestor.getUbicacionGuardada("noExiste"));
+        assertNull(gestor.getServicio("openweather"));
+        assertNull(gestor.getTiempoPorUbicacion(castello));
+        assertEquals(serviciosAntesDeAnadir.size(), serviciosDespuesDeReiniciarLaAplicacion.size());
     }
 }
