@@ -5,10 +5,14 @@
     <string name="tab_text_1">Ubicaciones</string>
     <string name="tab_text_2">Servicios</string>
 
-    <string-array name="tipo_lista">
-        <item>Orden alfabético</item>
-        <item>Orden de creacion</item>
+    <string-array name="tipo_lista_activadas">
+        <item>Activadas</item>
         <item>Favoritas</item>
+    </string-array>
+
+    <string-array name="tipo_lista">
+        <item>Alfabeticamente</item>
+        <item>Fecha de creacion</item>
     </string-array>
 
     <string name="browse_title">Videos by Your Company</string>

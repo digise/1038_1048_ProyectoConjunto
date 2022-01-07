@@ -22,6 +22,7 @@ import com.example.a1039_1048_proyectoconjunto.activities.UbicacionActividad;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Gestor gestor;
     private int posicionLista = 0;
     private int nUbicaciones = 0;
-    private List<Ubicacion> listaAlfabetica;
-    private List<Ubicacion> listaReciente;
+    private List<Ubicacion> listaActivadas;
     private List<Ubicacion> listaFavoritas;
     private List<Ubicacion> listaSeleccionada;
 
@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
             gestor = Gestor.getInstance();
         }
 
-        listaAlfabetica = gestor.getUbicacionesOrdenadasAlfabeticamente();
-        listaSeleccionada = listaAlfabetica;
-        listaReciente = gestor.getUbicacionesOrdenadasRecientes();
+
+        listaActivadas = new ArrayList<>(gestor.getUbicacionesActivas().values());
         listaFavoritas = gestor.getUbicacionesFavoritas();
+        listaSeleccionada = listaActivadas;
         nUbicaciones = listaSeleccionada.size();
 
 
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Spinner con tipos de listas
 
-        Spinner spinnerTipoLista = (Spinner) findViewById(R.id.tipoLista);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_lista, android.R.layout.simple_spinner_item);
+        Spinner spinnerTipoLista = (Spinner) findViewById(R.id.tipoListaActivadas);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_lista_activadas, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipoLista.setAdapter(adapter);
 
@@ -101,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if (position == 0)
-                    listaSeleccionada = listaAlfabetica;
-                else if (position == 1)
-                    listaSeleccionada = listaReciente;
+                    listaSeleccionada = listaActivadas;
                 else
                     listaSeleccionada = listaFavoritas;
                 posicionLista = 0;
@@ -130,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
         botonAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getBaseContext(), "Toast de prueba", Toast.LENGTH_SHORT);
-                toast.show();
                 if (posicionLista > 0) {
                     posicionLista--;
                     actualizaPuntero();
@@ -144,8 +140,6 @@ public class MainActivity extends AppCompatActivity {
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getBaseContext(), "Toast de prueba", Toast.LENGTH_SHORT);
-                toast.show();
                 if (!(nUbicaciones / 3 == posicionLista & nUbicaciones % 3 == 0)) {
                     posicionLista++;
                     actualizaPuntero();
