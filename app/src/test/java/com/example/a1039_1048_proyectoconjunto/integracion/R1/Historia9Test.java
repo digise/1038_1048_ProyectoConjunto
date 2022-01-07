@@ -85,7 +85,7 @@ public class Historia9Test {
 
 
         //WHEN
-        castellon.desactivar();
+        gestor.desactivarUbicacion("castello");
 
 
         //THEN
@@ -111,7 +111,7 @@ public class Historia9Test {
 
 
         //WHEN
-        castellon.desactivar();
+        gestor.desactivarUbicacion("castello");
 
 
         //THEN

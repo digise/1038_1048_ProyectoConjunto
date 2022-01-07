@@ -50,12 +50,12 @@ public class Historia1Test {
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
 
-        Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
+        Ubicacion sagunto = new Ubicacion("sagunto", "Spain", "39.6833", "-0.2667");
         Ubicacion valencia = new Ubicacion("valencia", "spain", "39.50337", "-0.40466");
 
         HashMap<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
-        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
+        ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", sagunto);
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS", valencia);
 
         when(mockConexionFirebase.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
@@ -64,11 +64,11 @@ public class Historia1Test {
     @Test
     public void altaUbicacion_toponimoExistente_anadir() {
         // Given
-        String toponimo = "sagunto";
+        String toponimo = "castello";
+        Ubicacion castellon = new Ubicacion(toponimo, "spain", "40.67830", "0.28421");
 
-        Ubicacion ubicacionMock = new Ubicacion(toponimo, "Spain", "39.6833", "-0.2667");
 
-        when(mockGeocodingAdapter.doRequest(anyString())).thenReturn(ubicacionMock);
+        when(mockGeocodingAdapter.doRequest(anyString())).thenReturn(castellon);
         when(mockConexionFirebase.createDocument(anyString(), anyObject(), anyString())).thenReturn("CREADO");
         when(mockConexionFirebase.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
 
@@ -87,7 +87,7 @@ public class Historia1Test {
         assertTrue(dadoAlta);
         assertEquals(nUbicacionesAntesDeInsertar + 1, nUbicacionesAlInsertar);
         assertEquals(nUbicacionesAntesDeInsertar + 1, 3);
-        assertEquals(gestor.getUbicacionGuardada(toponimo), ubicacionMock);
+        assertEquals(gestor.getUbicacionGuardada(toponimo), castellon);
     }
 
     @Test

@@ -84,7 +84,7 @@ public class Historia5Test {
         servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
-        gestor.activarUbicacion("sagunto");
+        gestor.desactivarUbicacion("sagunto");
 
         //When
         gestor.activarUbicacion("sagunto");
