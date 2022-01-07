@@ -21,9 +21,9 @@ public class CurrentsAdapter {
 
     public HashMap<String, HashMap<String, String>> doRequest(String tempUrl) {
 
-        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS) // connect timeout
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS) // connect timeout
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder().url(tempUrl)
                 .get().build();
         Call call = client.newCall(request);

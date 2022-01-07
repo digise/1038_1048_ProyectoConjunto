@@ -58,15 +58,14 @@ public class Historia1Test {
     public void consultar_listaServiciosNoDisponibles(){
         //GIVEN
         Map<String, Servicio> servicios = gestor.getAllServicios();
-        int nServiciosAntesDeEliminarCurrents = servicios.size();
         gestor.getGestorServicios().setServicioCurrents(null);
-        ServicioOpenWeather servicioOpenWeather = (ServicioOpenWeather) servicios.get("openweather");
+        gestor.getGestorServicios().setServicioOpenWeather(null);
 
         //WHEN
         int nServiciosActuales = servicios.size();
 
         //THEN
-        assertEquals(nServiciosAntesDeEliminarCurrents - 1, nServiciosActuales);
+        assertEquals(nServiciosActuales, 0);
     }
 
 }
