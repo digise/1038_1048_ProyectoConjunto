@@ -1,7 +1,9 @@
 package com.example.a1039_1048_proyectoconjunto.integracion.R2;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -120,7 +122,7 @@ public class Historia2_2Test {
 
         //THEN
         assertNull(gestor.getTiempoPorUbicacion(castellon));
-        assertNull(gestor.getGestorServicios().getServicioCurrents());
-        assertNull(gestor.getGestorServicios().getServicioOpenWeather());
+        assertTrue(gestor.getGestorServicios().getServicioCurrents().isActivo());
+        assertTrue(gestor.getGestorServicios().getServicioOpenWeather().isActivo());
     }
 }
