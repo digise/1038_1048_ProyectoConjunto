@@ -76,7 +76,7 @@ public class Historia8Test {
     @Test
     public void asignarAlias_Novalido() {
         //GIVEN
-        String alias = "";
+        String alias = "este alias tiene mas de 20 caracteres";
         when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
         Ubicacion ubicacion = gestor.getUbicacionGuardada("sagunto");
         ubicacion.setAlias("Saguntum");
