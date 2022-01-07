@@ -56,11 +56,13 @@ public class Historia2_1_3Test {
 
         Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain", "39.50337", "-0.40466");
+        Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
 
         HashMap<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS", valencia);
+        ubicacionesMentira.put("-MsT0srQqweHs540AArXS", sagunto);
 
         mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
         when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);

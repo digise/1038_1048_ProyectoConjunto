@@ -87,9 +87,9 @@ public class Historia4Test {
         ServicioOpenWeather servicioOpenWeatherGestor = (ServicioOpenWeather) servicios.get("openweather");
         ServicioCurrents servicioCurrentsGestor = (ServicioCurrents) servicios.get("currents");
 
-        Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
-        sagunto.activar();
-        sagunto.activarServicio("openweather", true);
+        Ubicacion alicante = new Ubicacion("alicante", "spain", "38.3451700", " -0.4814900");;
+        alicante.activar();
+        alicante.activarServicio("openweather", true);
 
         Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
         castellon.activar();
@@ -104,7 +104,7 @@ public class Historia4Test {
         servicioOpenWeatherGestor.servicioActivo(false);
 
         //THEN
-        assertNull(gestor.getTiempoPorUbicacion(sagunto));
+        assertNull(gestor.getTiempoPorUbicacion(alicante));
         assertNull(gestor.getTiempoPorUbicacion(valencia));
         assertNull(gestor.getTiempoPorUbicacion(castellon));
 
@@ -113,9 +113,9 @@ public class Historia4Test {
     @Test
     public void desactivarServiciosAPI_listadoSinServicios_valido(){
         //GIVEN
-        Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
-        sagunto.activar();
-        sagunto.activarServicio("openweather", true);
+        Ubicacion alicante = new Ubicacion("alicante", "spain", "38.3451700", " -0.4814900");;
+        alicante.activar();
+        alicante.activarServicio("openweather", true);
 
         Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
         castellon.activar();
@@ -131,7 +131,7 @@ public class Historia4Test {
 
         //THEN
         assertEquals(0, servicios.size());
-        assertNull(gestor.getTiempoPorUbicacion(sagunto));
+        assertNull(gestor.getTiempoPorUbicacion(alicante));
         assertNull(gestor.getTiempoPorUbicacion(valencia));
         assertNull(gestor.getTiempoPorUbicacion(castellon));
     }

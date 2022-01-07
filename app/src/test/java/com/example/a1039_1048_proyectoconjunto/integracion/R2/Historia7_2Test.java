@@ -102,16 +102,16 @@ public class Historia7_2Test {
         servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
-        Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
+        Ubicacion alicante = new Ubicacion("alicante", "spain", "38.3451700", " -0.4814900");
         Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain", "39.50337", "-0.40466");
 
         castellon.setNumCreacion(0);
-        sagunto.setNumCreacion(1);
+        alicante.setNumCreacion(1);
         valencia.setNumCreacion(2);
 
-        sagunto.activar();
-        sagunto.activarServicio("openweather", true);
+        alicante.activar();
+        alicante.activarServicio("openweather", true);
         castellon.activar();
         castellon.activarServicio("openweather", true);
         valencia.activar();
@@ -119,7 +119,7 @@ public class Historia7_2Test {
 
         Map<String, Ubicacion> ubicacionesMentira = new HashMap<>();
 
-        ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", sagunto);
+        ubicacionesMentira.put("-MsT0rTUlBSR9yU3zdsx", alicante);
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS", valencia);
 
@@ -138,8 +138,8 @@ public class Historia7_2Test {
         assertEquals(todasUbicacionesRecientemente.get(1).getNumCreacion(), 1);
         assertEquals(todasUbicacionesRecientemente.get(2).getNumCreacion(), 2);
 
-        assertEquals(todasUbicacionesRecientemente.get(0), castellon);
-        assertEquals(todasUbicacionesRecientemente.get(1), sagunto);
+        assertEquals(todasUbicacionesRecientemente.get(0), alicante);
+        assertEquals(todasUbicacionesRecientemente.get(1), castellon);
         assertEquals(todasUbicacionesRecientemente.get(2), valencia);
 
         assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesRecientemente.get(0)));
