@@ -38,6 +38,8 @@ public class ActividadServicioIndiv extends AppCompatActivity {
             }
         });
 
+        gestor = Gestor.getInstance();
+
         servicio = gestor.getServicio(nombre);
 
         TextView nombreView = findViewById(R.id.nombre_view);
@@ -63,11 +65,11 @@ public class ActividadServicioIndiv extends AppCompatActivity {
 
     private void configurarBoton() {
         if (servicio.isActivo()) {
-            botonActivarDesactivar.setText("Desactivar");
-            botonActivarDesactivar.setBackgroundColor(getResources().getColor(R.color.rojo_desactivar));
-        } else {
-            botonActivarDesactivar.setText("Activar");
+            botonActivarDesactivar.setText("Activado");
             botonActivarDesactivar.setBackgroundColor(getResources().getColor(R.color.verde_activar));
+        } else {
+            botonActivarDesactivar.setText("Desactivado");
+            botonActivarDesactivar.setBackgroundColor(getResources().getColor(R.color.rojo_desactivar));
         }
     }
 }

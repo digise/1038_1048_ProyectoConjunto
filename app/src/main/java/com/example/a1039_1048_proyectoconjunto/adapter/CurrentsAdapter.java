@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -46,6 +47,10 @@ public class CurrentsAdapter {
     private HashMap<String, HashMap<String, String>> jsonANoticia(String jsonData){
         HashMap<String, HashMap<String, String>> noticias = new HashMap<>(new HashMap<>());
         try {
+            byte[] bytes = jsonData.getBytes(StandardCharsets.UTF_8);
+
+            jsonData = new String(bytes, StandardCharsets.UTF_8);
+
             JSONObject jsonResponse = new JSONObject(jsonData);
             JSONArray noticiasArray = jsonResponse.getJSONArray("news");
             String id = "";

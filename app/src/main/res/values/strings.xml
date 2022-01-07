@@ -6,8 +6,8 @@
     <string name="tab_text_2">Servicios</string>
 
     <string-array name="tipo_lista_activadas">
-        <item>Activadas</item>
-        <item>Favoritas</item>
+        <item>Lista activadas  </item>
+        <item>Lista favoritas  </item>
     </string-array>
 
     <string-array name="tipo_lista">
