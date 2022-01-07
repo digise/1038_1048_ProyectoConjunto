@@ -63,19 +63,6 @@ public class Historia2_1Test {
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv", castellon);
         when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
 
-    }
-
-    @Test
-    public void activarAPIs_valido(){
-        //GIVEN
-        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
-        mockCurrentsAdapter = mock(CurrentsAdapter.class);
-        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
-        when(mockCurrentsAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
-
-
-        //when(mockConexionFirebaseUbicaciones.removeDocument())
-
         mockConexionFirebaseServicios = mock(ConexionFirebase.class);
         when(mockConexionFirebaseServicios.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
         when(mockConexionFirebaseServicios.removeDocument(anyString(), anyString())).thenReturn(false);
@@ -93,6 +80,18 @@ public class Historia2_1Test {
 
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
         gestor.getGestorServicios().setServicioCurrents(servicioCurrents);
+    }
+
+    @Test
+    public void activarAPIs_valido(){
+        //GIVEN
+        mockOpenWeatherAdapter = mock(OpenWeatherAdapter.class);
+        mockCurrentsAdapter = mock(CurrentsAdapter.class);
+        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
+        when(mockCurrentsAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
+
+
+        //when(mockConexionFirebaseUbicaciones.removeDocument())
 
         Ubicacion castellon = gestor.getUbicacionGuardada("castello");
         castellon.activarServicio("openweather", false);
@@ -114,6 +113,9 @@ public class Historia2_1Test {
         Ubicacion castellon = gestor.getUbicacionGuardada("castello");
         castellon.activarServicio("openweather", false);
         castellon.activarServicio("currents", false);
+
+        gestor.desactivarServicio("openweather");
+        gestor.desactivarServicio("currents");
 
         //WHEN
         castellon.activarServicio("openweather", true);
