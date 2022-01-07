@@ -35,13 +35,16 @@ public class Historia10Test {
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
 
+        mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
         gestor.getGestorUbicaciones().setConexionFirebase(mockConexionFirebaseUbicaciones);
         gestor.getGestorUbicaciones().generarUbicaciones();
     }
 
-    @BeforeAll
-    public static void setConfiguracion() {
-        mockConexionFirebaseUbicaciones = mock(ConexionFirebase.class);
+
+
+    @Test
+    public void darBajaUbicacionExistente_ubicacion_valido(){
+        //GIVEN
         Ubicacion sagunto = new Ubicacion("sagunto", "spain" , "39.69250", "-0.28686");
         Ubicacion castellon = new Ubicacion("castello", "spain" , "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain" , "39.50337", "-0.40466");
@@ -54,22 +57,15 @@ public class Historia10Test {
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
         ubicacionesMentira.put("-MsUUdnewn0S9PKoS2DP", calig);
 
-        gestor = Gestor.getInstance();
-        gestor.borrarGestor();
-        gestor = Gestor.getInstance();
-
         when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
-    }
+        gestor.getGestorUbicaciones().generarUbicaciones();
 
-    @Test
-    public void darBajaUbicacionExistente_ubicacion_valido(){
-        //GIVEN
         String toponimo = "castello";
         when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);
 
         //WHEN
         int numUbicacionesAntesBorrado = gestor.getAllUbicaciones().size();
-        boolean borrada = gestor.darBajaUbicacion(gestor.getUbicacionGuardada(toponimo));
+        boolean borrada = gestor.darBajaUbicacion(castellon);
 
         //THEN
         int numUbicacionesDespuesBorrado = gestor.getAllUbicaciones().size();
