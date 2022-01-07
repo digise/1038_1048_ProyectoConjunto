@@ -26,12 +26,12 @@ public class Historia2_2_2Test {
         Ubicacion valencia = gestor.getUbicacionPorToponimo("valencia");
         gestor.darAltaUbicacion(castello);
         gestor.darAltaUbicacion(valencia);
-        gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
-        gestor.desactivarServicio("currents");
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
-        gestor.desactivarServicio("openweather");
         gestor.activarUbicacion("castello");
         gestor.activarUbicacion("valencia");
+        gestor.activarServicio("openweather");
+        gestor.activarServicio("currents");
+        castello.activarServicio("openweather", true);
+        valencia.activarServicio("currents", true);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class Historia2_2_2Test {
         Map<String, String> recibirInformacionAntesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //WHEN
-        gestor.activarServicio("openweather");
+        gestor.desactivarServicio("openweather");
         castello.activarServicio("openweather", true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
@@ -50,8 +50,8 @@ public class Historia2_2_2Test {
 
 
         //THEN
-        assertNull(recibirInformacionAntesDeActualizar);
-        assertNotNull(recibirInformacionDespuesDeActualizar);
+        assertNotNull(recibirInformacionAntesDeActualizar);
+        assertNull(recibirInformacionDespuesDeActualizar);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class Historia2_2_2Test {
         Map<String, String> recibirInformacionDespuesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //THEN
-        assertNull(recibirInformacionAntesDeActualizar);
-        assertNull(recibirInformacionDespuesDeActualizar);
+        assertNotNull(recibirInformacionAntesDeActualizar);
+        assertNotNull(recibirInformacionDespuesDeActualizar);
     }
 }

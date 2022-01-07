@@ -28,47 +28,47 @@ public class Historia2_2_1Test {
         Ubicacion valencia = gestor.getUbicacionPorToponimo("valencia");
         gestor.darAltaUbicacion(castello);
         gestor.darAltaUbicacion(valencia);
-        gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         gestor.desactivarServicio("currents");
+        gestor.desactivarServicio("openweather");
         gestor.activarUbicacion("castello");
         gestor.activarUbicacion("valencia");
     }
 
     @Test
-    public void anadirApi_guardarEstado(){
+    public void activarApi_guardarEstado(){
         //GIVEN
         Ubicacion castello = gestor.getUbicacionGuardada("castello");
-        Map<String, Servicio> serviciosAntesDeAnadir = new HashMap<>(gestor.getAllServicios());
+        Map<String, String> recibirInformacionAntesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //WHEN
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        gestor.activarServicio("openweather");
         castello.activarServicio("openweather", true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
-        Map<String, Servicio> serviciosDespuesDeAnadirYReiniciarLaAplicacion = gestor.getAllServicios();
+        Map<String, String> recibirInformacionDespuesDeActualizar = gestor.getTiempoPorUbicacion(castello);
+
 
         //THEN
-        assertNotNull(gestor.getServicio("openweather"));
-        assertNotNull(gestor.getTiempoPorUbicacion(castello));
-        assertEquals(serviciosAntesDeAnadir.size() + 1, serviciosDespuesDeAnadirYReiniciarLaAplicacion.size());
+        assertNull(recibirInformacionAntesDeActualizar);
+        assertNotNull(recibirInformacionDespuesDeActualizar);
     }
 
     @Test
-    public void noAnadirApi_guardarEstado(){
+    public void noActivarApi_guardarEstado(){
         //GIVEN
         Ubicacion castello = gestor.getUbicacionGuardada("castello");
-        Map<String, Servicio> serviciosAntesDeAnadir = new HashMap<>(gestor.getAllServicios());
+        Map<String, String> recibirInformacionAntesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //WHEN
+        castello.activarServicio("openweather", true);
         gestor.borrarGestor();
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
-        Map<String, Servicio> serviciosDespuesDeReiniciarLaAplicacion = gestor.getAllServicios();
+        Map<String, String> recibirInformacionDespuesDeActualizar = gestor.getTiempoPorUbicacion(castello);
 
         //THEN
-        assertNull(gestor.getServicio("openweather"));
-        assertNull(gestor.getTiempoPorUbicacion(castello));
-        assertEquals(serviciosAntesDeAnadir.size(), serviciosDespuesDeReiniciarLaAplicacion.size());
+        assertNull(recibirInformacionAntesDeActualizar);
+        assertNull(recibirInformacionDespuesDeActualizar);
     }
 }

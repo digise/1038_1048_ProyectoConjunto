@@ -27,6 +27,8 @@ public class GestorServicios {
         servicios = new HashMap<>();
         conexionFirebase = new ConexionFirebase();
         servicioGeocoding = new ServicioGeocoding();
+        servicioOpenWeather = new ServicioOpenWeather();
+        servicioCurrents = new ServicioCurrents();
 
     }
 

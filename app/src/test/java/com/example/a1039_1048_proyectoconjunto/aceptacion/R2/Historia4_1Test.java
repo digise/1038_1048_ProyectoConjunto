@@ -23,14 +23,12 @@ public class Historia4_1Test {
     public void crearGestor(){
         gestor = Gestor.getInstance();
         gestor.borrarTodaLaInformacionDeLaAplicacion();
-        gestor.getGestorServicios().setServicioGeocoding(new ServicioGeocoding());
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }
 
     @Test
     public void consultar_informacionApiOpenWeatherDeUnaUbicacion_todoDisponible(){
         //GIVEN
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
         ubicacion.activarServicio("openweather", true);
@@ -52,7 +50,7 @@ public class Historia4_1Test {
     @Test
     public void consultar_informacionApiOpenWeatherDeUnaUbicacion_apiNoDisponible(){
         //GIVEN
-        gestor.getGestorServicios().setServicioOpenWeather(null);
+        gestor.desactivarServicio("openweather");
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
 
