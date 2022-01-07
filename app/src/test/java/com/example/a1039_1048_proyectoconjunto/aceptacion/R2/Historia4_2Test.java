@@ -39,7 +39,6 @@ public class Historia4_2Test {
 
         //WHEN
         Map<String, HashMap<String, String>> infoNoticias = gestor.getNoticiasPorUbicacion(ubicacion);
-        System.out.println(infoNoticias);
 
 
         //THEN

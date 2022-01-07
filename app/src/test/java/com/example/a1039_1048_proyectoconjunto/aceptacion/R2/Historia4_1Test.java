@@ -30,6 +30,7 @@ public class Historia4_1Test {
     public void consultar_informacionApiOpenWeatherDeUnaUbicacion_todoDisponible(){
         //GIVEN
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
+        gestor.activarServicio("openweather");
         ubicacion.activar();
         ubicacion.activarServicio("openweather", true);
 
