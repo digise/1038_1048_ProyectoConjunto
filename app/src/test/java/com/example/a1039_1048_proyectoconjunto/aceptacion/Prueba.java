@@ -16,10 +16,15 @@ public class Prueba {
 
     @Test
     public void altaUbicacion_toponimoExistente_anadir() {
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Calig"));
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Valencia"));
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Castellon"));
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Alicante"));
+//        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Calig"));
+//        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Valencia"));
+//        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Castellon"));
+//        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Alicante"));
+
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Cinctorres"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Madrid"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Barcelona"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("Yeste"));
     }
 
 }

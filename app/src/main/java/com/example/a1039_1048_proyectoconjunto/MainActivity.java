@@ -39,17 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView posicionTextView;
 
-    TextView stringListaVacia;
-    WrapperBotonUbicacion ubicacionBoton1;
-    WrapperBotonUbicacion ubicacionBoton2;
-    WrapperBotonUbicacion ubicacionBoton3;
-    Ubicacion ubicacion1;
-    Ubicacion ubicacion2;
-    Ubicacion ubicacion3;
+    private Spinner spinnerTipoLista;
+    private TextView stringListaVacia;
+    private WrapperBotonUbicacion ubicacionBoton1;
+    private WrapperBotonUbicacion ubicacionBoton2;
+    private WrapperBotonUbicacion ubicacionBoton3;
+    private Ubicacion ubicacion1;
+    private Ubicacion ubicacion2;
+    private Ubicacion ubicacion3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println(posicionLista*3 + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaAAAAAAAAAA");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -81,18 +81,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        listaActivadas = new ArrayList<>(gestor.getUbicacionesActivas().values());
-        listaFavoritas = gestor.getUbicacionesFavoritas();
-        listaSeleccionada = listaActivadas;
-        nUbicaciones = listaSeleccionada.size();
-
 
 
 
 
         // Spinner con tipos de listas
 
-        Spinner spinnerTipoLista = (Spinner) findViewById(R.id.tipoListaActivadas);
+        spinnerTipoLista = (Spinner) findViewById(R.id.tipoListaActivadas);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_lista_activadas, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipoLista.setAdapter(adapter);
@@ -114,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parentView) {}
         });
 
-
+        actualizarListas();
 
 
 
@@ -140,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!(nUbicaciones / 3 == posicionLista & nUbicaciones % 3 == 0)) {
+                if (nUbicaciones / 3 > posicionLista){
                     posicionLista++;
                     actualizaPuntero();
                     setUpBotonesubicacion();
@@ -174,8 +169,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarListas();
+        posicionLista = 0;
+        actualizaPuntero();
+        setUpBotonesubicacion();
+    }
 
 
     // Metodos privados
@@ -255,6 +256,14 @@ public class MainActivity extends AppCompatActivity {
         } else
             ubicacionBoton3.setVisibility(View.INVISIBLE);
 
+    }
+
+    private void actualizarListas() {
+        listaActivadas = new ArrayList<>(gestor.getUbicacionesActivas().values());
+        listaFavoritas = gestor.getUbicacionesFavoritas();
+        listaSeleccionada = listaActivadas;
+        nUbicaciones = listaSeleccionada.size();
+        spinnerTipoLista.setSelection(0);
     }
 
 

@@ -12,12 +12,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.a1039_1048_proyectoconjunto.MainActivity;
 import com.example.a1039_1048_proyectoconjunto.R;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
+import com.example.a1039_1048_proyectoconjunto.customview.WrapperBotonUbicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllUbicacionesActividad extends AppCompatActivity {
@@ -27,6 +26,7 @@ public class AllUbicacionesActividad extends AppCompatActivity {
     private List<Ubicacion> listaRecientemente;
     private List<Ubicacion> listaSeleccionada;
 
+    private Spinner spinnerTipoLista;
     private LinearLayout listaView;
 
     @Override
@@ -64,9 +64,6 @@ public class AllUbicacionesActividad extends AppCompatActivity {
             gestor = Gestor.getInstance();
         }
 
-        listaAlfabeticamente = gestor.getUbicacionesOrdenadasAlfabeticamente();
-        listaRecientemente = gestor.getUbicacionesOrdenadasRecientes();
-        listaSeleccionada = listaAlfabeticamente;
 
 
 
@@ -74,7 +71,7 @@ public class AllUbicacionesActividad extends AppCompatActivity {
 
         // Elemento spinner
 
-        Spinner spinnerTipoLista = (Spinner) findViewById(R.id.tipoLista);
+        spinnerTipoLista = (Spinner) findViewById(R.id.tipoLista);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.tipo_lista, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTipoLista.setAdapter(adapter);
@@ -86,11 +83,15 @@ public class AllUbicacionesActividad extends AppCompatActivity {
                     listaSeleccionada = listaAlfabeticamente;
                 else
                     listaSeleccionada = listaRecientemente;
+                actualizarVista();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {}
         });
+
+        actualizarLista();
+
 
 
 
@@ -99,19 +100,55 @@ public class AllUbicacionesActividad extends AppCompatActivity {
         // View con la lista
 
         listaView = findViewById(R.id.contenedor_ubicaciones);
-        actualizarLista();
+        actualizarVista();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarLista();
+        actualizarVista();
+    }
 
+    private void actualizarVista() {
+        listaView.removeAllViews();
 
-
-
-    private void actualizarLista() {
         for (Ubicacion ubicacion: listaSeleccionada) {
+            WrapperBotonUbicacion wrapperUbicacion = new WrapperBotonUbicacion(getBaseContext());
+            wrapperUbicacion.setAlias(ubicacion.getAlias());
+            wrapperUbicacion.setToponimo(ubicacion.getToponimo());
+            wrapperUbicacion.setCoordenadas(ubicacion.getLatitud() + ", " + ubicacion.getLongitud());
 
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            params.setMargins(0, 20, 0, 20);
+
+            wrapperUbicacion.setLayoutParams(params);
+            listaView.addView(wrapperUbicacion);
+
+            wrapperUbicacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String toponimo = ubicacion.getToponimo();
+                    Intent intent = new Intent(AllUbicacionesActividad.this, UbicacionActividad.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("codigoUbicacion", toponimo);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
     }
 
 
+    private void actualizarLista() {
+        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasAlfabeticamente();
+        listaAlfabeticamente = gestor.getUbicacionesOrdenadasAlfabeticamente();
+        listaRecientemente = gestor.getUbicacionesOrdenadasRecientes();
+        listaSeleccionada = listaAlfabeticamente;
+        spinnerTipoLista.setSelection(0);
+    }
 
 }
