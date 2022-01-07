@@ -1,10 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.aceptacion;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 
 import org.junit.jupiter.api.BeforeEach;
