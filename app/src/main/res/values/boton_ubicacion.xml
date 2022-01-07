@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WrapperBotonUbicacion">
+        <attr name="alias" format="string" />
+        <attr name="toponimo" format="string" />
+        <attr name="coordenadas" format="string" />
+    </declare-styleable>
+</resources>

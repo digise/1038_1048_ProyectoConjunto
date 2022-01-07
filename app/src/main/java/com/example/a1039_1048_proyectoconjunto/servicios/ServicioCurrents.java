@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class ServicioCurrents implements Servicio{
     private final String url = "https://api.currentsapi.services/v1/search?";
-    private final String apiKey = "O87PinCGKuQ3pk2qL9533nThHwM3dC67aLwNZOGoik5eUqF-";
+    private final String apiKey = "67m8cG_oXsrLM4MYG9BQIkyl7DxWDCK6xPklMstswXfthh77";
     private boolean activo;
     private final String descripcion = "En funcionamiento desde 2018, tenemos un índice de más de 24 millones de noticias, artículos y contenido de foros.\n" +
             "\n" +
@@ -41,7 +41,7 @@ public class ServicioCurrents implements Servicio{
 
     public HashMap<String, HashMap<String, String>> getInformacion(String toponimo) {
         if (activo) {
-            String tempUrl = url + "language=es&keywords=" + toponimo + "&apiKey=" + apiKey;
+            String tempUrl = url + "language=es&amp;keywords=" + toponimo + "&amp;apiKey=" + apiKey;
             return currentsAdapter.doRequest(tempUrl);
         }
         return null;

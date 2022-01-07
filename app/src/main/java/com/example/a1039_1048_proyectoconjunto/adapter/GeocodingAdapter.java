@@ -21,7 +21,9 @@ public class GeocodingAdapter {
 
     public Ubicacion doRequest(String tempUrl) {
 
-        OkHttpClient client = new OkHttpClient.Builder().build();
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(30, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(30, TimeUnit.MINUTES)
+                .readTimeout(30, TimeUnit.MINUTES).build();
         Request request = new Request.Builder().url(tempUrl)
                 .get().build();
         Call call = client.newCall(request);
