@@ -2,6 +2,7 @@ package com.example.a1039_1048_proyectoconjunto.integracion.R1;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Matchers.anyObject;
@@ -60,6 +61,8 @@ public class Historia5Test {
         ubicacionesMentira.put("-MsT0s-GrW9neZulj0Xv" ,castellon);
         ubicacionesMentira.put("-MsT0srQkDHs540AArXS" ,valencia);
 
+        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
+
         when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
         when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);
 
@@ -80,7 +83,6 @@ public class Historia5Test {
         when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(true);
 
         ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
-        when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(new HashMap<>());
         servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
@@ -88,36 +90,38 @@ public class Historia5Test {
 
         //When
         gestor.activarUbicacion("sagunto");
+        Ubicacion saguntoLoc = gestor.getUbicacionGuardada("sagunto");
+        saguntoLoc.activarServicio("openweather", true);
 
 
         //Then
-        Ubicacion sagunto = gestor.getUbicacionGuardada("sagunto");
-        assertTrue(sagunto.isActivada());
-        //assertEquals(gestor.getAllUbicaciones().size(), 3);
+        assertTrue(saguntoLoc.isActivada());
+        assertNotNull(gestor.getTiempoPorUbicacion(saguntoLoc));
     }
 
     @Test
     public void activarUbicacion_servicioNoDisponible_activar(){
         //Given
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().recuperarInformacionServicios();
 
-        when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(false);
+        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
+        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
+        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
-        gestor.desactivarUbicacion("alicante");
+        when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(),anyString())).thenReturn(true);
+
+        gestor.desactivarServicio("openweather");
+        gestor.desactivarUbicacion("sagunto");
 
         gestor.desactivarServicio("OPENWEATHER");
-        gestor.desactivarServicio("GEOCODING");
 
         //When
-        boolean alicanteActiva = gestor.activarUbicacion("alicante");
+        boolean saguntoActiva = gestor.activarUbicacion("sagunto");
 
 
         //Then
-        Ubicacion alicante = gestor.getUbicacionGuardada("alicante");
-        assertNull(alicante);
-        assertFalse(alicanteActiva);
-        assertNull(gestor.getTiempoPorUbicacion(alicante));
-        assertNull(gestor.getNoticiasPorUbicacion(alicante));
+        Ubicacion saguntoLoc = gestor.getUbicacionGuardada("sagunto");
+        assertTrue(saguntoActiva);
+        assertTrue(gestor.getTiempoPorUbicacion(saguntoLoc).isEmpty());
     }
 }
