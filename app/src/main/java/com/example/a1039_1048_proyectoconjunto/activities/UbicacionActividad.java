@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a1039_1048_proyectoconjunto.R;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
@@ -108,6 +109,7 @@ public class UbicacionActividad extends AppCompatActivity {
         botonDarBaja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gestor.darBajaUbicacion(ubicacion);
                 finish();
             }
         });
@@ -115,13 +117,21 @@ public class UbicacionActividad extends AppCompatActivity {
 
 
     private void getInformacion() {
-        if (gestor.getServicio("openweather").isActivo())
+        if (gestor.getServicio("openweather").isActivo()) {
             if (ubicacion.isServicioActivo("openweather"))
                 informacionOpenweather = gestor.getTiempoPorUbicacion(ubicacion);
+        } else {
+            Toast toast = Toast.makeText(getBaseContext(), "El servicio Openweather esta desactivado", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
-        if (gestor.getServicio("currents").isActivo())
+        if (gestor.getServicio("currents").isActivo()) {
             if (ubicacion.isServicioActivo("currents"))
                 informacionCurrents = gestor.getNoticiasPorUbicacion(ubicacion);
+        } else {
+            Toast toast = Toast.makeText(getBaseContext(), "El servicio Currents esta desactivado", Toast.LENGTH_LONG);
+            toast.show();
+        }
 
         showInformacion();
     }

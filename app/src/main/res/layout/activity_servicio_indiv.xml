@@ -29,15 +29,44 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/prueba"
+        android:id="@+id/nombre_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Nombre servicio"
         android:textColor="@color/black"
         android:textSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <TextView
+        android:id="@+id/descripcion_view"
+        android:layout_width="310dp"
+        android:layout_height="246dp"
+        android:gravity="center_horizontal"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.498" />
+
+    <Button
+        android:id="@+id/activar_desactivar_boton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activar/Desactivar"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion_view"
+        app:layout_constraintVertical_bias="0.307" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
