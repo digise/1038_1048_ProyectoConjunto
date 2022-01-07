@@ -53,7 +53,6 @@ public class Historia5Test {
         //Given
         Ubicacion ubicacion = gestor.getUbicacionPorToponimo("sagunto");
         gestor.darAltaUbicacion(ubicacion);
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
         gestor.desactivarServicio("OPENWEATHER");
         gestor.desactivarUbicacion("sagunto");
