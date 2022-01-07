@@ -133,9 +133,6 @@ public class ConexionFirebase {
         if (data.getClass() == Ubicacion.class) {
             if (!contieneUbicacion((Ubicacion) data))
                 return false;
-        } else {
-            if (!contieneServicio((Servicio) data))
-                return false;
         }
 
         //Url para identificar documento
