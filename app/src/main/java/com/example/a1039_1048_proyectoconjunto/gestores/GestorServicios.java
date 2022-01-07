@@ -27,11 +27,17 @@ public class GestorServicios {
         servicios = new HashMap<>();
         conexionFirebase = new ConexionFirebase();
         servicioGeocoding = new ServicioGeocoding();
+
     }
 
     public void recuperarInformacionServicios(){
         setServicioOpenWeather(getServicioOpenWeatherFirebase());
+        if (servicioOpenWeather == null)
+            setServicioOpenWeather(new ServicioOpenWeather());
+
         setServicioCurrents(getServicioCurrentsFirebase());
+        if (servicioCurrents == null)
+            setServicioCurrents(new ServicioCurrents());
     }
 
     public Map<String, Servicio> getAllServicios(){

@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/*public class GeocodingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GeocodingActivity extends AppCompatActivity{
 
     // https://geocode.xyz/51.50354,-0.12768?geoit=json&auth=57673066339488579050x115589 --> latitud longitud
     // https://geocode.xyz/sagunto?json=1&auth=57673066339488579050x115589
@@ -42,19 +42,19 @@ import java.util.List;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnAnadirByCoords = findViewById(R.id.button_getByCoords);
-        btnAnadirByToponimo = findViewById(R.id.button_getByName);
-        etCity = findViewById(R.id.etCity);
-        lvNuevasUbicaciones = findViewById(R.id.listView_nuevasUbicaciones);
-        lvNuevasUbicaciones.setOnItemClickListener(this);
+//        btnAnadirByCoords = findViewById(R.id.button_getByCoords);
+//        btnAnadirByToponimo = findViewById(R.id.button_getByName);
+//        etCity = findViewById(R.id.etCity);
+//        lvNuevasUbicaciones = findViewById(R.id.listView_nuevasUbicaciones);
+//        //lvNuevasUbicaciones.setOnItemClickListener(this);
 
     }
 
     public void getUbicacionPorCoords(View view){
         String toponimoCoords = etCity.getText().toString().trim();
-        getUbicacionPorCoords(toponimoCoords);
+        //getUbicacionPorCoords(toponimoCoords);
     }
-
+/*
     public void getUbicacionPorNombre(View view){
 
         String toponimoCoords = etCity.getText().toString().trim();
@@ -85,5 +85,5 @@ import java.util.List;
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(this, "clicked item: " + position, Toast.LENGTH_SHORT).show();
-    }
-}*/
+    }*/
+}
