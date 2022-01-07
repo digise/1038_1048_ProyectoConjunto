@@ -30,10 +30,15 @@ public class Historia6Test {
         Ubicacion castello = gestor.getUbicacionPorToponimo("castello");
         Ubicacion valencia = gestor.getUbicacionPorToponimo("valencia");
         Ubicacion alicante = gestor.getUbicacionPorToponimo("alicante");
+        Ubicacion sagunto = gestor.getUbicacionPorToponimo("sagunto");
         gestor.darAltaUbicacion(castello);
         gestor.darAltaUbicacion(valencia);
         gestor.darAltaUbicacion(alicante);
-        alicante.activar();
+        gestor.darAltaUbicacion(sagunto);
+        alicante.desactivar();
+        sagunto.desactivar();
+        castello.activar();
+        valencia.activar();
 
         //WHEN
         boolean marcada = gestor.marcarComoFavorita(valencia, true);

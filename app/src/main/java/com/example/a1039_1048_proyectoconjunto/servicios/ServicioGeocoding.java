@@ -6,7 +6,7 @@ import com.example.a1039_1048_proyectoconjunto.adapter.GeocodingAdapter;
 public class ServicioGeocoding {
 
     private final String url = "https://geocode.xyz/";
-    private final String auth = "734427685642956462938x6476";
+    private final String auth = "397281723927314678831x5820";
     private GeocodingAdapter geocodingAdapter;
 
     public ServicioGeocoding() {

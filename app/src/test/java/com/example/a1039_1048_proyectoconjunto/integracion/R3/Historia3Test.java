@@ -98,16 +98,4 @@ public class Historia3Test {
         assertEquals(descripcionCurrents, servicioCurrentsGestor.getDescripcion());
 
     }
-
-    @Test
-    public void descripcionServiciosAPI_listadoSinServicios_valido() {
-        //GIVEN
-
-
-        //WHEN
-        Map<String, Servicio> servicios = gestor.getAllServicios();
-
-        //THEN
-        assertEquals(0, servicios.size());
-    }
 }
