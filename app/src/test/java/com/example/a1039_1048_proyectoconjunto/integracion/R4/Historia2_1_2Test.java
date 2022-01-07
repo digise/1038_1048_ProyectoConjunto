@@ -93,7 +93,7 @@ public class Historia2_1_2Test {
         assertFalse(gestor.getUbicacionGuardada("castello").isActivada());
 
         InOrder inOrder = Mockito.inOrder(mockConexionFirebaseUbicaciones);
-        inOrder.verify(mockConexionFirebaseUbicaciones, times(2)).updateDocument(anyString(), anyObject(), anyString());
+        inOrder.verify(mockConexionFirebaseUbicaciones, times(1)).updateDocument(anyString(), anyObject(), anyString());
     }
 
     @Test

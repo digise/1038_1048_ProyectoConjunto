@@ -32,6 +32,7 @@ public class Historia2Test {
         //GIVEN
         System.out.println(gestor.getAllServicios().toString());
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         gestor.desactivarServicio("openweather");
 
 

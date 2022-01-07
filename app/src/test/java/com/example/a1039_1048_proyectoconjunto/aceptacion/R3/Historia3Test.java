@@ -39,17 +39,4 @@ public class Historia3Test {
         //THEN
         assertNotNull(servicioCurrents.getDescripcion());
     }
-
-    @Test
-    public void descripcionServiciosApi_noDisponibles_sinDescripcion(){
-        //GIVEN
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
-
-
-        //WHEN
-        ServicioOpenWeather servicioOpenWeather = (ServicioOpenWeather) gestor.getAllServicios().get("openweather");
-
-        //THEN
-        assertEquals(servicioOpenWeather.getDescripcion(), "");
-    }
 }

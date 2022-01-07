@@ -30,7 +30,7 @@ public class Historia5Test {
     }
 
     @Test
-    public void consultar_informacionCurrentsDeUnaUbicacion_todoDisponible(){
+    public void consultarHistoricoUbicaciones_valido(){
         //GIVEN
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("valencia"));
@@ -46,7 +46,7 @@ public class Historia5Test {
         //THEN
         assertEquals(ubicaciones.size(), 4);
         for (Ubicacion u : ubicaciones.values()){
-            if (u.isActivada())
+            if (u.getToponimo().equalsIgnoreCase("castello"))
                 assertTrue(u.isActivada());
             else
                 assertFalse(u.isActivada());
@@ -54,17 +54,18 @@ public class Historia5Test {
     }
 
     @Test
-    public void consultar_informacionCurrentsDeUnaUbicacion_apiNoDisponible(){
-        //GIVEN
-        gestor.getGestorServicios().setServicioCurrents(null);
-        Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
-
+    public void consultarHistoricoUbicaciones_noValido(){
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("valencia"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("cinctorres"));
+        Ubicacion ubicacion = gestor.getUbicacionGuardada("alicante");
 
         //WHEN
-        Map<String, HashMap<String, String>> infoNoticias = gestor.getNoticiasPorUbicacion(ubicacion);
+        Map<String, Ubicacion> ubicaciones = gestor.getAllUbicaciones();
 
 
         //THEN
-        assertNull(infoNoticias);
+        assertEquals(ubicaciones.size(), 3);
+        assertNull(ubicacion);
     }
 }

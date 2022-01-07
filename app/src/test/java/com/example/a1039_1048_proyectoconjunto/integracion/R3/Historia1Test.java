@@ -42,7 +42,6 @@ public class Historia1Test {
         gestor = Gestor.getInstance();
 
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().recuperarInformacionServicios();
     }
 
     @BeforeAll
