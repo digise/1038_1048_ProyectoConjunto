@@ -55,7 +55,7 @@ public class Historia4_2Test {
     @Test
     public void consultar_informacionCurrentsDeUnaUbicacion_apiNoDisponible(){
         //GIVEN
-        gestor.getGestorServicios().setServicioCurrents(null);
+        gestor.desactivarServicio("currents");
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
 

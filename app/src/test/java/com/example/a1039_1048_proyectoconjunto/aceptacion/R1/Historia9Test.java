@@ -23,8 +23,8 @@ public class Historia9Test {
         gestor = Gestor.getInstance();
         gestor.borrarTodaLaInformacionDeLaAplicacion();
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
-
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
+        Ubicacion castello = gestor.getUbicacionPorToponimo("castello");
+        gestor.darAltaUbicacion(castello);
     }
 
     @Test
