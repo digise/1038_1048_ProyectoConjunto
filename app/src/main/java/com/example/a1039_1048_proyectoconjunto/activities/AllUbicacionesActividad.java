@@ -144,6 +144,7 @@ public class AllUbicacionesActividad extends AppCompatActivity {
 
 
     private void actualizarLista() {
+        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasAlfabeticamente();
         listaAlfabeticamente = gestor.getUbicacionesOrdenadasAlfabeticamente();
         listaRecientemente = gestor.getUbicacionesOrdenadasRecientes();
         listaSeleccionada = listaAlfabeticamente;
