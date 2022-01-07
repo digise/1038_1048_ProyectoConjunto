@@ -21,8 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".ActividadServicios"
+            android:name=".activities.ActividadServicioIndiv"
+            android:screenOrientation="locked"
             android:exported="true" />
+        <activity
+            android:name=".activities.ActividadServicios"
+            android:exported="true"
+            android:screenOrientation="locked" />
         <activity
             android:name=".activities.ActividadDarAlta"
             android:exported="true"

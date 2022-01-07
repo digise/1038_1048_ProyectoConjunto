@@ -26,8 +26,9 @@
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.234375" />
         <entry key="app/src/main/res/layout/activity_all_ubicaciones.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_dar_alta.xml" value="0.36041666666666666" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_servicios.xml" value="0.30978260869565216" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_servicio_indiv.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/activity_servicios.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_ubicacion.xml" value="0.33" />
         <entry key="app/src/main/res/layout/boton_ubicacion.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_servicios.xml" value="0.21822916666666667" />

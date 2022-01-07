@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.a1039_1048_proyectoconjunto.activities.ActividadServicios;
 import com.example.a1039_1048_proyectoconjunto.activities.AllUbicacionesActividad;
 import com.example.a1039_1048_proyectoconjunto.activities.UbicacionActividad;
 
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         botonMenuServicios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getBaseContext(), ActividadServicios.class);
+                startActivity(intent);
             }
         });
 
