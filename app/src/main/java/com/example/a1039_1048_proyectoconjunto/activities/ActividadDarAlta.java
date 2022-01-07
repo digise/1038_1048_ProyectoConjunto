@@ -40,7 +40,6 @@ public class ActividadDarAlta extends AppCompatActivity {
         botonBuscarToponimo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 
