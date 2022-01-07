@@ -44,12 +44,8 @@ public class Gestor {
 
     public void borrarTodaLaInformacionDeLaAplicacion(){
         ConexionFirebase conexionFirebase = new ConexionFirebase();
-        conexionFirebase.removeDocument("","");
-        gestorServicios.setServicioCurrents(null);
-        gestorServicios.setServicioOpenWeather(null);
-        gestorServicios.getAllServicios().clear();
+        conexionFirebase.removeDocument("ubicaciones","");
         gestorUbicaciones.getAllUbicaciones().clear();
-
     }
 
     public GestorUbicaciones getGestorUbicaciones() {

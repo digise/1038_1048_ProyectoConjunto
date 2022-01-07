@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import com.example.a1039_1048_proyectoconjunto.MainActivity;
 import com.example.a1039_1048_proyectoconjunto.R;
 
+import java.util.Locale;
+
 public class ActividadServicios extends AppCompatActivity {
 
     private LinearLayout contenedorServicios;
@@ -87,7 +89,7 @@ public class ActividadServicios extends AppCompatActivity {
 
                 Intent intent = new Intent(ActividadServicios.this, ActividadServicioIndiv.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("nombre", stringArg[0].trim());
+                bundle.putString("nombre", stringArg[0].trim().toLowerCase(Locale.ROOT));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
