@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">1039_1048_ProyectoConjunto</string>
+    <string name="app_name">Ubify</string>
     <string name="title_activity_geocoding">Leanback GeocodingActivity</string>
     <string name="ubication_button_base_text">Ubicación</string>
+    <string name="tab_text_1">Ubicaciones</string>
+    <string name="tab_text_2">Servicios</string>
 
-
-
+    <string-array name="tipo_lista">
+        <item>Orden alfabético</item>
+        <item>Orden de creacion</item>
+        <item>Favoritas</item>
+    </string-array>
 
     <string name="browse_title">Videos by Your Company</string>
     <string name="related_movies">Related Videos</string>
@@ -22,4 +27,7 @@
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todas_ubicaciones">Todas las ubicaciones</string>
 </resources>

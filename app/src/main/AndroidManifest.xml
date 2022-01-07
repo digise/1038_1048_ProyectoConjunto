@@ -19,13 +19,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.1039_1048_ProyectoConjunto" >
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".activities.GeocodingActivity">
-        </activity>
+            android:name=".ActividadServicios"
+            android:exported="true" />
+        <activity
+            android:name=".activities.ActividadDarAlta"
+            android:exported="true"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".activities.AllUbicacionesActividad"
+            android:exported="true"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".activities.UbicacionActividad"
+            android:exported="true"
+            android:screenOrientation="locked" />
+        <activity android:name=".activities.GeocodingActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="locked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -42,11 +42,11 @@ public class GeocodingActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnAnadirByCoords = findViewById(R.id.button_getByCoords);
-        btnAnadirByToponimo = findViewById(R.id.button_getByName);
-        etCity = findViewById(R.id.etCity);
-        lvNuevasUbicaciones = findViewById(R.id.listView_nuevasUbicaciones);
-        //lvNuevasUbicaciones.setOnItemClickListener(this);
+//        btnAnadirByCoords = findViewById(R.id.button_getByCoords);
+//        btnAnadirByToponimo = findViewById(R.id.button_getByName);
+//        etCity = findViewById(R.id.etCity);
+//        lvNuevasUbicaciones = findViewById(R.id.listView_nuevasUbicaciones);
+//        //lvNuevasUbicaciones.setOnItemClickListener(this);
 
     }
 

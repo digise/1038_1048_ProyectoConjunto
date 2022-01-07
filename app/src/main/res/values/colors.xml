@@ -2,7 +2,10 @@
 <resources>
     <color name="boton_ubicacion_disabled">#4da6ff</color>
     <color name="boton_ubicacion_pressed">#0066cc</color>
-    <color name="boton_ubicacion_enabled">#4da6ff</color>
+    <color name="boton_ubicacion_enabled">#76E5EC</color>
+    <color name="color_primario">#3B48B9</color>
+    <color name="color_primario_light">#7D88EA</color>
+    <color name="rojo_borrar">#FF3535</color>
 
 
     <color name="purple_200">#FFBB86FC</color>
@@ -12,6 +15,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="grey">#333333</color>
+    <color name="dark_grey">#212121</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
