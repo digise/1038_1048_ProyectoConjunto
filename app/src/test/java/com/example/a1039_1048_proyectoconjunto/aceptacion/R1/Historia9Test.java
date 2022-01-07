@@ -9,6 +9,7 @@ import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,16 +22,15 @@ public class Historia9Test {
     public void anadirUbicacionParaHacerPrueba(){
         gestor = Gestor.getInstance();
         gestor.borrarTodaLaInformacionDeLaAplicacion();
-
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
 
-        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castellon"));
+        gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
     }
 
     @Test
     public void desactivarUbicacionActivada_valido(){
         //GIVEN
-        Ubicacion castellon = gestor.getUbicacionGuardada("castello de la plana");
+        Ubicacion castellon = gestor.getUbicacionGuardada("castello");
         castellon.activarServicio("currents", true);
         castellon.activar();
 
@@ -46,9 +46,8 @@ public class Historia9Test {
     @Test
     public void desactivarUbicacionDesactivada_noValido(){
         //GIVEN
-        Ubicacion castellon = gestor.getUbicacionGuardada("castello de la plana");
+        Ubicacion castellon = gestor.getUbicacionGuardada("castello");
         castellon.activarServicio("currents", true);
-        castellon.desactivar();
 
 
         //WHEN

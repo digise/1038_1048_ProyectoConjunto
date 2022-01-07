@@ -14,18 +14,15 @@ import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class Historia1_2Test {
-
+public class Historia7_1Test {
     private static Gestor gestor;
 
     private static OpenWeatherAdapter mockOpenWeatherAdapter;
@@ -58,37 +55,6 @@ public class Historia1_2Test {
         when(mockConexionFirebaseUbicaciones.removeDocument(anyString(), anyString())).thenReturn(true);
         when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
 
-    }
-
-    @Test
-    public void informacionTresUbicaciones_ordenReciente_noValido() {
-        //GIVEN
-        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
-        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
-
-        when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>());
-
-        gestor.getGestorUbicaciones().generarUbicaciones();
-        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasRecientes();
-
-        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
-
-        Set<Ubicacion> todasUbicaciones = new HashSet<>(gestor.getAllUbicaciones().values());
-        todasUbicaciones.forEach(ubicacion -> {
-            ubicacion.activar();
-            ubicacion.activarServicio("openweather", true);
-        });
-
-        //WHEN
-        List<Ubicacion> todasUbicacionesRecientemente = gestor.getUbicacionesOrdenadas("recientemente");
-
-        //THEN
-        assertEquals(todasUbicacionesRecientemente.size(), 0);
-
-    }
-    @Test
-    public void informacionTresUbicaciones_ordenReciente_valido(){
-        //GIVEN
         HashMap<String, String> infoOpenWeatherMentira = new HashMap<>();
 
         infoOpenWeatherMentira.put("sensacionTermica", "20");
@@ -97,7 +63,12 @@ public class Historia1_2Test {
         infoOpenWeatherMentira.put("presion", "23");
 
         when(mockOpenWeatherAdapter.doRequest(anyString())).thenReturn(infoOpenWeatherMentira);
+        when(mockConexionFirebaseUbicaciones.updateDocument(anyString(), anyObject(), anyString())).thenReturn(true);
+    }
 
+    @Test
+    public void listarUbicaciones_ordenAlfabetico_disponibles_conSuInformacion(){
+        //GIVEN
         ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
         servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
         gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
@@ -105,10 +76,6 @@ public class Historia1_2Test {
         Ubicacion sagunto = new Ubicacion("sagunto", "spain", "39.69250", "-0.28686");
         Ubicacion castellon = new Ubicacion("castello", "spain", "40.67830", "0.28421");
         Ubicacion valencia = new Ubicacion("valencia", "spain", "39.50337", "-0.40466");
-
-        castellon.setNumCreacion(0);
-        sagunto.setNumCreacion(1);
-        valencia.setNumCreacion(2);
 
         sagunto.activar();
         sagunto.activarServicio("openweather", true);
@@ -126,25 +93,42 @@ public class Historia1_2Test {
         when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
 
         gestor.getGestorUbicaciones().generarUbicaciones();
-        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasRecientes();
+        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasAlfabeticamente();
+
+        //WHEN
+        List<Ubicacion> todasUbicacionesAlfabeticamente = gestor.getUbicacionesOrdenadasAlfabeticamente();
+
+        //THEN
+        assertEquals(todasUbicacionesAlfabeticamente.size(), 3);
+
+        assertEquals(todasUbicacionesAlfabeticamente.get(0), castellon);
+        assertEquals(todasUbicacionesAlfabeticamente.get(1), sagunto);
+        assertEquals(todasUbicacionesAlfabeticamente.get(2), valencia);
+
+        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesAlfabeticamente.get(0)));
+        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesAlfabeticamente.get(1)));
+        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesAlfabeticamente.get(2)));
+    }
+
+    @Test
+    public void listaUbicaciones_ordenAlfabetico_noDisponibles() {
+        //GIVEN
+        ServicioOpenWeather servicioOpenWeather = new ServicioOpenWeather();
+        servicioOpenWeather.setOpenWeatherAdapter(mockOpenWeatherAdapter);
+
+        when(mockConexionFirebaseUbicaciones.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>());
+
+        gestor.getGestorUbicaciones().generarUbicaciones();
+        gestor.getGestorUbicaciones().generarUbicacionesOrdenadasAlfabeticamente();
+        gestor.getGestorServicios().setServicioOpenWeather(servicioOpenWeather);
 
 
         //WHEN
-        List<Ubicacion> todasUbicacionesRecientemente = gestor.getUbicacionesOrdenadas("recientemente");
+        List<Ubicacion> todasUbicacionesAlfabeticamente = gestor.getUbicacionesOrdenadasAlfabeticamente();
 
         //THEN
-        assertEquals(todasUbicacionesRecientemente.size(), 3);
-        assertEquals(todasUbicacionesRecientemente.get(0).getNumCreacion(), 0);
-        assertEquals(todasUbicacionesRecientemente.get(1).getNumCreacion(), 1);
-        assertEquals(todasUbicacionesRecientemente.get(2).getNumCreacion(), 2);
+        assertEquals(0, todasUbicacionesAlfabeticamente.size());
 
-        assertEquals(todasUbicacionesRecientemente.get(0), castellon);
-        assertEquals(todasUbicacionesRecientemente.get(1), sagunto);
-        assertEquals(todasUbicacionesRecientemente.get(2), valencia);
-
-        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesRecientemente.get(0)));
-        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesRecientemente.get(1)));
-        assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesRecientemente.get(2)));
     }
 
 }

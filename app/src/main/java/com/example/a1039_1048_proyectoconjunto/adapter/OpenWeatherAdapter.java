@@ -18,7 +18,7 @@ public class OpenWeatherAdapter {
     }
 
     public HashMap<String, String> doRequest(String tempUrl) {
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(10, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(tempUrl)
                 .get().build();
         Call call = client.newCall(request);
