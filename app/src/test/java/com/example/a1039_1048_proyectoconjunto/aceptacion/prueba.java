@@ -10,14 +10,13 @@ import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class prueba {
+public class Prueba {
     private Gestor gestor;
 
     @BeforeEach
     public void crear_gestor() {
         gestor = Gestor.getInstance();
         gestor.recuperarTodaLaInformacionDeLaAplicacion();
-
     }
 
     @Test
