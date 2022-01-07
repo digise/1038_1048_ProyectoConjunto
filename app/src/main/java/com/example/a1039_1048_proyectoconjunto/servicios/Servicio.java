@@ -6,6 +6,6 @@ public interface Servicio {
 
     public void servicioActivo(boolean activar);
     public boolean isActivo();
-
+    public String getDescripcion();
 
 }

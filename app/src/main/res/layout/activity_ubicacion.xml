@@ -159,12 +159,13 @@
 
             <Button
                 android:id="@+id/boton_guardar_ubicacion"
-                android:layout_width="85dp"
-                android:layout_height="40dp"
+                android:layout_width="93dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
+                android:padding="5dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@color/color_primario"
-                android:text="Guardar"
+                android:text="Actualizar"
                 android:textColor="@color/white"
                 android:textSize="13dp" />
 
@@ -203,7 +204,8 @@
                 android:id="@+id/informacion_ubicacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Informació es pot posar /n " />
+                android:textSize="18dp"
+                android:text="Informacion" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

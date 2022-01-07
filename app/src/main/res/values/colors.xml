@@ -6,6 +6,8 @@
     <color name="color_primario">#3B48B9</color>
     <color name="color_primario_light">#7D88EA</color>
     <color name="rojo_borrar">#FF3535</color>
+    <color name="rojo_desactivar">#EF6969</color>
+    <color name="verde_activar">#83C16F</color>
 
 
     <color name="purple_200">#FFBB86FC</color>

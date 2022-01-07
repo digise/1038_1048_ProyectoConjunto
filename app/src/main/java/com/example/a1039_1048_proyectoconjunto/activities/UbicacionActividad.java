@@ -4,18 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a1039_1048_proyectoconjunto.R;
 import com.example.a1039_1048_proyectoconjunto.Ubicacion;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.net.URL;
 import java.util.HashMap;
 
 public class UbicacionActividad extends AppCompatActivity {
@@ -108,6 +111,7 @@ public class UbicacionActividad extends AppCompatActivity {
         botonDarBaja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gestor.darBajaUbicacion(ubicacion);
                 finish();
             }
         });
@@ -115,13 +119,23 @@ public class UbicacionActividad extends AppCompatActivity {
 
 
     private void getInformacion() {
-        if (gestor.getServicio("openweather").isActivo())
-            if (ubicacion.isServicioActivo("openweather"))
+        if (ubicacion.isServicioActivo("openweather")) {
+            if (gestor.getServicio("openweather").isActivo()) {
                 informacionOpenweather = gestor.getTiempoPorUbicacion(ubicacion);
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "El servicio Openweather esta desactivado", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
 
-        if (gestor.getServicio("currents").isActivo())
-            if (ubicacion.isServicioActivo("currents"))
+        if (ubicacion.isServicioActivo("currents")) {
+            if (gestor.getServicio("currents").isActivo()) {
                 informacionCurrents = gestor.getNoticiasPorUbicacion(ubicacion);
+            } else {
+                Toast toast = Toast.makeText(getBaseContext(), "El servicio Currents esta desactivado", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
 
         showInformacion();
     }
@@ -131,19 +145,33 @@ public class UbicacionActividad extends AppCompatActivity {
         if (ubicacion.isActivada()) {
             if (!informacionOpenweather.isEmpty()) {
                 for (String key : informacionOpenweather.keySet()) {
-                    resultado = resultado + key + ": " + informacionOpenweather.get(key) + "\n";
+                    resultado = resultado + "- " + key + ": " + informacionOpenweather.get(key) + "\n";
                 }
                 resultado = resultado + "\n\n\n\n";
             }
             if (!informacionCurrents.isEmpty())
                 for (String news: informacionCurrents.keySet()){
                     for (String key : informacionCurrents.get(news).keySet()) {
-                        resultado = resultado + key + ": " + informacionCurrents.get(news).get(key) + "\n";
+                        resultado = resultado + "- " + key + ": " + informacionCurrents.get(news).get(key) + "\n";
                     }
                     resultado = resultado + "\n\n\n\n";
                 }
         }
 
         informacionUbicacionView.setText(resultado);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ubicacion.setAlias(aliasView.getEditText().getText().toString());
+        ubicacion.activarServicio("openweather", openWeatherBox.isChecked());
+        ubicacion.activarServicio("currents", currentBox.isChecked());
+        if (activadaBox.isChecked())
+            ubicacion.activar();
+        else
+            ubicacion.desactivar();
+        ubicacion.setFavorita(favoritaBox.isChecked());
     }
 }
