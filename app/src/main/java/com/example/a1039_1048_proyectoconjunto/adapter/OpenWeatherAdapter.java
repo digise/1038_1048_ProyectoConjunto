@@ -1,7 +1,5 @@
 package com.example.a1039_1048_proyectoconjunto.adapter;
 
-import com.example.a1039_1048_proyectoconjunto.Ubicacion;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,7 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class OpenWeatherAdapter implements APIsAdapter {
+public class OpenWeatherAdapter {
 
     public OpenWeatherAdapter() {
     }
