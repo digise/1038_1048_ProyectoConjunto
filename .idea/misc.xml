@@ -26,7 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24_black.xml" value="0.3765625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res/drawable/spinner_background.xml" value="0.234375" />
-        <entry key="app/src/main/res/layout/activity_all_ubicaciones.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/activity_all_ubicaciones.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_dar_alta.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_servicio_indiv.xml" value="0.36041666666666666" />
