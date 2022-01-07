@@ -21,8 +21,11 @@ public class CurrentsAdapter {
 
     public HashMap<String, HashMap<String, String>> doRequest(String tempUrl) {
 
-        OkHttpClient client = new OkHttpClient.Builder().build();
-        Request request = new Request.Builder().url(tempUrl).get().build();
+        OkHttpClient client = new OkHttpClient.Builder().connectTimeout(30, TimeUnit.SECONDS) // connect timeout
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS).build();
+        Request request = new Request.Builder().url(tempUrl)
+                .get().build();
         Call call = client.newCall(request);
 
         Response response = null;
@@ -34,7 +37,7 @@ public class CurrentsAdapter {
             e.printStackTrace();
         }
 
-        if (jsonData != null){
+        if (jsonData != null) {
             return jsonANoticia(jsonData);
         }
         return null;
