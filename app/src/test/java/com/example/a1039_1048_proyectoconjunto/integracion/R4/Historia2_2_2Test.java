@@ -75,7 +75,7 @@ public class Historia2_2_2Test {
     }
 
     @Test
-    public void actualizarAPI_actualizaEstado_valido() {
+    public void desactivarAPI_actualizaEstado_valido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
 
         // WHEN
@@ -88,7 +88,7 @@ public class Historia2_2_2Test {
     }
 
     @Test
-    public void actualizarAPI_actualizarEstado_novalido() {
+    public void desactivarAPI_actualizarEstado_novalido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
 
         // WHEN

@@ -32,7 +32,6 @@ public class Historia4_2Test {
     @Test
     public void consultar_informacionCurrentsDeUnaUbicacion_todoDisponible(){
         //GIVEN
-        gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
         ubicacion.activarServicio("currents", true);
