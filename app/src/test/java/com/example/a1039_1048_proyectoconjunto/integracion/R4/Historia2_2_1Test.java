@@ -24,8 +24,6 @@ import java.util.HashMap;
 
 public class Historia2_2_1Test {
 
-    private static CurrentsAdapter mockCurrentsAdapter;
-
     private static ConexionFirebase mockConexionFirebase;
     private static ConexionFirebase mockConexionFirebaseServicios;
     private static Gestor gestor;
@@ -56,11 +54,10 @@ public class Historia2_2_1Test {
 
         when(mockConexionFirebase.getCollection(anyString(), anyObject())).thenReturn(new HashMap<>(ubicacionesMentira));
 
-        ServicioCurrents servicioCurrents = new ServicioCurrents();
-        servicioCurrents.setCurrentsAdapter(mockCurrentsAdapter);
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebase);
-        servicioCurrents.servicioActivo(false);
-        gestor.getGestorServicios().setServicioCurrents(servicioCurrents);
+        gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
+
+        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
 
         mockConexionFirebaseServicios = mock(ConexionFirebase.class);
         when(mockConexionFirebaseServicios.createDocument(anyString(),anyObject(), anyString())).thenReturn("AÑADIDO");
@@ -68,25 +65,23 @@ public class Historia2_2_1Test {
 
     @BeforeAll
     public static void setUp() {
-        mockCurrentsAdapter = mock(CurrentsAdapter.class);
         mockConexionFirebase = mock(ConexionFirebase.class);
     }
 
     @Test
-    public void crearAPI_actualizaEstado_valido() {
+    public void activarAPI_actualizaEstado_valido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
-
-        // When
         gestor.getGestorServicios().setConexionFirebase(mockConexionFirebaseServicios);
-        gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
+        // When
+        gestor.getGestorServicios().getServicioOpenWeather().servicioActivo(true);
 
         // THEN
         InOrder inOrder = Mockito.inOrder(mockConexionFirebaseServicios);
-        inOrder.verify(mockConexionFirebaseServicios).createDocument(anyString(),anyObject(), anyString());
+        inOrder.verify(mockConexionFirebaseServicios).updateDocument(anyString(),anyObject(), anyString());
     }
 
     @Test
-    public void crearAPI_actualizarEstado_novalido() {
+    public void noActivarAPI_actualizarEstado_novalido() {
         // GIVEN -> como es el mismo en las dos historias, está en el beforeEach
 
         //WHEN
