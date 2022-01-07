@@ -33,6 +33,10 @@ public class Gestor {
         return INSTANCE;
     }
 
+    public static boolean isInstanced() {
+        return INSTANCE != null;
+    }
+
     public void recuperarTodaLaInformacionDeLaAplicacion(){
         gestorServicios.recuperarInformacionServicios();
         gestorUbicaciones.recuperarInformacionUbicaciones();
