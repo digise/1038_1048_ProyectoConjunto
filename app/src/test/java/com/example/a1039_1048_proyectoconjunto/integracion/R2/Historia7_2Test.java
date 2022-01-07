@@ -138,8 +138,8 @@ public class Historia7_2Test {
         assertEquals(todasUbicacionesRecientemente.get(1).getNumCreacion(), 1);
         assertEquals(todasUbicacionesRecientemente.get(2).getNumCreacion(), 2);
 
-        assertEquals(todasUbicacionesRecientemente.get(0), alicante);
-        assertEquals(todasUbicacionesRecientemente.get(1), castellon);
+        assertEquals(todasUbicacionesRecientemente.get(0), castellon);
+        assertEquals(todasUbicacionesRecientemente.get(1), alicante);
         assertEquals(todasUbicacionesRecientemente.get(2), valencia);
 
         assertNotNull(gestor.getTiempoPorUbicacion(todasUbicacionesRecientemente.get(0)));
