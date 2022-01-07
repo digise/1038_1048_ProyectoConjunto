@@ -46,7 +46,7 @@ public class Historia5Test {
         //THEN
         assertEquals(ubicaciones.size(), 4);
         for (Ubicacion u : ubicaciones.values()){
-            if (u.getToponimo().equalsIgnoreCase("castello"))
+            if (u.isActivada())
                 assertTrue(u.isActivada());
             else
                 assertFalse(u.isActivada());

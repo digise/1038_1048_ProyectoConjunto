@@ -1,6 +1,6 @@
-package com.example.a1039_1048_proyectoconjunto.aceptacion.R2.historia2;
+package com.example.a1039_1048_proyectoconjunto.aceptacion.R2;
 
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -10,49 +10,46 @@ import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioCurrents;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioOpenWeather;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-public class Historia2_1 {
+public class Historia2_2Test {
 
-    private static Gestor gestor;
+    private Gestor gestor;
 
     @BeforeEach
     public void crearGestor(){
         gestor = Gestor.getInstance();
         gestor.borrarTodaLaInformacionDeLaAplicacion();
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("castello"));
-
     }
 
     @Test
-    public void activar_ServiciosAPIIndependientes_disponible(){
+    public void desactivar_ServiciosAPIIndependientes_disponible(){
         //GIVEN
         gestor.getGestorServicios().setServicioCurrents(new ServicioCurrents());
         gestor.getGestorServicios().setServicioOpenWeather(new ServicioOpenWeather());
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         ubicacion.activar();
-        ubicacion.activarServicio("openweather", false);
-        ubicacion.activarServicio("currents", false);
-        Map<String, String> informacionTiempoAntesDeActivarApis = gestor.getTiempoPorUbicacion(ubicacion);
+        ubicacion.activarServicio("openweather", true);
+        Map<String, String> informacionTiempoAntesDeDesactivarApis = gestor.getTiempoPorUbicacion(ubicacion);
 
         //WHEN
-        ubicacion.activarServicio("openweather", true);
-        Map<String, String> informacionTiempoDespuesDeActivarApis = gestor.getTiempoPorUbicacion(ubicacion);
-        System.out.println(informacionTiempoDespuesDeActivarApis);
+        ubicacion.activarServicio("openweather", false);
+        Map<String, String> informacionTiempoDespuesDeDesactivarApis = gestor.getTiempoPorUbicacion(ubicacion);
 
 
 
         //THEN
-        assertNull(informacionTiempoAntesDeActivarApis);
-        assertNotNull(informacionTiempoDespuesDeActivarApis);
+        assertNotNull(informacionTiempoAntesDeDesactivarApis);
+        assertNull(informacionTiempoDespuesDeDesactivarApis);
     }
 
     @Test
-    public void activar_ApisEnUbicaciones_noDisponibles(){
-        //GIVEN
+    public void desactivar_ServiciosAPIIndependientes_noDisponible(){
         Ubicacion ubicacion = gestor.getUbicacionGuardada("castello");
         gestor.getGestorServicios().setServicioCurrents(null);
         gestor.getGestorServicios().setServicioOpenWeather(null);
@@ -60,12 +57,13 @@ public class Historia2_1 {
         Map<String, String> informacionTiempoSinTenerLaApi = gestor.getTiempoPorUbicacion(ubicacion);
 
         //WHEN
-        ubicacion.activarServicio("openweather", true);
+        ubicacion.activarServicio("openweather", false);
         Map<String, String> informacionTiempoDespuesDeActivarApis = gestor.getTiempoPorUbicacion(ubicacion);
 
 
 
         //THEN
+        assertEquals(gestor.getAllServicios().size(), 0);
         assertNull(informacionTiempoSinTenerLaApi);
         assertNull(informacionTiempoDespuesDeActivarApis);
     }

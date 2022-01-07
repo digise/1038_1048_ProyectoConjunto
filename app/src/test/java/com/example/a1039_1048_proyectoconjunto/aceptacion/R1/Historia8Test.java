@@ -9,19 +9,19 @@ import com.example.a1039_1048_proyectoconjunto.firebase.ConexionFirebase;
 import com.example.a1039_1048_proyectoconjunto.gestores.Gestor;
 import com.example.a1039_1048_proyectoconjunto.servicios.ServicioGeocoding;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 
 public class Historia8Test {
 
-    private static Gestor gestor;
+    private Gestor gestor;
 
-    @BeforeAll
-    public static void anadirUbicacionParaHacerPrueba(){
+    @BeforeEach
+    public void anadirUbicacionParaHacerPrueba(){
         gestor = Gestor.getInstance();
         gestor.borrarTodaLaInformacionDeLaAplicacion();
-
         gestor.darAltaUbicacion(gestor.getUbicacionPorToponimo("sagunto"));
         gestor.activarUbicacion("sagunto");
     }

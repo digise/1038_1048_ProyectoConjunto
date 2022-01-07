@@ -41,7 +41,8 @@ public class Historia1Test {
     @Test
     public void recuperarEstadoAnterior_valido(){
         //GIVEN -> cargar estado (no habrá nada)
-        Gestor gestor = Gestor.getInstance();
+        gestor = Gestor.getInstance();
+
 
 
         //WHEN
@@ -55,7 +56,7 @@ public class Historia1Test {
     @Test
     public void rcuperarEstadoAnterior_noValido(){
         //GIVEN -> cargar estado (no habrá nada)
-        Gestor gestor = Gestor.getInstance();
+        gestor = Gestor.getInstance();
 
         //WHEN -> vacío por que no carga nada
 

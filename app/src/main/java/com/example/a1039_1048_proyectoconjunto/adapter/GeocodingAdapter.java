@@ -22,7 +22,7 @@ public class GeocodingAdapter {
 
     public Ubicacion doRequest(String tempUrl) {
 
-        OkHttpClient client = new OkHttpClient.Builder().readTimeout(10, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder().url(tempUrl)
                 .get().build();
         Call call = client.newCall(request);
@@ -31,7 +31,6 @@ public class GeocodingAdapter {
         String jsonData = null;
         try {
             response = call.execute();
-            System.out.println(response.body().toString());
             jsonData = response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
