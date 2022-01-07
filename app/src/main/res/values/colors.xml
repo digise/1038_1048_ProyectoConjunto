@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="boton_ubicacion_disabled">#C2C8FF</color>
+    <color name="boton_ubicacion_disabled">#99C7FF</color>
     <color name="boton_ubicacion_pressed">#0066cc</color>
-    <color name="boton_ubicacion_enabled">#C2C8FF</color>
+    <color name="boton_ubicacion_enabled">#99C7FF</color>
     <color name="color_primario">#3B48B9</color>
     <color name="color_primario_light">#7D88EA</color>
     <color name="rojo_borrar">#FF3535</color>

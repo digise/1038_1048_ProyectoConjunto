@@ -105,6 +105,8 @@ public class Ubicacion implements Comparable<Ubicacion> {
 
 
     public boolean activar() {
+        if (isActivada())
+            return true;
         activada = true;
         boolean s = updateUbicacionFirebase(this, this.idDocumento);
         if (!s)
@@ -113,7 +115,10 @@ public class Ubicacion implements Comparable<Ubicacion> {
         return activada;
     }
 
+
     public boolean desactivar() {
+        if (!isActivada())
+            return false;
         activada = false;
         boolean s = updateUbicacionFirebase(this, this.idDocumento);
         if (!s)
